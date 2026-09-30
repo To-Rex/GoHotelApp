@@ -1,0 +1,423 @@
+{
+  "@@locale": "ru",
+  "appTitle": "GoHotel Staff",
+  "ok": "OK",
+  "cancel": "Отмена",
+  "save": "Сохранить",
+  "retry": "Повторить",
+  "close": "Закрыть",
+  "refresh": "Обновить",
+  "send": "Отправить",
+  "all": "Все",
+  "today": "Сегодня",
+  "done": "Выполнено",
+  "back": "Назад",
+  "logout": "Выйти",
+  "confirm": "Подтвердить",
+  "comingSoon": "Скоро",
+  "error": "Ошибка",
+  "optional": "необязательно",
+  "enable": "Включить",
+  "notNow": "Не сейчас",
+  "networkError": "Нет соединения с интернетом. Проверьте подключение и попробуйте снова.",
+  "serverError": "Ошибка на сервере. Попробуйте немного позже.",
+  "sessionExpired": "Сессия истекла. Войдите заново.",
+  "permissionDenied": "У вас нет прав для этого действия.",
+  "welcomeTitle": "Добро пожаловать",
+  "welcomeSubtitle": "Войдите в свой аккаунт, чтобы продолжить",
+  "username": "Логин",
+  "password": "Пароль",
+  "signIn": "Войти",
+  "fieldRequired": "Это поле обязательно",
+  "wrongCredentials": "Неверный логин или пароль",
+  "faceStepTitle": "Подтверждение лица",
+  "faceStepBody": "Для безопасности подтвердите своё лицо. Смотрите прямо в камеру и сделайте снимок в хорошо освещённом месте.",
+  "faceOpenCamera": "Открыть камеру",
+  "faceRetry": "Переснять",
+  "faceNoCameraBtn": "Войти без камеры",
+  "faceNoCameraReason": "Камера на устройстве не работает",
+  "faceNotRecognized": "Лицо не совпало. Попробуйте ещё раз.",
+  "faceNotDetected": "Лицо не обнаружено — посмотрите прямо в камеру и повторите.",
+  "devicePendingTitle": "Устройство ждёт одобрения",
+  "devicePendingBody": "С этого устройства входят впервые. Попробуйте снова после того, как администратор одобрит устройство.",
+  "deviceBlockedTitle": "Устройство заблокировано",
+  "deviceBlockedBody": "Вход с этого устройства запрещён. Обратитесь к администратору.",
+  "scanTitle": "Сканировать документ",
+  "scanPickType": "Тип документа",
+  "scanPickTypeBody": "Какой документ сканируем?",
+  "scanIdCard": "ID-карта",
+  "scanIdCardBody": "Достаточно лицевой стороны — при желании добавьте обратную",
+  "scanPassport": "Паспорт",
+  "scanPassportBody": "Страница с данными",
+  "scanStepFront": "Лицевая сторона",
+  "scanStepBack": "Обратная сторона",
+  "scanSendOneSide": "Достаточно лицевой стороны — отправить",
+  "scanStepPassport": "Страница с данными",
+  "scanGuide": "Поместите документ в рамку и держите ровно",
+  "scanReading": "Документ распознаётся...",
+  "scanCameraFailed": "Не удалось открыть камеру",
+  "scanFailedTitle": "Документ не распознан",
+  "scanMatchedTitle": "Гость найден",
+  "scanNewGuestTitle": "Новый гость",
+  "scanSentBody": "На стойке регистрации открылось окно новой брони.",
+  "scanAgain": "Сканировать снова",
+  "serviceStoppedTitle": "Сервис остановлен",
+  "serviceStoppedBody": "Система для вашего отеля временно отключена. Это не сбой приложения — все данные сохранены.",
+  "serviceStoppedHint": "Обратитесь к системному администратору, чтобы восстановить сервис. После восстановления кнопка «Проверить снова» продолжит работу.",
+  "serviceStoppedRetry": "Проверить снова",
+  "biometricEnableTitle": "Быстрый вход",
+  "biometricEnableBody": "Включить быстрый вход в приложение по отпечатку пальца или лицу?",
+  "biometricReason": "Подтвердите личность для входа в приложение",
+  "unlock": "Разблокировать",
+  "unlockTitle": "Приложение заблокировано",
+  "unlockBody": "Подтвердите личность, чтобы продолжить",
+  "loginAsOther": "Войти под другим аккаунтом",
+  "tabTasks": "Задачи",
+  "tabRooms": "Комнаты",
+  "tabChat": "Чат",
+  "tabProfile": "Профиль",
+  "goodMorning": "Доброе утро",
+  "goodAfternoon": "Добрый день",
+  "goodEvening": "Добрый вечер",
+  "tasksTitle": "Задачи по уборке",
+  "filterAll": "Все",
+  "filterNew": "Новые",
+  "filterInProgress": "В работе",
+  "filterDone": "Готово",
+  "roomTitle": "Комната {n}",
+  "@roomTitle": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "urgentBadge": "Срочно",
+  "deadlineAt": "Срок: {time}",
+  "@deadlineAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "guestLabel": "Гость",
+  "statusNew": "Новая",
+  "statusInProgress": "В работе",
+  "statusDone": "Готово",
+  "startCleaning": "Начать уборку",
+  "finishCleaning": "Завершить уборку",
+  "confirmFinishTitle": "Уборка завершена?",
+  "confirmFinishBody": "Задача будет отмечена выполненной, а комната перейдёт в статус «Свободна».",
+  "cleaningDone": "Отлично! Комната убрана ✅",
+  "checklistTitle": "Список работ",
+  "checklistRemaining": "Не отмечено работ: {count}",
+  "@checklistRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "confirmFinishBodyRemaining": "Не отмечено работ: {count}. Всё равно завершить? Задача будет отмечена выполненной, а комната перейдёт в статус «Свободна».",
+  "@confirmFinishBodyRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "checklistAllDone": "Все работы отмечены",
+  "progressLabel": "Прогресс",
+  "photoReportTitle": "Фотоотчёт",
+  "addPhoto": "Добавить фото",
+  "commentHint": "Комментарий (необязательно)",
+  "sendReport": "Отправить отчёт",
+  "reportSentOk": "Фотоотчёт отправлен",
+  "reportProblem": "Сообщить о проблеме",
+  "noteLabel": "Примечание",
+  "noTasksTitle": "Пока задач нет",
+  "noTasksBody": "Когда вам назначат новую задачу, она появится здесь, и придёт уведомление.",
+  "tasksSummary": "{done} / {total} выполнено",
+  "@tasksSummary": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "problemTitle": "Сообщение о проблеме",
+  "problemCategoryLabel": "Тип проблемы",
+  "problemDescLabel": "Описание",
+  "problemDescHint": "Кратко опишите проблему...",
+  "problemPhotos": "Фотографии",
+  "problemSubmit": "Отправить",
+  "problemSentOk": "Сообщение о проблеме отправлено",
+  "catBroken": "Сломанный предмет",
+  "catTechnical": "Техническая неисправность",
+  "catWater": "Протечка воды",
+  "catBurnt": "Перегоревшая лампа",
+  "catElectric": "Проблема с электрикой",
+  "catMechanism": "Сломан механизм",
+  "catOther": "Другое",
+  "roomsTitle": "Комнаты",
+  "tabOccupied": "Занятые",
+  "tabUpcoming": "Скоро уборка",
+  "checkoutLabel": "Время выезда",
+  "overdueBadge": "Просрочено",
+  "leftMinutes": "Осталось {n} мин",
+  "@leftMinutes": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "leftHours": "Осталось {h} ч {m} мин",
+  "@leftHours": {
+    "placeholders": {
+      "h": {
+        "type": "int"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "guestRequests": "Запросы гостя",
+  "writeToReception": "Написать на ресепшн",
+  "reservedBadge": "Ожидается",
+  "checkedInBadge": "Гость в номере",
+  "bookingDaily": "Посуточно",
+  "bookingHourly": "Почасово",
+  "noOccupiedTitle": "Занятых комнат нет",
+  "noOccupiedBody": "Сейчас нет комнат с заселёнными гостями.",
+  "upcomingEmptyTitle": "Ближайших уборок нет",
+  "upcomingEmptyBody": "Комнаты с приближающимся временем выезда появятся здесь.",
+  "upcomingHint": "После выезда гостя комнату нужно убрать. Список отсортирован по времени выезда.",
+  "roomStatusAvailable": "Свободна",
+  "roomStatusReserved": "Забронирована",
+  "roomStatusOccupied": "Занята",
+  "roomStatusCleaning": "Уборка",
+  "roomStatusMaintenance": "Ремонт",
+  "roomStatusInspection": "Проверка",
+  "roomStatusOutOfService": "Не работает",
+  "chatTitle": "Чат с ресепшн",
+  "chatSubtitle": "Сообщения видят все сотрудники",
+  "messageHint": "Напишите сообщение...",
+  "markDone": "Отметить выполненным",
+  "doneByName": "Выполнил: {name}",
+  "@doneByName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "openBadge": "Открыто",
+  "attachPhoto": "Отправить фото",
+  "imageMessageBody": "📷 Фото",
+  "uploadImageDenied": "Для отправки фото вам не выдано право «file.upload». Обратитесь к администратору.",
+  "noMessagesTitle": "Сообщений нет",
+  "noMessagesBody": "Переписка с ресепшн и другими сотрудниками появится здесь.",
+  "selectRoom": "Выбрать комнату",
+  "noRoom": "Без комнаты",
+  "notificationsTitle": "Уведомления",
+  "markAllRead": "Отметить все прочитанными",
+  "noNotifsTitle": "Уведомлений нет",
+  "noNotifsBody": "Уведомления о новых задачах и сообщениях появятся здесь.",
+  "profileTitle": "Профиль",
+  "positionLabel": "Должность",
+  "phoneLabel": "Телефон",
+  "idLabel": "ID сотрудника",
+  "hotelLabel": "Отель",
+  "scheduleLabel": "Рабочее время",
+  "statsTitle": "Статистика работы",
+  "statToday": "Сегодня",
+  "statWeek": "За неделю",
+  "statMonth": "За месяц",
+  "statAvg": "Среднее время",
+  "statActive": "В работе",
+  "completedTasks": "выполнено",
+  "statMinutes": "{n} мин",
+  "@statMinutes": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "Настройки",
+  "languageLabel": "Язык",
+  "themeLabel": "Тема",
+  "themeLight": "Дневная",
+  "themeDark": "Ночная",
+  "themeSystem": "Как в системе",
+  "quickUnlockLabel": "Быстрый вход (Face ID / отпечаток)",
+  "quickUnlockDesc": "При открытии приложения потребуется биометрия",
+  "logoutConfirmTitle": "Выйти из аккаунта?",
+  "logoutConfirmBody": "Для повторного входа понадобятся логин и пароль.",
+  "appVersion": "Версия {v}",
+  "@appVersion": {
+    "placeholders": {
+      "v": {
+        "type": "String"
+      }
+    }
+  },
+  "roleHousekeeper": "Горничная",
+  "roleAdmin": "Администратор",
+  "roleManager": "Менеджер",
+  "roleReception": "Сотрудник ресепшн",
+  "roleMaintenance": "Техническая служба",
+  "roleAccountant": "Бухгалтер",
+  "roleStaff": "Сотрудник",
+  "roleHomeSoonTitle": "Раздел «{role}» скоро",
+  "@roleHomeSoonTitle": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "roleHomeSoonBody": "Специальный раздел для вашей должности в разработке. Пока вам доступны чат, уведомления и профиль.",
+  "yourTools": "Доступные возможности",
+  "faceGateTitle": "Привяжите своё лицо",
+  "faceGateBody": "Вход в систему двухэтапный: пароль и лицо. У вас ещё не привязано лицо — аккаунт пока защищён только паролем. Привяжите лицо, чтобы продолжить.",
+  "faceEnrollAction": "Привязать лицо",
+  "faceEnrolledOk": "Лицо привязано ✅",
+  "faceSection": "Вход по лицу",
+  "faceStatusEnrolled": "Привязано · {count} обр.",
+  "@faceStatusEnrolled": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "faceStatusNotEnrolled": "Не привязано",
+  "faceAddSample": "Добавить ещё образец",
+  "faceDeleteAction": "Удалить профили лица",
+  "faceDeleteTitle": "Удалить профили лица?",
+  "faceDeleteBody": "При входе лицо запрашиваться не будет, и система потребует привязать его заново при следующем входе.",
+  "faceDeletedOk": "Профили лица удалены",
+  "faceEngineOff": "Проверка лица на сервере пока не включена.",
+  "faceAutoPlace": "Поместите лицо в овал",
+  "faceAutoCloser": "Подойдите ближе",
+  "faceAutoFarther": "Отодвиньтесь немного",
+  "faceAutoCenter": "Поместите лицо по центру",
+  "faceAutoLookStraight": "Смотрите прямо в камеру",
+  "faceAutoHold": "Не двигайтесь…",
+  "tabBookings": "Брони",
+  "tabReport": "Отчёт",
+  "bookingsTitle": "Брони",
+  "bookingsSubtitle": "Заезды, проживающие и выезды",
+  "bookingsSearchHint": "Гость, номер брони или комната...",
+  "bookingsAll": "Все",
+  "bookingArrival": "Заезд",
+  "bookingInhouse": "Проживает",
+  "bookingDeparture": "Выезд",
+  "bookingsEmptyTitle": "На этот день броней нет",
+  "bookingsEmptyBody": "Выберите другой день или зайдите позже.",
+  "bookingsNotFoundTitle": "Не найдено",
+  "bookingsNotFoundBody": "По запросу ничего не найдено.",
+  "bookingPaid": "Оплачено",
+  "bookingCancelled": "Отменена",
+  "bookingDebt": "Долг: {amount}",
+  "@bookingDebt": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "bookingPeriod": "Период",
+  "bookingGuests": "Гости",
+  "bookingPhone": "Телефон",
+  "bookingNote": "Заметка",
+  "bookingTotal": "Итого",
+  "bookingPaidAmount": "Оплачено",
+  "bookingRemaining": "Остаток",
+  "bookingReadOnlyHint": "Здесь бронь только просматривается. Редактирование, приём оплаты и выезд выполняются на большом экране.",
+  "previousDay": "Предыдущий день",
+  "nextDay": "Следующий день",
+  "copied": "Скопировано",
+  "periodToday": "Сегодня",
+  "periodYesterday": "Вчера",
+  "periodLast7": "7 дней",
+  "periodThisMonth": "Этот месяц",
+  "reportNet": "Чистый результат",
+  "reportNetBreakdown": "Доход {income} − расход {expense}",
+  "@reportNetBreakdown": {
+    "placeholders": {
+      "income": {
+        "type": "String"
+      },
+      "expense": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCollected": "Принято денег",
+  "reportCash": "Наличные: {amount}",
+  "@reportCash": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "reportBookings": "Мои брони",
+  "reportCancelled": "Отменено: {count}",
+  "@reportCancelled": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reportShop": "Продажи магазина",
+  "reportShopCount": "Продаж: {count}",
+  "@reportShopCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reportExpenses": "Мои расходы",
+  "reportExpenseCount": "Записей: {count}",
+  "@reportExpenseCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reportRefunds": "Возвращено",
+  "reportRefundsHint": "уже вычтено",
+  "reportShopUnpaid": "Долг магазина",
+  "reportShopUnpaidHint": "записано на брони",
+  "reportByMethod": "По способам оплаты",
+  "methodCash": "Наличные",
+  "methodCard": "Карта",
+  "methodOnline": "Онлайн",
+  "methodBankTransfer": "Банковский перевод",
+  "methodOther": "Другое",
+  "callWatchTitle": "Определять гостя по звонку",
+  "callWatchBody": "Когда гость звонит, его имя и комната появятся на экране компьютера. Нужно разрешение на чтение входящего номера.",
+  "callWatchEnable": "Включить",
+  "callWatchEnabled": "Включено — звонки видны на компьютере",
+  "callMatched": "Звонит {name}",
+  "@callMatched": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dismiss": "Закрыть"
+}

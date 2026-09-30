@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "649035787043",
+    "project_id": "gohotel-e05a8",
+    "storage_bucket": "gohotel-e05a8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649035787043:android:66ebe2e3e64ea158a3ba96",
+        "android_client_info": {
+          "package_name": "com.gohotels.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2Lq9ajia8E1Y6DV2gSkB4hh9mBTNyIBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649035787043:android:5fb726bc63fa8bc2a3ba96",
+        "android_client_info": {
+          "package_name": "gohotels.torex.uz.gohotels"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2Lq9ajia8E1Y6DV2gSkB4hh9mBTNyIBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

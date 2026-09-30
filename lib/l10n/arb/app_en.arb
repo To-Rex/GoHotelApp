@@ -1,0 +1,423 @@
+{
+  "@@locale": "en",
+  "appTitle": "GoHotel Staff",
+  "ok": "OK",
+  "cancel": "Cancel",
+  "save": "Save",
+  "retry": "Retry",
+  "close": "Close",
+  "refresh": "Refresh",
+  "send": "Send",
+  "all": "All",
+  "today": "Today",
+  "done": "Done",
+  "back": "Back",
+  "logout": "Log out",
+  "confirm": "Confirm",
+  "comingSoon": "Coming soon",
+  "error": "Error",
+  "optional": "optional",
+  "enable": "Enable",
+  "notNow": "Not now",
+  "networkError": "No internet connection. Check your connection and try again.",
+  "serverError": "Server error. Please try again in a moment.",
+  "sessionExpired": "Your session has expired. Please sign in again.",
+  "permissionDenied": "You don't have permission for this action.",
+  "welcomeTitle": "Welcome",
+  "welcomeSubtitle": "Sign in to your account to continue",
+  "username": "Username",
+  "password": "Password",
+  "signIn": "Sign in",
+  "fieldRequired": "This field is required",
+  "wrongCredentials": "Wrong username or password",
+  "faceStepTitle": "Face verification",
+  "faceStepBody": "For security, verify your face. Look straight at the camera and take a photo in a well-lit place.",
+  "faceOpenCamera": "Open camera",
+  "faceRetry": "Retake photo",
+  "faceNoCameraBtn": "Sign in without camera",
+  "faceNoCameraReason": "Camera is not working on this device",
+  "faceNotRecognized": "Face didn't match. Please try again.",
+  "faceNotDetected": "No face detected — look straight at the camera and try again.",
+  "devicePendingTitle": "Device awaiting approval",
+  "devicePendingBody": "This is the first sign-in from this device. Try again after an administrator approves it.",
+  "deviceBlockedTitle": "Device blocked",
+  "deviceBlockedBody": "Sign-in from this device is not allowed. Contact your administrator.",
+  "scanTitle": "Scan a document",
+  "scanPickType": "Document type",
+  "scanPickTypeBody": "Which document are we scanning?",
+  "scanIdCard": "ID card",
+  "scanIdCardBody": "Front side is enough — add the back if you wish",
+  "scanPassport": "Passport",
+  "scanPassportBody": "Data page",
+  "scanStepFront": "Front side",
+  "scanStepBack": "Back side",
+  "scanSendOneSide": "Front side is enough — send",
+  "scanStepPassport": "Data page",
+  "scanGuide": "Fit the document inside the frame and hold still",
+  "scanReading": "Reading the document...",
+  "scanCameraFailed": "Could not open the camera",
+  "scanFailedTitle": "Could not read the document",
+  "scanMatchedTitle": "Guest found",
+  "scanNewGuestTitle": "New guest",
+  "scanSentBody": "The new booking dialog opened on the front desk screen.",
+  "scanAgain": "Scan again",
+  "serviceStoppedTitle": "Service stopped",
+  "serviceStoppedBody": "The system has been switched off for your hotel. This is not an app failure — your data is safe.",
+  "serviceStoppedHint": "Contact your system administrator to restore the service. Once restored, “Check again” resumes your work.",
+  "serviceStoppedRetry": "Check again",
+  "biometricEnableTitle": "Quick unlock",
+  "biometricEnableBody": "Enable quick sign-in with fingerprint or face next time?",
+  "biometricReason": "Verify your identity to enter the app",
+  "unlock": "Unlock",
+  "unlockTitle": "App is locked",
+  "unlockBody": "Verify your identity to continue",
+  "loginAsOther": "Sign in with another account",
+  "tabTasks": "Tasks",
+  "tabRooms": "Rooms",
+  "tabChat": "Chat",
+  "tabProfile": "Profile",
+  "goodMorning": "Good morning",
+  "goodAfternoon": "Good afternoon",
+  "goodEvening": "Good evening",
+  "tasksTitle": "Cleaning tasks",
+  "filterAll": "All",
+  "filterNew": "New",
+  "filterInProgress": "In progress",
+  "filterDone": "Done",
+  "roomTitle": "Room {n}",
+  "@roomTitle": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "urgentBadge": "Urgent",
+  "deadlineAt": "Due: {time}",
+  "@deadlineAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "guestLabel": "Guest",
+  "statusNew": "New",
+  "statusInProgress": "In progress",
+  "statusDone": "Done",
+  "startCleaning": "Start cleaning",
+  "finishCleaning": "Finish cleaning",
+  "confirmFinishTitle": "Finished cleaning?",
+  "confirmFinishBody": "The task will be marked as done and the room will become “Available”.",
+  "cleaningDone": "Great job! Room is clean ✅",
+  "checklistTitle": "Checklist",
+  "checklistRemaining": "{count} item(s) not checked",
+  "@checklistRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "confirmFinishBodyRemaining": "{count} item(s) are still unchecked. Finish anyway? The task will be marked as done and the room will become “Available”.",
+  "@confirmFinishBodyRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "checklistAllDone": "All items checked",
+  "progressLabel": "Progress",
+  "photoReportTitle": "Photo report",
+  "addPhoto": "Add photo",
+  "commentHint": "Comment (optional)",
+  "sendReport": "Send report",
+  "reportSentOk": "Photo report sent",
+  "reportProblem": "Report a problem",
+  "noteLabel": "Note",
+  "noTasksTitle": "No tasks yet",
+  "noTasksBody": "When a new task is assigned to you, it will appear here and you'll get a notification.",
+  "tasksSummary": "{done} / {total} done",
+  "@tasksSummary": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "problemTitle": "Report a problem",
+  "problemCategoryLabel": "Problem type",
+  "problemDescLabel": "Description",
+  "problemDescHint": "Briefly describe the problem...",
+  "problemPhotos": "Photos",
+  "problemSubmit": "Submit",
+  "problemSentOk": "Problem report sent",
+  "catBroken": "Broken item",
+  "catTechnical": "Technical fault",
+  "catWater": "Water leak",
+  "catBurnt": "Burnt-out light",
+  "catElectric": "Electrical fault",
+  "catMechanism": "Broken mechanism",
+  "catOther": "Other",
+  "roomsTitle": "Rooms",
+  "tabOccupied": "Occupied",
+  "tabUpcoming": "Upcoming cleaning",
+  "checkoutLabel": "Check-out time",
+  "overdueBadge": "Overdue",
+  "leftMinutes": "{n} min left",
+  "@leftMinutes": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "leftHours": "{h} h {m} min left",
+  "@leftHours": {
+    "placeholders": {
+      "h": {
+        "type": "int"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "guestRequests": "Guest requests",
+  "writeToReception": "Message reception",
+  "reservedBadge": "Arriving",
+  "checkedInBadge": "Guest inside",
+  "bookingDaily": "Daily",
+  "bookingHourly": "Hourly",
+  "noOccupiedTitle": "No occupied rooms",
+  "noOccupiedBody": "There are no rooms with checked-in guests right now.",
+  "upcomingEmptyTitle": "No upcoming cleanings",
+  "upcomingEmptyBody": "Rooms with an approaching check-out time will appear here.",
+  "upcomingHint": "After the guest checks out, the room will need cleaning. The list is sorted by check-out time.",
+  "roomStatusAvailable": "Available",
+  "roomStatusReserved": "Reserved",
+  "roomStatusOccupied": "Occupied",
+  "roomStatusCleaning": "Cleaning",
+  "roomStatusMaintenance": "Maintenance",
+  "roomStatusInspection": "Inspection",
+  "roomStatusOutOfService": "Out of service",
+  "chatTitle": "Reception chat",
+  "chatSubtitle": "Messages are visible to all staff",
+  "messageHint": "Type a message...",
+  "markDone": "Mark as done",
+  "doneByName": "Done by: {name}",
+  "@doneByName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "openBadge": "Open",
+  "attachPhoto": "Send photo",
+  "imageMessageBody": "📷 Photo",
+  "uploadImageDenied": "You don't have the “file.upload” permission to send photos. Contact your administrator.",
+  "noMessagesTitle": "No messages",
+  "noMessagesBody": "Conversations with reception and other staff will appear here.",
+  "selectRoom": "Select room",
+  "noRoom": "No room",
+  "notificationsTitle": "Notifications",
+  "markAllRead": "Mark all as read",
+  "noNotifsTitle": "No notifications",
+  "noNotifsBody": "Notifications about new tasks and messages will appear here.",
+  "profileTitle": "Profile",
+  "positionLabel": "Position",
+  "phoneLabel": "Phone",
+  "idLabel": "Employee ID",
+  "hotelLabel": "Hotel",
+  "scheduleLabel": "Working hours",
+  "statsTitle": "Work statistics",
+  "statToday": "Today",
+  "statWeek": "This week",
+  "statMonth": "This month",
+  "statAvg": "Average time",
+  "statActive": "In progress",
+  "completedTasks": "completed",
+  "statMinutes": "{n} min",
+  "@statMinutes": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "Settings",
+  "languageLabel": "Language",
+  "themeLabel": "Theme",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "themeSystem": "System",
+  "quickUnlockLabel": "Quick unlock (Face ID / fingerprint)",
+  "quickUnlockDesc": "Biometric confirmation will be required on app start",
+  "logoutConfirmTitle": "Log out of your account?",
+  "logoutConfirmBody": "You will need your username and password to sign in again.",
+  "appVersion": "Version {v}",
+  "@appVersion": {
+    "placeholders": {
+      "v": {
+        "type": "String"
+      }
+    }
+  },
+  "roleHousekeeper": "Housekeeper",
+  "roleAdmin": "Administrator",
+  "roleManager": "Manager",
+  "roleReception": "Receptionist",
+  "roleMaintenance": "Maintenance",
+  "roleAccountant": "Accountant",
+  "roleStaff": "Staff member",
+  "roleHomeSoonTitle": "{role} section coming soon",
+  "@roleHomeSoonTitle": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "roleHomeSoonBody": "A dedicated section for your position is under development. For now you can use chat, notifications and your profile.",
+  "yourTools": "Available tools",
+  "faceGateTitle": "Enroll your face",
+  "faceGateBody": "Signing in has two steps: password and face. You haven't enrolled a face yet — your account is protected by password only. Enroll your face to continue.",
+  "faceEnrollAction": "Enroll face",
+  "faceEnrolledOk": "Face enrolled ✅",
+  "faceSection": "Face sign-in",
+  "faceStatusEnrolled": "Enrolled · {count} sample(s)",
+  "@faceStatusEnrolled": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "faceStatusNotEnrolled": "Not enrolled",
+  "faceAddSample": "Add another sample",
+  "faceDeleteAction": "Delete face profiles",
+  "faceDeleteTitle": "Delete face profiles?",
+  "faceDeleteBody": "Face won't be requested at sign-in, and the system will require enrolling again next time you sign in.",
+  "faceDeletedOk": "Face profiles deleted",
+  "faceEngineOff": "Server-side face verification is not enabled yet.",
+  "faceAutoPlace": "Place your face inside the oval",
+  "faceAutoCloser": "Move closer",
+  "faceAutoFarther": "Move back a little",
+  "faceAutoCenter": "Center your face",
+  "faceAutoLookStraight": "Look straight at the camera",
+  "faceAutoHold": "Hold still…",
+  "tabBookings": "Bookings",
+  "tabReport": "Report",
+  "bookingsTitle": "Bookings",
+  "bookingsSubtitle": "Arrivals, in-house and departures",
+  "bookingsSearchHint": "Guest, booking number or room...",
+  "bookingsAll": "All",
+  "bookingArrival": "Arrival",
+  "bookingInhouse": "In-house",
+  "bookingDeparture": "Departure",
+  "bookingsEmptyTitle": "No bookings on this day",
+  "bookingsEmptyBody": "Pick another day or check back later.",
+  "bookingsNotFoundTitle": "Not found",
+  "bookingsNotFoundBody": "No booking matches your search.",
+  "bookingPaid": "Paid",
+  "bookingCancelled": "Cancelled",
+  "bookingDebt": "Due: {amount}",
+  "@bookingDebt": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "bookingPeriod": "Period",
+  "bookingGuests": "Guests",
+  "bookingPhone": "Phone",
+  "bookingNote": "Note",
+  "bookingTotal": "Total",
+  "bookingPaidAmount": "Paid",
+  "bookingRemaining": "Remaining",
+  "bookingReadOnlyHint": "Bookings are view-only here. Editing, taking payment and check-out are done on the large screen.",
+  "previousDay": "Previous day",
+  "nextDay": "Next day",
+  "copied": "Copied",
+  "periodToday": "Today",
+  "periodYesterday": "Yesterday",
+  "periodLast7": "7 days",
+  "periodThisMonth": "This month",
+  "reportNet": "Net result",
+  "reportNetBreakdown": "Income {income} − expenses {expense}",
+  "@reportNetBreakdown": {
+    "placeholders": {
+      "income": {
+        "type": "String"
+      },
+      "expense": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCollected": "Money collected",
+  "reportCash": "Cash: {amount}",
+  "@reportCash": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "reportBookings": "My bookings",
+  "reportCancelled": "{count} cancelled",
+  "@reportCancelled": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reportShop": "Shop sales",
+  "reportShopCount": "{count} sales",
+  "@reportShopCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reportExpenses": "My expenses",
+  "reportExpenseCount": "{count} entries",
+  "@reportExpenseCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reportRefunds": "Refunded",
+  "reportRefundsHint": "already deducted",
+  "reportShopUnpaid": "Shop due",
+  "reportShopUnpaidHint": "charged to bookings",
+  "reportByMethod": "By payment method",
+  "methodCash": "Cash",
+  "methodCard": "Card",
+  "methodOnline": "Online",
+  "methodBankTransfer": "Bank transfer",
+  "methodOther": "Other",
+  "callWatchTitle": "Identify guests by phone call",
+  "callWatchBody": "When a guest calls, their name and room appear on the desktop screen. This needs permission to read the incoming number.",
+  "callWatchEnable": "Enable",
+  "callWatchEnabled": "Enabled — calls now appear on the desktop",
+  "callMatched": "{name} is calling",
+  "@callMatched": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dismiss": "Dismiss"
+}

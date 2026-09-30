@@ -1,0 +1,423 @@
+{
+  "@@locale": "uz",
+  "appTitle": "GoHotel Staff",
+  "ok": "OK",
+  "cancel": "Bekor qilish",
+  "save": "Saqlash",
+  "retry": "Qayta urinish",
+  "close": "Yopish",
+  "refresh": "Yangilash",
+  "send": "Yuborish",
+  "all": "Barchasi",
+  "today": "Bugun",
+  "done": "Bajarildi",
+  "back": "Orqaga",
+  "logout": "Chiqish",
+  "confirm": "Tasdiqlash",
+  "comingSoon": "Tez orada",
+  "error": "Xatolik",
+  "optional": "ixtiyoriy",
+  "enable": "Yoqish",
+  "notNow": "Hozir emas",
+  "networkError": "Internet bilan aloqa yo'q. Ulanishni tekshirib, qayta urinib ko'ring.",
+  "serverError": "Serverda xatolik yuz berdi. Birozdan so'ng qayta urinib ko'ring.",
+  "sessionExpired": "Sessiya muddati tugadi. Qaytadan kiring.",
+  "permissionDenied": "Bu amal uchun sizda ruxsat yo'q.",
+  "welcomeTitle": "Xush kelibsiz",
+  "welcomeSubtitle": "Davom etish uchun hisobingizga kiring",
+  "username": "Login",
+  "password": "Parol",
+  "signIn": "Kirish",
+  "fieldRequired": "Bu maydon to'ldirilishi shart",
+  "wrongCredentials": "Login yoki parol noto'g'ri",
+  "faceStepTitle": "Yuzni tasdiqlash",
+  "faceStepBody": "Xavfsizlik uchun yuzingizni tasdiqlang. Kameraga to'g'ri qarab, yorug' joyda suratga oling.",
+  "faceOpenCamera": "Kamerani ochish",
+  "faceRetry": "Qayta suratga olish",
+  "faceNoCameraBtn": "Kamerasiz kirish",
+  "faceNoCameraReason": "Qurilmada kamera ishlamayapti",
+  "faceNotRecognized": "Yuz mos kelmadi. Qayta urinib ko'ring.",
+  "faceNotDetected": "Yuz aniqlanmadi — kameraga to'g'ri qarab qayta uriring.",
+  "devicePendingTitle": "Qurilma tasdiq kutmoqda",
+  "devicePendingBody": "Bu qurilmadan birinchi marta kirilmoqda. Administrator qurilmani tasdiqlagach, qayta urinib ko'ring.",
+  "deviceBlockedTitle": "Qurilma bloklangan",
+  "deviceBlockedBody": "Bu qurilmadan kirish taqiqlangan. Administratorga murojaat qiling.",
+  "scanTitle": "Hujjatni skanerlash",
+  "scanPickType": "Hujjat turi",
+  "scanPickTypeBody": "Qaysi hujjatni skanerlaymiz?",
+  "scanIdCard": "ID karta",
+  "scanIdCardBody": "Old tomoni yetarli — xohlasangiz orqasini ham qo'shasiz",
+  "scanPassport": "Passport",
+  "scanPassportBody": "Ma'lumot sahifasi",
+  "scanStepFront": "Old tomon",
+  "scanStepBack": "Orqa tomon",
+  "scanSendOneSide": "Old tomoni yetarli — jo'natish",
+  "scanStepPassport": "Ma'lumot sahifasi",
+  "scanGuide": "Hujjatni ramka ichiga to'liq joylang va qimirlatmay turing",
+  "scanReading": "Hujjat o'qilmoqda...",
+  "scanCameraFailed": "Kamera ochilmadi",
+  "scanFailedTitle": "Hujjat o'qilmadi",
+  "scanMatchedTitle": "Mehmon topildi",
+  "scanNewGuestTitle": "Yangi mijoz",
+  "scanSentBody": "Qabulxona ekranida yangi bandlov oynasi ochildi.",
+  "scanAgain": "Qayta skanerlash",
+  "serviceStoppedTitle": "Xizmat to'xtatilgan",
+  "serviceStoppedBody": "Mehmonxonangiz uchun tizim vaqtincha o'chirib qo'yilgan. Bu ilovadagi nosozlik emas — ma'lumotlaringiz saqlanmoqda.",
+  "serviceStoppedHint": "Xizmatni tiklash uchun tizim ma'muriga murojaat qiling. Tiklangach «Qayta tekshirish» tugmasi ishni davom ettiradi.",
+  "serviceStoppedRetry": "Qayta tekshirish",
+  "biometricEnableTitle": "Tez kirish",
+  "biometricEnableBody": "Keyingi safar ilovaga barmoq izi yoki yuz orqali tez kirishni yoqasizmi?",
+  "biometricReason": "Ilovaga kirish uchun shaxsingizni tasdiqlang",
+  "unlock": "Ochish",
+  "unlockTitle": "Ilova qulflangan",
+  "unlockBody": "Davom etish uchun shaxsingizni tasdiqlang",
+  "loginAsOther": "Boshqa hisob bilan kirish",
+  "tabTasks": "Vazifalar",
+  "tabRooms": "Xonalar",
+  "tabChat": "Chat",
+  "tabProfile": "Profil",
+  "goodMorning": "Xayrli tong",
+  "goodAfternoon": "Xayrli kun",
+  "goodEvening": "Xayrli kech",
+  "tasksTitle": "Tozalash vazifalari",
+  "filterAll": "Barchasi",
+  "filterNew": "Yangi",
+  "filterInProgress": "Jarayonda",
+  "filterDone": "Bajarilgan",
+  "roomTitle": "{n}-xona",
+  "@roomTitle": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
+  "urgentBadge": "Shoshilinch",
+  "deadlineAt": "Muddat: {time}",
+  "@deadlineAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "guestLabel": "Mehmon",
+  "statusNew": "Yangi",
+  "statusInProgress": "Jarayonda",
+  "statusDone": "Bajarilgan",
+  "startCleaning": "Tozalashni boshlash",
+  "finishCleaning": "Tozalashni yakunlash",
+  "confirmFinishTitle": "Tozalash yakunlandimi?",
+  "confirmFinishBody": "Vazifa bajarilgan deb belgilanadi va xona “Bo'sh” holatiga o'tadi.",
+  "cleaningDone": "Barakalla! Xona tozalandi ✅",
+  "checklistTitle": "Bajariladigan ishlar",
+  "checklistRemaining": "{count} ta ish belgilanmagan",
+  "@checklistRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "confirmFinishBodyRemaining": "{count} ta ish hali belgilanmagan. Baribir yakunlaysizmi? Vazifa bajarilgan deb belgilanadi va xona “Bo'sh” holatiga o'tadi.",
+  "@confirmFinishBodyRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "checklistAllDone": "Barcha ishlar belgilandi",
+  "progressLabel": "Bajarilishi",
+  "photoReportTitle": "Foto hisobot",
+  "addPhoto": "Rasm qo'shish",
+  "commentHint": "Izoh (ixtiyoriy)",
+  "sendReport": "Hisobotni yuborish",
+  "reportSentOk": "Foto hisobot yuborildi",
+  "reportProblem": "Muammo haqida xabar berish",
+  "noteLabel": "Izoh",
+  "noTasksTitle": "Hozircha vazifa yo'q",
+  "noTasksBody": "Sizga yangi vazifa berilganda shu yerda ko'rinadi va bildirishnoma keladi.",
+  "tasksSummary": "{done} / {total} bajarildi",
+  "@tasksSummary": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "problemTitle": "Muammo haqida xabar",
+  "problemCategoryLabel": "Muammo turi",
+  "problemDescLabel": "Tavsif",
+  "problemDescHint": "Muammoni qisqacha yozing...",
+  "problemPhotos": "Rasmlar",
+  "problemSubmit": "Xabar yuborish",
+  "problemSentOk": "Muammo haqida xabar yuborildi",
+  "catBroken": "Siniq buyum",
+  "catTechnical": "Texnik nosozlik",
+  "catWater": "Suv sizishi",
+  "catBurnt": "Chiroq kuygan",
+  "catElectric": "Elektr nosozligi",
+  "catMechanism": "Mexanizm buzilgan",
+  "catOther": "Boshqa",
+  "roomsTitle": "Xonalar",
+  "tabOccupied": "Band xonalar",
+  "tabUpcoming": "Yaqin tozalash",
+  "checkoutLabel": "Chiqish vaqti",
+  "overdueBadge": "Vaqti o'tgan",
+  "leftMinutes": "{n} daqiqa qoldi",
+  "@leftMinutes": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "leftHours": "{h} soat {m} daq. qoldi",
+  "@leftHours": {
+    "placeholders": {
+      "h": {
+        "type": "int"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "guestRequests": "Mehmon so'rovlari",
+  "writeToReception": "Resepshnga yozish",
+  "reservedBadge": "Kutilmoqda",
+  "checkedInBadge": "Mehmon ichkarida",
+  "bookingDaily": "Kunlik",
+  "bookingHourly": "Soatlik",
+  "noOccupiedTitle": "Band xonalar yo'q",
+  "noOccupiedBody": "Hozirda mehmon joylashgan xonalar yo'q.",
+  "upcomingEmptyTitle": "Yaqin tozalash yo'q",
+  "upcomingEmptyBody": "Chiqish vaqti yaqinlashgan xonalar shu yerda ko'rinadi.",
+  "upcomingHint": "Mehmon chiqqach, xonani tozalash kerak bo'ladi. Ro'yxat chiqish vaqtiga qarab tartiblangan.",
+  "roomStatusAvailable": "Bo'sh",
+  "roomStatusReserved": "Bron qilingan",
+  "roomStatusOccupied": "Band",
+  "roomStatusCleaning": "Tozalanmoqda",
+  "roomStatusMaintenance": "Ta'mirda",
+  "roomStatusInspection": "Tekshiruvda",
+  "roomStatusOutOfService": "Ishlamayapti",
+  "chatTitle": "Resepshn bilan chat",
+  "chatSubtitle": "Xabarlar barcha xodimlarga ko'rinadi",
+  "messageHint": "Xabar yozing...",
+  "markDone": "Bajarildi deb belgilash",
+  "doneByName": "Bajardi: {name}",
+  "@doneByName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "openBadge": "Ochiq",
+  "attachPhoto": "Rasm yuborish",
+  "imageMessageBody": "📷 Rasm",
+  "uploadImageDenied": "Rasm yuborish uchun sizga «file.upload» ruxsati berilmagan. Administratorga murojaat qiling.",
+  "noMessagesTitle": "Xabarlar yo'q",
+  "noMessagesBody": "Resepshn va boshqa xodimlar bilan yozishmalar shu yerda ko'rinadi.",
+  "selectRoom": "Xonani tanlash",
+  "noRoom": "Xonasiz",
+  "notificationsTitle": "Bildirishnomalar",
+  "markAllRead": "Barchasini o'qilgan qilish",
+  "noNotifsTitle": "Bildirishnoma yo'q",
+  "noNotifsBody": "Yangi vazifa va xabarlar haqidagi bildirishnomalar shu yerda ko'rinadi.",
+  "profileTitle": "Profil",
+  "positionLabel": "Lavozim",
+  "phoneLabel": "Telefon",
+  "idLabel": "Xodim ID",
+  "hotelLabel": "Mehmonxona",
+  "scheduleLabel": "Ish vaqti",
+  "statsTitle": "Ish statistikasi",
+  "statToday": "Bugun",
+  "statWeek": "Bu hafta",
+  "statMonth": "Bu oy",
+  "statAvg": "O'rtacha vaqt",
+  "statActive": "Jarayonda",
+  "completedTasks": "bajarilgan",
+  "statMinutes": "{n} daqiqa",
+  "@statMinutes": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "Sozlamalar",
+  "languageLabel": "Til",
+  "themeLabel": "Mavzu",
+  "themeLight": "Kunduzgi",
+  "themeDark": "Tungi",
+  "themeSystem": "Tizim bo'yicha",
+  "quickUnlockLabel": "Tez kirish (Face ID / barmoq izi)",
+  "quickUnlockDesc": "Ilovani ochishda biometrik tasdiq so'raladi",
+  "logoutConfirmTitle": "Hisobdan chiqasizmi?",
+  "logoutConfirmBody": "Qaytadan kirish uchun login va parol kerak bo'ladi.",
+  "appVersion": "Versiya {v}",
+  "@appVersion": {
+    "placeholders": {
+      "v": {
+        "type": "String"
+      }
+    }
+  },
+  "roleHousekeeper": "Farrosh",
+  "roleAdmin": "Administrator",
+  "roleManager": "Menejer",
+  "roleReception": "Qabulxona xodimi",
+  "roleMaintenance": "Texnik xizmat",
+  "roleAccountant": "Buxgalter",
+  "roleStaff": "Xodim",
+  "roleHomeSoonTitle": "{role} bo'limi tez orada",
+  "@roleHomeSoonTitle": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "roleHomeSoonBody": "Sizning lavozimingiz uchun maxsus bo'lim ishlab chiqilmoqda. Hozircha chat, bildirishnoma va profil bo'limlaridan foydalanishingiz mumkin.",
+  "yourTools": "Mavjud imkoniyatlar",
+  "faceGateTitle": "Yuzingizni biriktiring",
+  "faceGateBody": "Tizimga kirish ikki bosqichli: parol va yuz. Sizda hali yuz biriktirilmagan — hisobingizni hozircha faqat parol himoya qilyapti. Davom etish uchun yuzingizni biriktiring.",
+  "faceEnrollAction": "Yuzni biriktirish",
+  "faceEnrolledOk": "Yuz biriktirildi ✅",
+  "faceSection": "Yuz bilan kirish",
+  "faceStatusEnrolled": "Biriktirilgan · {count} ta namuna",
+  "@faceStatusEnrolled": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "faceStatusNotEnrolled": "Biriktirilmagan",
+  "faceAddSample": "Yana namuna qo'shish",
+  "faceDeleteAction": "Yuz profillarini o'chirish",
+  "faceDeleteTitle": "Yuz profillarini o'chirasizmi?",
+  "faceDeleteBody": "Kirishda yuz so'ralmaydi va tizim keyingi kirishda qaytadan biriktirishni talab qiladi.",
+  "faceDeletedOk": "Yuz profillari o'chirildi",
+  "faceEngineOff": "Serverda yuz tekshiruvi hozircha yoqilmagan.",
+  "faceAutoPlace": "Yuzingizni oval ichiga joylashtiring",
+  "faceAutoCloser": "Yaqinroq keling",
+  "faceAutoFarther": "Biroz uzoqlashing",
+  "faceAutoCenter": "Yuzingizni markazga joylang",
+  "faceAutoLookStraight": "Kameraga to'g'ri qarang",
+  "faceAutoHold": "Qimirlamay turing…",
+  "tabBookings": "Bronlar",
+  "tabReport": "Hisobot",
+  "bookingsTitle": "Bronlar",
+  "bookingsSubtitle": "Kelayotgan, turgan va chiqayotganlar",
+  "bookingsSearchHint": "Mehmon, bron raqami yoki xona...",
+  "bookingsAll": "Hammasi",
+  "bookingArrival": "Kelish",
+  "bookingInhouse": "Turibdi",
+  "bookingDeparture": "Chiqish",
+  "bookingsEmptyTitle": "Bu kunda bron yo'q",
+  "bookingsEmptyBody": "Boshqa kunni tanlang yoki keyinroq qarang.",
+  "bookingsNotFoundTitle": "Topilmadi",
+  "bookingsNotFoundBody": "Qidiruv bo'yicha bron topilmadi.",
+  "bookingPaid": "To'langan",
+  "bookingCancelled": "Bekor qilingan",
+  "bookingDebt": "Qarz: {amount}",
+  "@bookingDebt": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "bookingPeriod": "Muddat",
+  "bookingGuests": "Mehmonlar",
+  "bookingPhone": "Telefon",
+  "bookingNote": "Izoh",
+  "bookingTotal": "Umumiy summa",
+  "bookingPaidAmount": "To'langan",
+  "bookingRemaining": "Qoldiq",
+  "bookingReadOnlyHint": "Bron bu yerda faqat ko'rinadi. Tahrirlash, to'lov qabul qilish va chiqarish katta ekranda bajariladi.",
+  "previousDay": "Oldingi kun",
+  "nextDay": "Keyingi kun",
+  "copied": "Nusxa olindi",
+  "periodToday": "Bugun",
+  "periodYesterday": "Kecha",
+  "periodLast7": "7 kun",
+  "periodThisMonth": "Shu oy",
+  "reportNet": "Sof natija",
+  "reportNetBreakdown": "Tushum {income} − xarajat {expense}",
+  "@reportNetBreakdown": {
+    "placeholders": {
+      "income": {
+        "type": "String"
+      },
+      "expense": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCollected": "Qabul qilingan pul",
+  "reportCash": "Naqd: {amount}",
+  "@reportCash": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "reportBookings": "Bronlarim",
+  "reportCancelled": "{count} ta bekor qilingan",
+  "@reportCancelled": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reportShop": "Do'kon savdosi",
+  "reportShopCount": "{count} ta sotuv",
+  "@reportShopCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reportExpenses": "Xarajatlarim",
+  "reportExpenseCount": "{count} ta chiqim",
+  "@reportExpenseCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reportRefunds": "Qaytarilgan",
+  "reportRefundsHint": "tushumdan ayirilgan",
+  "reportShopUnpaid": "Do'kon qarzi",
+  "reportShopUnpaidHint": "bronga yozilgan",
+  "reportByMethod": "To'lov usullari bo'yicha",
+  "methodCash": "Naqd pul",
+  "methodCard": "Bank kartasi",
+  "methodOnline": "Online to'lov",
+  "methodBankTransfer": "Bank o'tkazmasi",
+  "methodOther": "Boshqa",
+  "callWatchTitle": "Qo'ng'iroq bo'yicha mehmonni aniqlash",
+  "callWatchBody": "Mehmon qo'ng'iroq qilganda uning ismi va xonasi kompyuter ekranida ko'rinadi. Buning uchun qurilmadan qo'ng'iroq raqamini o'qishga ruxsat kerak.",
+  "callWatchEnable": "Yoqish",
+  "callWatchEnabled": "Yoqildi — endi qo'ng'iroqlar kompyuterda ko'rinadi",
+  "callMatched": "{name} qo'ng'iroq qilmoqda",
+  "@callMatched": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dismiss": "Yopish"
+}

@@ -1,0 +1,81 @@
+name: gohotels
+description: "GoHotel Staff — mehmonxona xodimlari uchun mobil ilova (farrosh, resepshn, menejer va boshqalar)."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # UI
+  cupertino_icons: ^1.0.8
+  cached_network_image: ^3.4.1
+
+  # State & DI
+  flutter_bloc: ^9.1.1
+  equatable: ^2.0.7
+  get_it: ^8.2.0
+
+  # Network
+  dio: ^5.9.0
+
+  # Storage
+  shared_preferences: ^2.5.3
+  flutter_secure_storage: ^9.2.4
+
+  # Device
+  local_auth: ^2.3.0
+  image_picker: ^1.2.0
+  # Ilova ichidagi tezkor kamera (foto hisobot, chat, muammo xabari).
+  # image_picker tashqi kamera ilovasini ochib sekin ishlaydi — bu esa yo'q.
+  camera: ^0.11.2
+  # Qurilmada yuzni aniqlash (MyID uslubidagi avtomatik suratga olish uchun).
+  google_mlkit_face_detection: ^0.13.1
+
+  intl: any
+  image: ^4.9.2
+  firebase_core: ^4.14.0
+  firebase_messaging: ^16.6.0
+  flutter_local_notifications: ^22.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    # Inter — SF Pro (iOS tizim shrifti)ga eng yaqin ochiq shrift.
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Inter-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Inter-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Inter-ExtraBold.ttf
+          weight: 800
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"
+  adaptive_icon_background: "#2563EB"
+  adaptive_icon_foreground: "assets/icon/app_icon_foreground.png"
+  remove_alpha_ios: true
