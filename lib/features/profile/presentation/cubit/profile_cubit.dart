@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/bloc/safe_emit.dart';
 import '../../../../core/network/api_exception.dart';
 import '../../data/profile_repository.dart';
 import '../../domain/work_stats.dart';
@@ -45,7 +46,7 @@ class ProfileState extends Equatable {
   ];
 }
 
-class ProfileCubit extends Cubit<ProfileState> {
+class ProfileCubit extends Cubit<ProfileState> with SafeEmit<ProfileState> {
   ProfileCubit(this._repository) : super(const ProfileState());
 
   final ProfileRepository _repository;

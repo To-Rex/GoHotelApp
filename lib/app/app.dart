@@ -12,6 +12,7 @@ import '../features/auth/presentation/pages/face_verify_page.dart';
 import '../features/auth/presentation/widgets/face_enroll_gate.dart';
 import '../features/auth/presentation/pages/locked_page.dart';
 import '../features/auth/presentation/pages/login_page.dart';
+import '../features/auth/presentation/pages/outside_work_hours_page.dart';
 import '../features/auth/presentation/pages/service_stopped_page.dart';
 import '../l10n/gen/app_localizations.dart';
 import 'boot_splash.dart';
@@ -53,7 +54,18 @@ class GoHotelsApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            home: const AuthGate(),
+            /* Ildiz sahifa — AuthGate. Avvalgi `home: AuthGate()` bilan bir
+               xil, faqat dasturiy `pop()` uni olib tashlay olmaydi
+               ([AuthGate.rootRoute]). `home` bilan `onGenerateInitialRoutes`
+               birga berilmaydi, shuning uchun "/" yo'li shu yerda quriladi. */
+            onGenerateInitialRoutes: (_) => [AuthGate.rootRoute()],
+            onGenerateRoute: (settings) =>
+                settings.name == Navigator.defaultRouteName
+                ? MaterialPageRoute<void>(
+                    settings: settings,
+                    builder: (_) => const AuthGate(),
+                  )
+                : null,
           );
         },
       ),
@@ -65,8 +77,37 @@ class GoHotelsApp extends StatelessWidget {
 class AuthGate extends StatefulWidget {
   const AuthGate({super.key});
 
+  /// Ilovaning ildiz sahifasi (AuthGate) — `home` dagi bilan bir xil
+  /// [MaterialPageRoute], faqat dasturiy `pop()` uni olib tashlay olmaydi.
+  ///
+  /// To'siq ekraniga (ish vaqti tugadi, xizmat to'xtatildi) o'tishda
+  /// ustidagi sahifa va oynalar yopiladi. Ulardan biri yopilish animatsiyasi
+  /// paytida (hali "mounted") kutayotgan ishini tugatib o'zini `pop()`
+  /// qilsa, bu chaqiriq ildizga tushib, ilovani bo'sh (qora) ekranda
+  /// qoldirardi. Tizimning "orqaga" tugmasi bunga tegmaydi: ildizda u
+  /// avvalgidek ilovadan chiqadi.
+  static Route<void> rootRoute() => _GateRoute();
+
   @override
   State<AuthGate> createState() => _AuthGateState();
+}
+
+class _GateRoute extends MaterialPageRoute<void> {
+  _GateRoute()
+    : super(
+        builder: (_) => const AuthGate(),
+        settings: const RouteSettings(name: Navigator.defaultRouteName),
+      );
+
+  /// Ildiz hech qachon dasturiy `pop()` bilan olib tashlanmaydi: ostida
+  /// sahifa yo'q, olib tashlansa ilova bo'sh ekranda qolardi. (`didPop`
+  /// paytida `isFirst` allaqachon `false` — shuning uchun shartsiz.)
+  ///
+  /// Shu sababli `popUntil` predikati ildizda albatta to'xtashi kerak
+  /// (masalan `route.isFirst`) — aks holda sikl tugamaydi.
+  @override
+  // ignore: must_call_super
+  bool didPop(void result) => false;
 }
 
 class _AuthGateState extends State<AuthGate> {
@@ -81,6 +122,31 @@ class _AuthGateState extends State<AuthGate> {
     getIt<ApiClient>().onServiceStopped = (code, message) {
       if (mounted) context.read<AuthCubit>().serviceStopped(code, message);
     };
+    // Ish vaqti tugadi (mehmonxona cheklagan) — ish vaqti ekrani.
+    // Sessiya saqlanadi.
+    getIt<ApiClient>().onOutsideWorkHours = (message) {
+      if (mounted) context.read<AuthCubit>().outsideWorkHours(message);
+    };
+  }
+
+  static bool _isBlocking(AuthStatus status) =>
+      status == AuthStatus.outsideWorkHours ||
+      status == AuthStatus.serviceStopped;
+
+  /// To'siq ekrani ilovaning ILDIZIDA almashadi, ochiq sahifalar (vazifa,
+  /// kamera, bildirishnomalar) va oynalar esa uning ustida turadi — ular
+  /// yopilmasa to'siq ko'rinmay, ular ham 403 olib yotaverardi.
+  ///
+  /// Yopish keyingi kadrdan KEYIN: to'siqni qo'zg'atgan 403 so'rovining
+  /// egasi (masalan skanerning "o'qilmoqda" oynasi) xatoni olgach o'z
+  /// oynasini o'zi yopadi. Shu ondayoq yopilsa, uning `pop()` i boshqa
+  /// sahifaga (oxir-oqibat ildizga) tushardi — qarang [AuthGate.rootRoute].
+  void _closeRoutesAboveGate() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      if (!_isBlocking(context.read<AuthCubit>().state.status)) return;
+      Navigator.maybeOf(context)?.popUntil((route) => route.isFirst);
+    });
   }
 
   Future<void> _maybeOfferBiometric() async {
@@ -125,6 +191,14 @@ class _AuthGateState extends State<AuthGate> {
         } else if (state.status == AuthStatus.unauthenticated) {
           // Chiqqan foydalanuvchiga push kelmasin — qurilma tokeni o'chadi
           getIt<PushService>().disconnect();
+        } else if (_isBlocking(state.status)) {
+          _closeRoutesAboveGate();
+          /* Ish vaqtidan tashqarida ham push ulangan qoladi (kirish shu
+             holatda tugagan bo'lsa ham qurilma ro'yxatdan o'tadi):
+             ertalab ilova ochilmagan bo'lsa ham xabar yetib keladi. */
+          if (state.status == AuthStatus.outsideWorkHours) {
+            getIt<PushService>().connect();
+          }
         }
       },
       buildWhen: (a, b) => a.status != b.status || a.user != b.user,
@@ -137,6 +211,7 @@ class _AuthGateState extends State<AuthGate> {
             AuthStatus.unauthenticated => const LoginPage(),
             AuthStatus.faceStep => const FaceVerifyPage(),
             AuthStatus.serviceStopped => const ServiceStoppedPage(),
+            AuthStatus.outsideWorkHours => const OutsideWorkHoursPage(),
             AuthStatus.authenticated =>
               // Rolga qarab bosh sahifa: farrosh → farrosh moduli,
               // boshqalar → o'z bo'limlari (yoki umumiy skelet).

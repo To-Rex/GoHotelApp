@@ -92,5 +92,19 @@ void main() {
     test('ruxsatsiz xodim zaxira bo\'limga tushadi', () {
       expect(RoleRegistry.resolve(_user()).id, 'staff');
     });
+
+    test('sozlovchi — alohida yo\'riqnoma sahifasi, admin ham, xodim ham emas', () {
+      final user = _user(userType: 'CONFIGURATOR');
+      expect(user.isConfigurator, isTrue);
+      expect(user.isAdmin, isFalse);
+      expect(RoleRegistry.resolve(user).id, 'configurator');
+      // Ruxsat kodlari kelib qolsa ham — baribir sozlovchi sahifasi
+      expect(
+        RoleRegistry.resolve(
+          _user(userType: 'CONFIGURATOR', permissions: ['reservation.create']),
+        ).id,
+        'configurator',
+      );
+    });
   });
 }

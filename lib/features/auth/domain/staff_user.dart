@@ -16,10 +16,13 @@ class StaffUser extends Equatable {
     this.phone,
     this.workStart = '09:00',
     this.workEnd = '18:00',
+    this.allowOutsideWorkHours = false,
+    this.workHoursEnforced = false,
+    this.workHoursBlocked = false,
   });
 
   final String id;
-  final String userType; // SUPER_ADMIN / ADMIN / EMPLOYEE
+  final String userType; // SUPER_ADMIN / ADMIN / EMPLOYEE / CONFIGURATOR
   final String username;
   final String firstName;
   final String lastName;
@@ -32,9 +35,26 @@ class StaffUser extends Equatable {
   final String workStart;
   final String workEnd;
 
+  /// Administrator belgilagan istisno: xodim ish vaqtidan tashqari ham
+  /// ishlay oladi.
+  final bool allowOutsideWorkHours;
+
+  /// Mehmonxona sozlamasi: ish vaqtidan tashqari ishlash cheklanganmi.
+  /// Xodim bo'lmaganlar va mehmonxonasizlar uchun doim `false`.
+  final bool workHoursEnforced;
+
+  /// Server hisobi: shu daqiqada bu xodimning so'rovlari ish vaqti sababli
+  /// to'siladimi (`403 OUTSIDE_WORK_HOURS`). Qaror faqat serverda — ilova
+  /// soatni o'zi hisoblamaydi, qurilma vaqti noto'g'ri bo'lishi mumkin.
+  final bool workHoursBlocked;
+
   String get fullName => '$firstName $lastName'.trim();
 
   bool get isAdmin => userType == 'ADMIN' || userType == 'SUPER_ADMIN';
+
+  /// Sozlovchi — mehmonxonaga bog'lanmagan hisob: mehmonxonani veb-ilovada
+  /// tanlab sozlaydi. Mobil ilovada unga faqat yo'riqnoma sahifasi ochiladi.
+  bool get isConfigurator => userType == 'CONFIGURATOR';
 
   /// Ruxsat tekshiruvi. `pattern` yulduzchali bo'lishi mumkin
   /// (masalan `housekeeping.*`) — xodimning istalgan mos kodi yetarli.
@@ -63,8 +83,26 @@ class StaffUser extends Equatable {
     phone: json['phone'] as String?,
     workStart: json['work_start'] as String? ?? '09:00',
     workEnd: json['work_end'] as String? ?? '18:00',
+    // Eski server bu maydonlarni yubormaydi — standart qiymat bugungi
+    // xatti-harakatni saqlaydi (hech kim to'silmaydi).
+    allowOutsideWorkHours: json['allow_outside_work_hours'] == true,
+    workHoursEnforced: json['work_hours_enforced'] == true,
+    workHoursBlocked: json['work_hours_blocked'] == true,
   );
 
+  /// Ish vaqti va uning bayroqlari ham tenglikka kiradi: aks holda
+  /// `/auth/me` yangilangan foydalanuvchini qaytarsa ham Bloc uni "o'sha
+  /// holat" deb tashlab yuborar, ekran esa eski soatni ko'rsatib qolardi.
   @override
-  List<Object?> get props => [id, userType, username, permissions];
+  List<Object?> get props => [
+    id,
+    userType,
+    username,
+    permissions,
+    workStart,
+    workEnd,
+    allowOutsideWorkHours,
+    workHoursEnforced,
+    workHoursBlocked,
+  ];
 }

@@ -65,6 +65,13 @@
   "serviceStoppedBody": "Mehmonxonangiz uchun tizim vaqtincha o'chirib qo'yilgan. Bu ilovadagi nosozlik emas — ma'lumotlaringiz saqlanmoqda.",
   "serviceStoppedHint": "Xizmatni tiklash uchun tizim ma'muriga murojaat qiling. Tiklangach «Qayta tekshirish» tugmasi ishni davom ettiradi.",
   "serviceStoppedRetry": "Qayta tekshirish",
+  "outsideHoursTitle": "Ish vaqtingiz emas",
+  "outsideHoursBody": "Mehmonxonada ish vaqtidan tashqari ishlash cheklangan. Ish vaqtingiz boshlanganda ilova ishni o'zi davom ettiradi.",
+  "outsideHoursScheduleLabel": "Ish vaqtingiz",
+  "outsideHoursHint": "Ilova har daqiqada o'zi tekshiradi. Ish vaqtidan tashqari ishlash kerak bo'lsa, administratorga murojaat qiling.",
+  "outsideHoursRetry": "Qayta tekshirish",
+  "outsideHoursStill": "Hozircha ish vaqtingiz emas",
+  "outsideHoursError": "Hozir ish vaqtingiz emas. Ish vaqti boshlanganda davom ettirishingiz mumkin.",
   "biometricEnableTitle": "Tez kirish",
   "biometricEnableBody": "Keyingi safar ilovaga barmoq izi yoki yuz orqali tez kirishni yoqasizmi?",
   "biometricReason": "Ilovaga kirish uchun shaxsingizni tasdiqlang",
@@ -419,5 +426,587 @@
       }
     }
   },
-  "dismiss": "Yopish"
+  "dismiss": "Yopish",
+  "tabHome": "Asosiy",
+  "tabTeam": "Jamoa",
+  "broadcastAction": "E'lon",
+  "pulseTitle": "Mehmonxona pulsi",
+  "pulseLive": "Jonli",
+  "pulseUpdatedAt": "Yangilandi {time}",
+  "@pulseUpdatedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "pulsePartialWarning": "{count} bo'lak yuklanmadi — pastga tortib yangilang",
+  "@pulsePartialWarning": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "occupancyTitle": "Bandlik",
+  "roomsOf": "{busy} / {total} xona band",
+  "@roomsOf": {
+    "placeholders": {
+      "busy": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "heroArrivals": "Keladi",
+  "heroDepartures": "Chiqadi",
+  "heroInHouse": "Turibdi",
+  "heroOverdue": "{count} xona chiqish vaqtidan o'tgan",
+  "@heroOverdue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "todayBookingsTitle": "Bugungi bronlar",
+  "financeTitle": "Moliya",
+  "financeIncome": "Tushum",
+  "financeExpenses": "Xarajat",
+  "financeNet": "Sof natija",
+  "financeDebt": "Qarzdorlik",
+  "financePayments": "{count} to'lov",
+  "@financePayments": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "financeLast7": "Oxirgi 7 kun tushumi",
+  "currencySuffix": "so'm",
+  "moneyThousand": "ming",
+  "moneyMillion": "mln",
+  "hkTitle": "Xo'jalik ishlari",
+  "taskOpen": "Kutmoqda",
+  "taskInProgress": "Jarayonda",
+  "taskCompleted": "Bajarildi",
+  "taskCancelled": "Bekor qilingan",
+  "hkDoneToday": "Bugun bajarildi",
+  "hkCleaningRooms": "{count} xona tozalanmoqda",
+  "@hkCleaningRooms": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "attentionTitle": "Diqqat talab qiladi",
+  "attentionNone": "Hammasi joyida — e'tibor talab qiladigan holat yo'q",
+  "attentionComplaints": "{count} yangi shikoyat",
+  "@attentionComplaints": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "attentionFeedbackOpen": "{count} ochiq murojaat",
+  "@attentionFeedbackOpen": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "attentionDebtors": "{count} qarzdor bron · {amount}",
+  "@attentionDebtors": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "attentionProblems": "{count} xodim muammosi ochiq",
+  "@attentionProblems": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "attentionHandover": "{count} smena topshirishni kutmoqda",
+  "@attentionHandover": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "attentionOpenTasks": "{count} vazifa biriktirilmagan",
+  "@attentionOpenTasks": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "teamOnDuty": "{onDuty} / {total} xodim ish vaqtida",
+  "@teamOnDuty": {
+    "placeholders": {
+      "onDuty": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "shiftsOpen": "{count} ochiq smena",
+  "@shiftsOpen": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "roomMapTitle": "Xonalar xaritasi",
+  "roomStateAvailable": "Bo'sh",
+  "roomStateOccupied": "Band",
+  "roomStateReserved": "Bron",
+  "roomStateCleaning": "Tozalanmoqda",
+  "roomStateMaintenance": "Ta'mirda",
+  "roomStateInspection": "Tekshiruvda",
+  "roomStateOutOfService": "Xizmatdan tashqari",
+  "roomStateUnknown": "Noma'lum",
+  "floorLabel": "{number}-qavat",
+  "@floorLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "floorOther": "Boshqa xonalar",
+  "roomsEmptyTitle": "Xonalar topilmadi",
+  "roomsEmptyBody": "Bu holatda xona yo'q",
+  "roomSinceLabel": "{duration} dan beri",
+  "@roomSinceLabel": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "roomCapacity": "{count} kishilik",
+  "@roomCapacity": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "roomPrice": "Narx",
+  "roomGuestTitle": "Mehmon",
+  "roomNoStay": "Faol bron yo'q",
+  "roomCompanions": "Hamrohlar: {names}",
+  "@roomCompanions": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "roomChangeStatus": "Holatni o'zgartirish",
+  "roomCreateTask": "Vazifa yaratish",
+  "roomStatusChanged": "Xona holati yangilandi",
+  "roomStatusBusyHint": "Band yoki bron qilingan xona holati bron orqali o'zgaradi — kirish yoki chiqish rasmiylashtiring",
+  "notesLabel": "Izoh",
+  "hourShort": "s",
+  "minuteShort": "d",
+  "taskCreateTitle": "Yangi vazifa · {room}",
+  "@taskCreateTitle": {
+    "placeholders": {
+      "room": {
+        "type": "String"
+      }
+    }
+  },
+  "taskTypeLabel": "Vazifa turi",
+  "taskTypeCleaning": "Tozalash",
+  "taskTypeDeepCleaning": "Chuqur tozalash",
+  "taskTypeMaintenance": "Ta'mir",
+  "taskTypeInspection": "Tekshiruv",
+  "taskTypeTurnDown": "Kechki tayyorlash",
+  "priorityLabel": "Muhimlik",
+  "priorityLow": "Past",
+  "priorityMedium": "O'rta",
+  "priorityHigh": "Yuqori",
+  "priorityUrgent": "Shoshilinch",
+  "assigneeLabel": "Mas'ul",
+  "assigneeNone": "Avtomatik (navbat bo'yicha)",
+  "taskCreated": "Vazifa yaratildi",
+  "create": "Yaratish",
+  "segmentStaff": "Xodimlar",
+  "segmentShifts": "Smenalar",
+  "segmentTasks": "Vazifalar",
+  "segmentProblems": "Muammolar",
+  "staffSearchHint": "Ism, login yoki telefon",
+  "staffOnDutyBadge": "Ish vaqtida",
+  "staffOffDuty": "Ish vaqtidan tashqari",
+  "staffOnline": "Hozir ilovada",
+  "staffStatusInactive": "Nofaol",
+  "staffStatusTerminated": "Ishdan bo'shagan",
+  "staffLastLoginLabel": "Oxirgi kirish",
+  "staffNeverLoggedIn": "Hali kirmagan",
+  "staffEmptyTitle": "Xodimlar topilmadi",
+  "staffEmptyBody": "Qidiruvga mos xodim yo'q",
+  "shiftsNotCashTitle": "Kassa rejimi o'chirilgan",
+  "shiftsNotCashBody": "Smenalar sozlamada «kassa» rejimi yoqilganda yuritiladi",
+  "shiftsOpenTitle": "Ochiq smenalar",
+  "shiftsClosedTitle": "Yopilgan smenalar",
+  "shiftsEmpty": "Smenalar hali yo'q",
+  "shiftActive": "Faol",
+  "shiftPendingHandover": "Topshirishni kutmoqda",
+  "shiftForceClosed": "Majburiy yopilgan",
+  "shiftStarted": "Boshlandi {time}",
+  "@shiftStarted": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "shiftDurationLabel": "Davomiyligi",
+  "shiftOpeningCash": "Boshlang'ich kassa",
+  "shiftCounted": "Sanalgan",
+  "shiftDiff": "Farq",
+  "shiftForceClose": "Majburiy yopish",
+  "shiftForceCloseBody": "{name} smenasi yopiladi. Sanalgan summa kiritilmasa kutilgan summa bo'yicha yopiladi.",
+  "@shiftForceCloseBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "shiftCountedCashLabel": "Sanalgan naqd (ixtiyoriy)",
+  "shiftHandOver": "Kassa keyingi xodimga topshirilsin",
+  "shiftHandOverHint": "O'chirilsa pulni admin oladi va smena butunlay yopiladi",
+  "shiftForceClosedDone": "Smena yopildi",
+  "tasksEmptyTitle": "Vazifalar yo'q",
+  "tasksEmptyBody": "Xonalar xaritasidan vazifa yaratishingiz mumkin",
+  "taskAssign": "Biriktirish",
+  "taskReassign": "Qayta biriktirish",
+  "taskUnassigned": "Biriktirilmagan",
+  "taskAssigned": "Vazifa biriktirildi",
+  "taskComplete": "Yakunlash",
+  "taskCancelAction": "Vazifani bekor qilish",
+  "taskCompleteConfirm": "Vazifa yakunlangan deb belgilansinmi? Tozalash bo'lsa xona bo'sh holatga o'tadi.",
+  "taskCancelConfirm": "Vazifa bekor qilinsinmi?",
+  "taskWaiting": "{duration} kutmoqda",
+  "@taskWaiting": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "taskWorking": "{duration} ishlanmoqda",
+  "@taskWorking": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "taskChecklist": "{done}/{total} band",
+  "@taskChecklist": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "taskChecklistLabel": "Ish bandlari",
+  "taskAutoCompleted": "Avtomatik yakunlangan",
+  "taskCreatedAt": "Yaratilgan",
+  "taskStartedAt": "Boshlangan",
+  "assignSheetTitle": "Kimga biriktiriladi?",
+  "problemsEmptyTitle": "Muammolar yo'q",
+  "problemsEmptyBody": "Xodimlar xabar qilgan muammolar shu yerda ko'rinadi",
+  "problemOpen": "Ochiq",
+  "problemResolved": "Hal qilindi",
+  "problemTake": "Ishga olish",
+  "problemResolve": "Hal qilindi deb belgilash",
+  "problemReportedBy": "{name} xabar qildi",
+  "@problemReportedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "problemResolvedTitle": "Hal qilinganlar",
+  "feedbackTitle": "Murojaatlar",
+  "feedbackRequest": "Talab",
+  "feedbackSuggestion": "Taklif",
+  "feedbackComplaint": "Shikoyat",
+  "feedbackNew": "Yangi",
+  "feedbackInProgress": "Jarayonda",
+  "feedbackResolved": "Hal qilindi",
+  "feedbackRejected": "Rad etildi",
+  "feedbackFilterOpen": "Ochiq",
+  "feedbackFilterComplaints": "Shikoyatlar",
+  "feedbackFilterResolved": "Yopilgan",
+  "feedbackEmptyTitle": "Murojaatlar yo'q",
+  "feedbackEmptyBody": "Mehmon murojaatlari qabulxona tomonidan kiritiladi",
+  "feedbackResolveAction": "Hal qilish",
+  "feedbackRejectAction": "Rad etish",
+  "feedbackReopen": "Qayta ochish",
+  "feedbackResolutionLabel": "Qaror / javob",
+  "feedbackResolutionRequired": "Yopishda javob matni shart",
+  "feedbackRoom": "Xona {number}",
+  "@feedbackRoom": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "feedbackAssigned": "Mas'ul: {name}",
+  "@feedbackAssigned": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedbackStatusUpdated": "Murojaat holati yangilandi",
+  "broadcastTitle": "Barcha xodimlarga e'lon",
+  "broadcastBody": "Xabar mehmonxonaning barcha faol xodimlariga push bo'lib boradi",
+  "broadcastTitleHint": "Sarlavha",
+  "broadcastMessageHint": "Matn (ixtiyoriy)",
+  "broadcastSent": "E'lon {count} qurilmaga yuborildi",
+  "@broadcastSent": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "roomStayNights": "{done} / {total} kecha",
+  "@roomStayNights": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "roomActionsTitle": "Amallar",
+  "broadcastPreview": "Xodim telefonida shunday ko'rinadi",
+  "broadcastNow": "hozir",
+  "broadcastRecipients": "{count} faol xodimga yuboriladi",
+  "@broadcastRecipients": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "broadcastQuick": "Tez matnlar",
+  "broadcastQuick1": "Yig'ilish 10 daqiqadan so'ng",
+  "broadcastQuick2": "Smenani topshirishni unutmang",
+  "broadcastQuick3": "Tozalikka alohida e'tibor bering",
+  "broadcastTitlePlaceholder": "E'lon sarlavhasi",
+  "broadcastBodyPlaceholder": "E'lon matni shu yerda ko'rinadi",
+  "teamOnDutyNow": "Hozir ish vaqtida",
+  "teamNobodyOnDuty": "Hozir ish vaqtida hech kim yo'q",
+  "staffActiveTasks": "{count} faol vazifa",
+  "@staffActiveTasks": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "staffNoTasks": "Faol vazifa yo'q",
+  "taskStepAssigned": "Biriktirilgan",
+  "taskTimelineTitle": "Jarayon",
+  "taskNotStarted": "Hali boshlanmagan",
+  "shiftSummaryTitle": "Smena",
+  "assigneeAuto": "Avto",
+  "roomsFreeNow": "Hozir bo'sh",
+  "stayCheckIn": "Kelish",
+  "stayCheckOut": "Ketish",
+  "roleConfigurator": "Sozlovchi",
+  "configuratorTitle": "Sozlovchi hisobi",
+  "configuratorBody": "Mehmonxonalarni sozlash veb-ilovada bajariladi. Kompyuterda GoHotel'ga shu login bilan kiring, mehmonxona va filialni tanlang — keyin uning barcha bo'limlari va sozlamalari sizga ochiladi.",
+  "configuratorHint": "Mobil ilova mehmonxona xodimlari uchun.",
+  "financeDetails": "Batafsil",
+  "periodCustom": "Tanlash",
+  "financePickRange": "Davrni tanlang",
+  "financeRevenue": "Jami tushum",
+  "financeRevenueParts": "Bronlar: {bookings} · Do'kon: {shop}",
+  "@financeRevenueParts": {
+    "placeholders": {
+      "bookings": {
+        "type": "String"
+      },
+      "shop": {
+        "type": "String"
+      }
+    }
+  },
+  "financeAvgPayment": "o'rtacha to'lov {amount}",
+  "@financeAvgPayment": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "financeVsPrevious": "oldingi davrga nisbatan",
+  "financeNoPrevious": "oldingi davrda tushum bo'lmagan",
+  "financeInvoices": "Hisob-fakturalar",
+  "financeInvoicesValue": "{count} ta · {amount}",
+  "@financeInvoicesValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "financeDiscounts": "Chegirmalar",
+  "cashNowTitle": "Kassada hozir",
+  "cashNowHint": "Ochiq smenalarda kassada bo'lishi kerak bo'lgan naqd pul",
+  "cashDrawersCount": "Ochiq: {active} · topshirilmoqda: {pending}",
+  "@cashDrawersCount": {
+    "placeholders": {
+      "active": {
+        "type": "int"
+      },
+      "pending": {
+        "type": "int"
+      }
+    }
+  },
+  "cashNoOpen": "Hozir ochiq kassa yo'q",
+  "cashSimpleMode": "Kassa smenalari yuritilmaydi — naqd pul harakati davr bo'yicha quyida",
+  "cashBreakdown": "Boshlang'ich {opening} + to'lovlar {payments} + do'kon {shop} − xarajat {expenses}",
+  "@cashBreakdown": {
+    "placeholders": {
+      "opening": {
+        "type": "String"
+      },
+      "payments": {
+        "type": "String"
+      },
+      "shop": {
+        "type": "String"
+      },
+      "expenses": {
+        "type": "String"
+      }
+    }
+  },
+  "cashCounted": "Sanab topshirildi: {amount}",
+  "@cashCounted": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "cashFlowTitle": "Naqd pul harakati",
+  "cashIn": "Kirim",
+  "cashOut": "Chiqim",
+  "cashBalance": "Qoldiq",
+  "chartDaily": "Kunlik tushum va xarajat",
+  "chartWeekly": "Haftalik tushum va xarajat",
+  "chartBest": "Eng yaxshi: {day} — {amount}",
+  "@chartBest": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "chartAverage": "Kuniga o'rtacha {amount}",
+  "@chartAverage": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "expenseCategoriesTitle": "Xarajatlar toifalari",
+  "expensesNone": "Bu davrda xarajat yo'q",
+  "debtorsTitle": "Qarzdorlar",
+  "debtorsSummary": "{count} ta bron · jami {amount}",
+  "@debtorsSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "debtorsNone": "Qarzdor yo'q",
+  "debtorsMore": "Yana {count} ta",
+  "@debtorsMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "debtorRoom": "{room}-xona",
+  "@debtorRoom": {
+    "placeholders": {
+      "room": {
+        "type": "String"
+      }
+    }
+  },
+  "debtorCheckOut": "chiqish {date}",
+  "@debtorCheckOut": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "shiftsCashTitle": "Smenalar kassasi",
+  "shiftsClosedCount": "Yopilgan smenalar: {count}",
+  "@shiftsClosedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shiftsShortage": "Kamomad",
+  "shiftsSurplus": "Ortiqcha",
+  "shiftsNoneClosed": "Bu davrda smena yopilmagan",
+  "financeGuestUnknown": "Mehmon"
 }

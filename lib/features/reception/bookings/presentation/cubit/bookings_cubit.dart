@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/bloc/safe_emit.dart';
 import '../../data/bookings_repository.dart';
 import '../../domain/booking.dart';
 
@@ -60,7 +61,7 @@ class BookingsState extends Equatable {
 }
 
 /// Qabulxona bronlari: kun tanlash, qidiruv va guruh filtri.
-class BookingsCubit extends Cubit<BookingsState> {
+class BookingsCubit extends Cubit<BookingsState> with SafeEmit<BookingsState> {
   BookingsCubit(this._repository)
     : super(BookingsState(date: DateTime.now()));
 

@@ -215,6 +215,30 @@ class SEn extends S {
   String get serviceStoppedRetry => 'Check again';
 
   @override
+  String get outsideHoursTitle => 'Outside your working hours';
+
+  @override
+  String get outsideHoursBody =>
+      'Your hotel restricts work outside working hours. When your working hours start, the app will continue on its own.';
+
+  @override
+  String get outsideHoursScheduleLabel => 'Your working hours';
+
+  @override
+  String get outsideHoursHint =>
+      'The app checks again every minute. If you need to work outside your hours, contact your administrator.';
+
+  @override
+  String get outsideHoursRetry => 'Check again';
+
+  @override
+  String get outsideHoursStill => 'Your working hours haven\'t started yet';
+
+  @override
+  String get outsideHoursError =>
+      'It\'s outside your working hours. You can continue once they start.';
+
+  @override
   String get biometricEnableTitle => 'Quick unlock';
 
   @override
@@ -907,4 +931,810 @@ class SEn extends S {
 
   @override
   String get dismiss => 'Dismiss';
+
+  @override
+  String get tabHome => 'Home';
+
+  @override
+  String get tabTeam => 'Team';
+
+  @override
+  String get broadcastAction => 'Announce';
+
+  @override
+  String get pulseTitle => 'Hotel pulse';
+
+  @override
+  String get pulseLive => 'Live';
+
+  @override
+  String pulseUpdatedAt(String time) {
+    return 'Updated $time';
+  }
+
+  @override
+  String pulsePartialWarning(int count) {
+    return '$count sections failed to load — pull down to refresh';
+  }
+
+  @override
+  String get occupancyTitle => 'Occupancy';
+
+  @override
+  String roomsOf(int busy, int total) {
+    return '$busy of $total rooms occupied';
+  }
+
+  @override
+  String get heroArrivals => 'Arriving';
+
+  @override
+  String get heroDepartures => 'Departing';
+
+  @override
+  String get heroInHouse => 'In-house';
+
+  @override
+  String heroOverdue(int count) {
+    return '$count rooms past checkout time';
+  }
+
+  @override
+  String get todayBookingsTitle => 'Today\'s bookings';
+
+  @override
+  String get financeTitle => 'Finance';
+
+  @override
+  String get financeIncome => 'Income';
+
+  @override
+  String get financeExpenses => 'Expenses';
+
+  @override
+  String get financeNet => 'Net';
+
+  @override
+  String get financeDebt => 'Outstanding';
+
+  @override
+  String financePayments(int count) {
+    return '$count payments';
+  }
+
+  @override
+  String get financeLast7 => 'Income, last 7 days';
+
+  @override
+  String get currencySuffix => 'UZS';
+
+  @override
+  String get moneyThousand => 'K';
+
+  @override
+  String get moneyMillion => 'M';
+
+  @override
+  String get hkTitle => 'Housekeeping';
+
+  @override
+  String get taskOpen => 'Open';
+
+  @override
+  String get taskInProgress => 'In progress';
+
+  @override
+  String get taskCompleted => 'Completed';
+
+  @override
+  String get taskCancelled => 'Cancelled';
+
+  @override
+  String get hkDoneToday => 'Done today';
+
+  @override
+  String hkCleaningRooms(int count) {
+    return '$count rooms being cleaned';
+  }
+
+  @override
+  String get attentionTitle => 'Needs attention';
+
+  @override
+  String get attentionNone => 'All clear — nothing needs attention right now';
+
+  @override
+  String attentionComplaints(int count) {
+    return '$count new complaints';
+  }
+
+  @override
+  String attentionFeedbackOpen(int count) {
+    return '$count open requests';
+  }
+
+  @override
+  String attentionDebtors(int count, String amount) {
+    return '$count debtor bookings · $amount';
+  }
+
+  @override
+  String attentionProblems(int count) {
+    return '$count staff problems open';
+  }
+
+  @override
+  String attentionHandover(int count) {
+    return '$count shifts awaiting handover';
+  }
+
+  @override
+  String attentionOpenTasks(int count) {
+    return '$count tasks unassigned';
+  }
+
+  @override
+  String teamOnDuty(int onDuty, int total) {
+    return '$onDuty of $total staff on duty';
+  }
+
+  @override
+  String shiftsOpen(int count) {
+    return '$count open shifts';
+  }
+
+  @override
+  String get roomMapTitle => 'Room map';
+
+  @override
+  String get roomStateAvailable => 'Available';
+
+  @override
+  String get roomStateOccupied => 'Occupied';
+
+  @override
+  String get roomStateReserved => 'Reserved';
+
+  @override
+  String get roomStateCleaning => 'Cleaning';
+
+  @override
+  String get roomStateMaintenance => 'Maintenance';
+
+  @override
+  String get roomStateInspection => 'Inspection';
+
+  @override
+  String get roomStateOutOfService => 'Out of service';
+
+  @override
+  String get roomStateUnknown => 'Unknown';
+
+  @override
+  String floorLabel(int number) {
+    return 'Floor $number';
+  }
+
+  @override
+  String get floorOther => 'Other rooms';
+
+  @override
+  String get roomsEmptyTitle => 'No rooms found';
+
+  @override
+  String get roomsEmptyBody => 'There are no rooms in this state';
+
+  @override
+  String roomSinceLabel(String duration) {
+    return 'for $duration';
+  }
+
+  @override
+  String roomCapacity(int count) {
+    return '$count guests';
+  }
+
+  @override
+  String get roomPrice => 'Price';
+
+  @override
+  String get roomGuestTitle => 'Guest';
+
+  @override
+  String get roomNoStay => 'No active stay';
+
+  @override
+  String roomCompanions(String names) {
+    return 'Companions: $names';
+  }
+
+  @override
+  String get roomChangeStatus => 'Change status';
+
+  @override
+  String get roomCreateTask => 'Create task';
+
+  @override
+  String get roomStatusChanged => 'Room status updated';
+
+  @override
+  String get roomStatusBusyHint =>
+      'Occupied and reserved states come from bookings — check the guest in or out';
+
+  @override
+  String get notesLabel => 'Note';
+
+  @override
+  String get hourShort => 'h';
+
+  @override
+  String get minuteShort => 'min';
+
+  @override
+  String taskCreateTitle(String room) {
+    return 'New task · $room';
+  }
+
+  @override
+  String get taskTypeLabel => 'Task type';
+
+  @override
+  String get taskTypeCleaning => 'Cleaning';
+
+  @override
+  String get taskTypeDeepCleaning => 'Deep cleaning';
+
+  @override
+  String get taskTypeMaintenance => 'Maintenance';
+
+  @override
+  String get taskTypeInspection => 'Inspection';
+
+  @override
+  String get taskTypeTurnDown => 'Turn-down';
+
+  @override
+  String get priorityLabel => 'Priority';
+
+  @override
+  String get priorityLow => 'Low';
+
+  @override
+  String get priorityMedium => 'Medium';
+
+  @override
+  String get priorityHigh => 'High';
+
+  @override
+  String get priorityUrgent => 'Urgent';
+
+  @override
+  String get assigneeLabel => 'Assignee';
+
+  @override
+  String get assigneeNone => 'Automatic (by queue)';
+
+  @override
+  String get taskCreated => 'Task created';
+
+  @override
+  String get create => 'Create';
+
+  @override
+  String get segmentStaff => 'Staff';
+
+  @override
+  String get segmentShifts => 'Shifts';
+
+  @override
+  String get segmentTasks => 'Tasks';
+
+  @override
+  String get segmentProblems => 'Problems';
+
+  @override
+  String get staffSearchHint => 'Name, login or phone';
+
+  @override
+  String get staffOnDutyBadge => 'On duty';
+
+  @override
+  String get staffOffDuty => 'Off duty';
+
+  @override
+  String get staffOnline => 'Online now';
+
+  @override
+  String get staffStatusInactive => 'Inactive';
+
+  @override
+  String get staffStatusTerminated => 'Terminated';
+
+  @override
+  String get staffLastLoginLabel => 'Last login';
+
+  @override
+  String get staffNeverLoggedIn => 'Never logged in';
+
+  @override
+  String get staffEmptyTitle => 'No staff found';
+
+  @override
+  String get staffEmptyBody => 'Nobody matches the search';
+
+  @override
+  String get shiftsNotCashTitle => 'Cash mode is off';
+
+  @override
+  String get shiftsNotCashBody =>
+      'Shift sessions are tracked when the cash mode is enabled in settings';
+
+  @override
+  String get shiftsOpenTitle => 'Open shifts';
+
+  @override
+  String get shiftsClosedTitle => 'Closed shifts';
+
+  @override
+  String get shiftsEmpty => 'No shifts yet';
+
+  @override
+  String get shiftActive => 'Active';
+
+  @override
+  String get shiftPendingHandover => 'Awaiting handover';
+
+  @override
+  String get shiftForceClosed => 'Force-closed';
+
+  @override
+  String shiftStarted(String time) {
+    return 'Started $time';
+  }
+
+  @override
+  String get shiftDurationLabel => 'Duration';
+
+  @override
+  String get shiftOpeningCash => 'Opening cash';
+
+  @override
+  String get shiftCounted => 'Counted';
+
+  @override
+  String get shiftDiff => 'Difference';
+
+  @override
+  String get shiftForceClose => 'Force close';
+
+  @override
+  String shiftForceCloseBody(String name) {
+    return '$name\'s shift will be closed. Without a counted amount it closes at the expected cash.';
+  }
+
+  @override
+  String get shiftCountedCashLabel => 'Counted cash (optional)';
+
+  @override
+  String get shiftHandOver => 'Hand the cash over to the next employee';
+
+  @override
+  String get shiftHandOverHint =>
+      'If off, the admin takes the cash and the session closes completely';
+
+  @override
+  String get shiftForceClosedDone => 'Shift closed';
+
+  @override
+  String get tasksEmptyTitle => 'No tasks';
+
+  @override
+  String get tasksEmptyBody => 'You can create a task from the room map';
+
+  @override
+  String get taskAssign => 'Assign';
+
+  @override
+  String get taskReassign => 'Reassign';
+
+  @override
+  String get taskUnassigned => 'Unassigned';
+
+  @override
+  String get taskAssigned => 'Task assigned';
+
+  @override
+  String get taskComplete => 'Complete';
+
+  @override
+  String get taskCancelAction => 'Cancel task';
+
+  @override
+  String get taskCompleteConfirm =>
+      'Mark the task as completed? For cleaning tasks the room becomes available.';
+
+  @override
+  String get taskCancelConfirm => 'Cancel this task?';
+
+  @override
+  String taskWaiting(String duration) {
+    return 'waiting $duration';
+  }
+
+  @override
+  String taskWorking(String duration) {
+    return 'in work for $duration';
+  }
+
+  @override
+  String taskChecklist(int done, int total) {
+    return '$done/$total items';
+  }
+
+  @override
+  String get taskChecklistLabel => 'Checklist';
+
+  @override
+  String get taskAutoCompleted => 'Auto-completed';
+
+  @override
+  String get taskCreatedAt => 'Created';
+
+  @override
+  String get taskStartedAt => 'Started';
+
+  @override
+  String get assignSheetTitle => 'Assign to whom?';
+
+  @override
+  String get problemsEmptyTitle => 'No problems';
+
+  @override
+  String get problemsEmptyBody => 'Problems reported by staff appear here';
+
+  @override
+  String get problemOpen => 'Open';
+
+  @override
+  String get problemResolved => 'Resolved';
+
+  @override
+  String get problemTake => 'Take';
+
+  @override
+  String get problemResolve => 'Mark resolved';
+
+  @override
+  String problemReportedBy(String name) {
+    return 'Reported by $name';
+  }
+
+  @override
+  String get problemResolvedTitle => 'Resolved';
+
+  @override
+  String get feedbackTitle => 'Guest feedback';
+
+  @override
+  String get feedbackRequest => 'Request';
+
+  @override
+  String get feedbackSuggestion => 'Suggestion';
+
+  @override
+  String get feedbackComplaint => 'Complaint';
+
+  @override
+  String get feedbackNew => 'New';
+
+  @override
+  String get feedbackInProgress => 'In progress';
+
+  @override
+  String get feedbackResolved => 'Resolved';
+
+  @override
+  String get feedbackRejected => 'Rejected';
+
+  @override
+  String get feedbackFilterOpen => 'Open';
+
+  @override
+  String get feedbackFilterComplaints => 'Complaints';
+
+  @override
+  String get feedbackFilterResolved => 'Closed';
+
+  @override
+  String get feedbackEmptyTitle => 'No feedback';
+
+  @override
+  String get feedbackEmptyBody => 'Guest feedback is entered by the reception';
+
+  @override
+  String get feedbackResolveAction => 'Resolve';
+
+  @override
+  String get feedbackRejectAction => 'Reject';
+
+  @override
+  String get feedbackReopen => 'Reopen';
+
+  @override
+  String get feedbackResolutionLabel => 'Resolution';
+
+  @override
+  String get feedbackResolutionRequired =>
+      'A resolution note is required to close';
+
+  @override
+  String feedbackRoom(String number) {
+    return 'Room $number';
+  }
+
+  @override
+  String feedbackAssigned(String name) {
+    return 'Assignee: $name';
+  }
+
+  @override
+  String get feedbackStatusUpdated => 'Feedback status updated';
+
+  @override
+  String get broadcastTitle => 'Announcement to all staff';
+
+  @override
+  String get broadcastBody =>
+      'Sent as a push notification to every active employee';
+
+  @override
+  String get broadcastTitleHint => 'Title';
+
+  @override
+  String get broadcastMessageHint => 'Message (optional)';
+
+  @override
+  String broadcastSent(int count) {
+    return 'Announcement sent to $count devices';
+  }
+
+  @override
+  String roomStayNights(int done, int total) {
+    return 'Night $done of $total';
+  }
+
+  @override
+  String get roomActionsTitle => 'Actions';
+
+  @override
+  String get broadcastPreview => 'How it looks on a staff phone';
+
+  @override
+  String get broadcastNow => 'now';
+
+  @override
+  String broadcastRecipients(int count) {
+    return 'Goes to $count active employees';
+  }
+
+  @override
+  String get broadcastQuick => 'Quick texts';
+
+  @override
+  String get broadcastQuick1 => 'Meeting in 10 minutes';
+
+  @override
+  String get broadcastQuick2 => 'Don\'t forget the shift handover';
+
+  @override
+  String get broadcastQuick3 => 'Pay extra attention to cleanliness';
+
+  @override
+  String get broadcastTitlePlaceholder => 'Announcement title';
+
+  @override
+  String get broadcastBodyPlaceholder => 'The message text appears here';
+
+  @override
+  String get teamOnDutyNow => 'On duty now';
+
+  @override
+  String get teamNobodyOnDuty => 'Nobody is on duty right now';
+
+  @override
+  String staffActiveTasks(int count) {
+    return '$count active tasks';
+  }
+
+  @override
+  String get staffNoTasks => 'No active tasks';
+
+  @override
+  String get taskStepAssigned => 'Assigned';
+
+  @override
+  String get taskTimelineTitle => 'Progress';
+
+  @override
+  String get taskNotStarted => 'Not started yet';
+
+  @override
+  String get shiftSummaryTitle => 'Shift';
+
+  @override
+  String get assigneeAuto => 'Auto';
+
+  @override
+  String get roomsFreeNow => 'Free now';
+
+  @override
+  String get stayCheckIn => 'Check-in';
+
+  @override
+  String get stayCheckOut => 'Check-out';
+
+  @override
+  String get roleConfigurator => 'Configurator';
+
+  @override
+  String get configuratorTitle => 'Configurator account';
+
+  @override
+  String get configuratorBody =>
+      'Hotels are configured in the web app. Sign in to GoHotel on a computer with this username, choose a hotel and branch — all its sections and settings will then be open to you.';
+
+  @override
+  String get configuratorHint => 'The mobile app is meant for hotel staff.';
+
+  @override
+  String get financeDetails => 'Details';
+
+  @override
+  String get periodCustom => 'Custom';
+
+  @override
+  String get financePickRange => 'Choose a period';
+
+  @override
+  String get financeRevenue => 'Total revenue';
+
+  @override
+  String financeRevenueParts(String bookings, String shop) {
+    return 'Bookings: $bookings · Shop: $shop';
+  }
+
+  @override
+  String financeAvgPayment(String amount) {
+    return 'average payment $amount';
+  }
+
+  @override
+  String get financeVsPrevious => 'vs previous period';
+
+  @override
+  String get financeNoPrevious => 'no revenue in the previous period';
+
+  @override
+  String get financeInvoices => 'Invoices';
+
+  @override
+  String financeInvoicesValue(int count, String amount) {
+    return '$count · $amount';
+  }
+
+  @override
+  String get financeDiscounts => 'Discounts';
+
+  @override
+  String get cashNowTitle => 'Cash on hand now';
+
+  @override
+  String get cashNowHint => 'Cash that should be in the open drawers right now';
+
+  @override
+  String cashDrawersCount(int active, int pending) {
+    return 'Open: $active · handing over: $pending';
+  }
+
+  @override
+  String get cashNoOpen => 'No open cash drawers right now';
+
+  @override
+  String get cashSimpleMode =>
+      'Cash shifts are not used — cash movement for the period is below';
+
+  @override
+  String cashBreakdown(
+    String opening,
+    String payments,
+    String shop,
+    String expenses,
+  ) {
+    return 'Opening $opening + payments $payments + shop $shop − expenses $expenses';
+  }
+
+  @override
+  String cashCounted(String amount) {
+    return 'Counted at handover: $amount';
+  }
+
+  @override
+  String get cashFlowTitle => 'Cash movement';
+
+  @override
+  String get cashIn => 'In';
+
+  @override
+  String get cashOut => 'Out';
+
+  @override
+  String get cashBalance => 'Balance';
+
+  @override
+  String get chartDaily => 'Daily revenue and expenses';
+
+  @override
+  String get chartWeekly => 'Weekly revenue and expenses';
+
+  @override
+  String chartBest(String day, String amount) {
+    return 'Best: $day — $amount';
+  }
+
+  @override
+  String chartAverage(String amount) {
+    return 'Daily average $amount';
+  }
+
+  @override
+  String get expenseCategoriesTitle => 'Expenses by category';
+
+  @override
+  String get expensesNone => 'No expenses in this period';
+
+  @override
+  String get debtorsTitle => 'Debtors';
+
+  @override
+  String debtorsSummary(int count, String amount) {
+    return '$count bookings · total $amount';
+  }
+
+  @override
+  String get debtorsNone => 'No debtors';
+
+  @override
+  String debtorsMore(int count) {
+    return '$count more';
+  }
+
+  @override
+  String debtorRoom(String room) {
+    return 'Room $room';
+  }
+
+  @override
+  String debtorCheckOut(String date) {
+    return 'check-out $date';
+  }
+
+  @override
+  String get shiftsCashTitle => 'Shift cash';
+
+  @override
+  String shiftsClosedCount(int count) {
+    return 'Shifts closed: $count';
+  }
+
+  @override
+  String get shiftsShortage => 'Shortage';
+
+  @override
+  String get shiftsSurplus => 'Surplus';
+
+  @override
+  String get shiftsNoneClosed => 'No shifts closed in this period';
+
+  @override
+  String get financeGuestUnknown => 'Guest';
 }

@@ -128,11 +128,9 @@ class _SummaryBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF3B82F6), Color(0xFF1D4ED8)],
-        ),
+        // Tekis brend ko'ki (ilgarigi gradientning o'rta rangi) — ilovada
+        // gradient ishlatilmaydi
+        color: const Color(0xFF2563EB),
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(

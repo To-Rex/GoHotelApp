@@ -22,8 +22,15 @@ class ApiException implements Exception {
   /// Internet/timeout muammosi — server javobi emas.
   final bool isNetwork;
 
+  /// Xodimning ish vaqti emas — mehmonxona ish vaqtidan tashqari ishlashni
+  /// cheklagan (403). `HOTEL_` bilan boshlanmaydi: u "mehmonxona
+  /// to'xtatilgan" degani emas.
+  static const outsideWorkHoursCode = 'OUTSIDE_WORK_HOURS';
+
   bool get isUnauthorized => statusCode == 401;
   bool get isForbidden => statusCode == 403;
+  bool get isOutsideWorkHours =>
+      statusCode == 403 && code == outsideWorkHoursCode;
 
   factory ApiException.fromDio(DioException e) {
     switch (e.type) {

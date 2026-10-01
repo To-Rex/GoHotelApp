@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +15,8 @@ part 'auth_state.dart';
 ///
 /// Oqim: start → (locked?) → unauthenticated → [login] → (faceStep?) →
 /// authenticated. Sessiya kutilmaganda tugasa [sessionExpired] chaqiriladi.
+/// Server xodimning ish vaqti emasligini aytsa (kirishda `/auth/me` yoki
+/// ish paytida 403) — outsideWorkHours, sessiya saqlangan holda.
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit({
     required this.repository,
@@ -54,9 +58,19 @@ class AuthCubit extends Cubit<AuthState> {
     if (user == null) {
       emit(const AuthState(status: AuthStatus.unauthenticated));
     } else {
-      emit(AuthState(status: AuthStatus.authenticated, user: user));
+      emit(_signedIn(user));
     }
   }
+
+  /// Kirgan foydalanuvchi uchun holat. Server "hozir ish vaqti emas" desa
+  /// (`work_hours_blocked`) — darhol ish vaqti ekrani: aks holda qobiq
+  /// ochilib, uning har bir so'rovi 403 bilan qaytardi.
+  AuthState _signedIn(StaffUser user) => AuthState(
+    status: user.workHoursBlocked
+        ? AuthStatus.outsideWorkHours
+        : AuthStatus.authenticated,
+    user: user,
+  );
 
   Future<void> login(String username, String password) async {
     emit(state.copyWith(submitting: true, clearError: true));
@@ -142,6 +156,78 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthState(status: AuthStatus.authenticated, user: user));
   }
 
+  /// Ish vaqti tugadi — so'rov 403 `OUTSIDE_WORK_HOURS` bilan qaytdi.
+  ///
+  /// Faqat ishlayotgan xodim uchun: parallel so'rovlar buni bir necha marta
+  /// chaqirsa ham o'tish bitta bo'ladi. Ekrandagi soat eskirgan bo'lishi
+  /// mumkin (administrator o'zgartirgan) — profil jim yangilanadi.
+  void outsideWorkHours(String message) {
+    if (state.status != AuthStatus.authenticated) return;
+    emit(
+      state.copyWith(
+        status: AuthStatus.outsideWorkHours,
+        error: message,
+        errorCode: ApiException.outsideWorkHoursCode,
+      ),
+    );
+    unawaited(_refreshBlockedUser());
+  }
+
+  Future<void> _refreshBlockedUser() async {
+    try {
+      final user = await repository.me();
+      if (isClosed || state.status != AuthStatus.outsideWorkHours) return;
+      // Faqat ma'lumot yangilanadi: ekrandan chiqish — server tasdig'i
+      // bilan, [recheckWorkHours] orqali.
+      emit(state.copyWith(user: user));
+    } catch (_) {
+      // Eski ma'lumot bilan qolamiz — keyingi tekshiruv baribir so'raydi.
+    }
+  }
+
+  /// "Qayta tekshirish" — tugma, har daqiqadagi va ilova qayta ochilgandagi
+  /// tekshiruv.
+  ///
+  /// Ish faqat server (`/auth/me`) to'siq yo'qligini tasdiqlasa davom
+  /// etadi. Ko'r-ko'rona qaytish ([retryService] kabi) qobiqni ochib, darhol
+  /// yana 403 olib, ekranni miltillatardi.
+  ///
+  /// `true` — ish davom etdi; `false` — hali ish vaqti emas. Tarmoq/server
+  /// xatosi chaqiruvchiga qaytariladi, holat esa o'zgarmaydi.
+  ///
+  /// [silent] — avtomatik tekshiruv: tugma "kutilmoqda" holatiga o'tmaydi
+  /// (har daqiqada miltillamasin). Bir vaqtda faqat bitta so'rov ketadi —
+  /// tugma avtomatik tekshiruv ustiga bosilsa, o'sha javobni kutadi.
+  Future<bool> recheckWorkHours({bool silent = false}) {
+    if (state.status != AuthStatus.outsideWorkHours) return Future.value(false);
+    if (!silent && !state.submitting) emit(state.copyWith(submitting: true));
+    return _workHoursCheck ??= _askWorkHours().whenComplete(
+      () => _workHoursCheck = null,
+    );
+  }
+
+  Future<bool>? _workHoursCheck;
+
+  Future<bool> _askWorkHours() async {
+    try {
+      final user = await repository.me();
+      if (isClosed || state.status != AuthStatus.outsideWorkHours) {
+        return false;
+      }
+      if (user.workHoursBlocked) {
+        emit(state.copyWith(user: user, submitting: false));
+        return false;
+      }
+      emit(AuthState(status: AuthStatus.authenticated, user: user));
+      return true;
+    } catch (_) {
+      if (!isClosed && state.status == AuthStatus.outsideWorkHours) {
+        emit(state.copyWith(submitting: false));
+      }
+      rethrow;
+    }
+  }
+
   /// Yuz bosqichidan login sahifasiga qaytish.
   void cancelFaceStep() {
     emit(const AuthState(status: AuthStatus.unauthenticated));
@@ -149,7 +235,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> _finishLogin() async {
     final user = await repository.me();
-    emit(AuthState(status: AuthStatus.authenticated, user: user));
+    emit(_signedIn(user));
   }
 
   Future<void> logout() async {
@@ -158,8 +244,12 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   /// Interceptor refresh'ni eplay olmaganda chaqiriladi.
+  ///
+  /// Ish vaqti ekranida ham: u yerdagi tekshiruv tokenlar o'lganini
+  /// bilsa, xodim abadiy shu ekranda qolib ketmasin.
   void sessionExpired() {
-    if (state.status == AuthStatus.authenticated) {
+    if (state.status == AuthStatus.authenticated ||
+        state.status == AuthStatus.outsideWorkHours) {
       emit(const AuthState(status: AuthStatus.unauthenticated));
     }
   }

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/bloc/safe_emit.dart';
 import '../../data/report_repository.dart';
 import '../../domain/my_report.dart';
 
@@ -61,7 +62,7 @@ class ReportState extends Equatable {
 /// Davr KALIT sifatida saqlanadi, sanalar esa har so'rovda qaytadan
 /// hisoblanadi — ilova yarim tundan o'tib ochiq qolsa ham "Bugun"
 /// haqiqiy bugunni bildiradi.
-class ReportCubit extends Cubit<ReportState> {
+class ReportCubit extends Cubit<ReportState> with SafeEmit<ReportState> {
   ReportCubit(this._repository) : super(const ReportState());
 
   final ReportRepository _repository;

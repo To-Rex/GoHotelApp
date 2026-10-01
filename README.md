@@ -1,9 +1,9 @@
 # GoHotel Staff — mehmonxona xodimlari mobil ilovasi
 
-GoHotel tizimining mobil ilovasi. Hozirda **Farrosh** moduli to'liq ishlab
-chiqilgan; admin, menejer, resepshn va texnik xizmat rollari uchun alohida
-papkalar tayyorlab qo'yilgan — ilova xodimning rolini o'zi aniqlab, mos
-bo'limni ochadi.
+GoHotel tizimining mobil ilovasi. **Farrosh**, **Qabulxona** va
+**Boshqaruv (admin / menejer)** modullari to'liq ishlab chiqilgan; texnik
+xizmat uchun alohida papka tayyorlab qo'yilgan — ilova xodimning rolini o'zi
+aniqlab, mos bo'limni ochadi.
 
 Backend: `GoHotelBackend` (FastAPI) · Web frontend: `GoHotelFrontend` (React).
 Ilova ikonkasi va brend ranglari frontend bilan bir xil (`#2563EB`, oq
@@ -20,6 +20,34 @@ mehmonxona binosi).
 | **Bildirishnomalar** | Ro'yxat, o'qilgan belgilash, o'qilmaganlar sanog'i |
 | **Profil** | Ism, lavozim (rolga qarab), telefon, ID, mehmonxona, ish vaqti, surat, ish statistikasi (bugun/hafta/oy, o'rtacha vaqt) |
 | **Sozlamalar** | 3 til (o'zbek — asosiy, rus, ingliz), kun/tun/tizim mavzusi, biometrika |
+
+## Imkoniyatlar (Boshqaruv — admin va menejer)
+
+Bitta qobiq (`features/management`), farq ruxsatlarda (`ManagementAccess`):
+admin hammasini ko'radi, menejer — o'z ruxsat kodlariga qarab (tugma
+ko'rinmasa server ham rad etadi). Ma'lumot har daqiqada jim yangilanadi,
+ilova fonga o'tganda polling to'xtaydi.
+
+| Bo'lim | Tavsif |
+|---|---|
+| **Asosiy (puls)** | Bandlik halqasi (`GET /rooms/`), bugungi kelish/chiqish/turibdi (`/reception/bookings`), moliya kartasi — tushum, xarajat, sof natija, qarzdorlik, to'lov usullari, 7 kunlik chiziq (`/finance/summary`, davr: bugun / 7 kun / oy), xo'jalik progressi (`/housekeeping/tasks`), "Diqqat talab qiladi" ro'yxati (yangi shikoyatlar, chiqish vaqti o'tgan xonalar, biriktirilmagan vazifalar, xodim muammolari, topshirilmagan smenalar, qarzdorlar), jamoa kartasi. Har bo'lak mustaqil yuklanadi — biri yiqilsa qolganlari turadi |
+| **Xonalar xaritasi** | Umumiy karta (hozir bo'sh xonalar, bandlik, taqsimot chizig'i), tepada qoladigan holat filtri, qavatlar bo'yicha kataklar — bo'sh xona oq, qolganlari holat rangida (`/rooms/`, `/floors/`); katak → tafsilot (qanchadan beri, mehmon va hamrohlar `/rooms/{id}/reservations`, qarz), holatni qo'lda o'zgartirish (`PATCH /rooms/{id}/status`, `room.update`; band/bron holatlari bron orqali), vazifa yaratish (`POST /housekeeping/tasks`, tur/muhimlik/mas'ul) |
+| **Jamoa** | *Xodimlar* — ro'yxat, qidiruv, ish vaqtida/ilovada belgilari, faol vazifalari (`/employees/`); *Smenalar* — kassa rejimida ochiq smenalar jonli davomiylik bilan, majburiy yopish (`POST /shifts/force-close`, `shift.force_close`), yopilganlar farqi bilan (`/shifts/history`); *Vazifalar* — kutmoqda/jarayonda/bajarildi, biriktirish (`housekeeping.task.assign`), yakunlash/bekor qilish (`housekeeping.task.update`); *Muammolar* — xodimlar xabar qilgan muammolar, ishga olish / hal qilish (`PATCH /problems/{id}/status`) |
+| **Murojaatlar** | Talab / taklif / shikoyat (`/feedback/`), filtr, holatni o'zgartirish (ishga olish, hal qilish, rad etish, qayta ochish) — yopishda javob matni shart |
+| **E'lon** | Pastki paneldagi markaziy tugma (faqat admin): barcha xodimlarga push (`POST /notifications/broadcast`) |
+| **Profil** | Appbar'dagi avatar orqali — profil sahifasi boshqa rollar bilan bir xil |
+
+Vizual til: iOS 26 shisha panellar saqlangan; puls ekranida kod bilan
+chizilgan bandlik halqasi va tushum chizig'i (`CustomPainter`), raqamlar
+"sanab chiqiladi", kartalar birin-ketin paydo bo'ladi (`StaggerIn`),
+ko'rinmas tabda animatsiya uxlaydi (`TickerIndexedStack`). Gradient
+ishlatilmaydi — faqat tekis ranglar. Xonalar xaritasi va qavatlarda
+holat taqsimoti chizig'i (`DistributionBar`), Jamoa sahifasida sonli
+tanlagich (`StatTabs`), xodimlarda 24 soatlik ish chizig'i (`DayTimeline`).
+
+Dizaynni qurilmasiz ko'rish: `test/management_pages_test.dart` sahifa va
+oynalarni 360×740 ekranda uch tilda tekshiradi; skrinshot kerak bo'lsa
+`GOHOTEL_SHOTS=<papka> flutter test --update-goldens test/management_pages_test.dart`.
 
 ## Arxitektura
 
@@ -52,10 +80,15 @@ lib/
 │   │   ├── home/               #   4 tabli shell
 │   │   ├── tasks/              #   vazifalar (data/domain/presentation)
 │   │   └── rooms/              #   band xonalar
-│   ├── admin/                  # rol skeletlari — kelgusi modullar joyi
-│   ├── manager/
-│   ├── reception/
-│   ├── maintenance/
+│   ├── reception/              # QABULXONA MODULI (bronlar, hisobot, skaner)
+│   ├── management/             # BOSHQARUV MODULI (admin + menejer)
+│   │   ├── home/               #   ManagementShell — 4 tab + e'lon
+│   │   ├── data/               #   ManagementRepository (veb-API'lar)
+│   │   ├── domain/             #   RoomTile, HotelPulse, FinanceSummary, ShiftSession...
+│   │   └── presentation/       #   cubit (puls, xarita, jamoa, murojaat), pages, widgets
+│   ├── admin/                  # → ManagementShell (to'liq ruxsat)
+│   ├── manager/                # → ManagementShell (ruxsat kodlariga qarab)
+│   ├── maintenance/            # rol skeleti — kelgusi modul joyi
 │   └── staff/                  # rol aniqlanmaganlar uchun zaxira
 └── l10n/
     ├── arb/                    # app_uz.arb (asosiy), app_ru.arb, app_en.arb

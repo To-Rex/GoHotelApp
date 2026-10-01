@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/bloc/safe_emit.dart';
 import '../../data/rooms_repository.dart';
 import '../../domain/occupied_room.dart';
 
@@ -35,7 +36,7 @@ class RoomsState extends Equatable {
   List<Object?> get props => [loading, rooms, error];
 }
 
-class RoomsCubit extends Cubit<RoomsState> {
+class RoomsCubit extends Cubit<RoomsState> with SafeEmit<RoomsState> {
   RoomsCubit(this._repository) : super(const RoomsState());
 
   final RoomsRepository _repository;

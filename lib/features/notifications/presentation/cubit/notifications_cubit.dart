@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/bloc/safe_emit.dart';
 import '../../data/notifications_repository.dart';
 import '../../domain/staff_notification.dart';
 
@@ -36,7 +37,8 @@ class NotificationsState extends Equatable {
 
 /// Bildirishnomalar: ro'yxat + o'qilmaganlar soni (bell belgisidagi nuqta).
 /// Fonda daqiqada bir marta jim yangilanadi.
-class NotificationsCubit extends Cubit<NotificationsState> {
+class NotificationsCubit extends Cubit<NotificationsState>
+    with SafeEmit<NotificationsState> {
   NotificationsCubit(this._repository) : super(const NotificationsState());
 
   final NotificationsRepository _repository;

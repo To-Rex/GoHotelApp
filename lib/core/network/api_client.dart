@@ -13,6 +13,9 @@ typedef SessionExpiredCallback = void Function();
 /// Mehmonxona xizmati to'xtatilganda (403 + `HOTEL_*`) xabar berish uchun.
 typedef ServiceStoppedCallback = void Function(String code, String message);
 
+/// Xodimning ish vaqti emas (403 + `OUTSIDE_WORK_HOURS`) — xabar berish uchun.
+typedef OutsideWorkHoursCallback = void Function(String message);
+
 /// Dio ustidagi yagona kirish nuqtasi.
 ///
 /// - Har so'rovga `Authorization` va `X-Device-Id` qo'shadi.
@@ -43,6 +46,11 @@ class ApiClient {
   /// Panel mehmonxonani to'xtatganda chaqiriladi. Sessiya tozalanmaydi:
   /// xizmat tiklangach xodim o'sha yerdan ishini davom ettiradi.
   ServiceStoppedCallback? onServiceStopped;
+
+  /// Mehmonxona ish vaqtidan tashqari ishlashni cheklagan va xodimning
+  /// vaqti tugagan bo'lsa chaqiriladi. Sessiya tozalanmaydi: ish vaqti
+  /// boshlangach xodim qaytadan kirmasdan davom etadi.
+  OutsideWorkHoursCallback? onOutsideWorkHours;
 
   /// Bir vaqtda faqat bitta refresh — qolganlari shu future'ni kutadi.
   Future<bool>? _refreshing;
@@ -78,6 +86,13 @@ class ApiClient {
       if (code is String && code.startsWith('HOTEL_')) {
         final detail = data is Map ? data['detail'] : null;
         onServiceStopped?.call(code, detail is String ? detail : '');
+      } else if (code == ApiException.outsideWorkHoursCode) {
+        /* Ish vaqti tugagan. Ekranlar bittalab "ruxsat yo'q" deb qizarib,
+           so'rovlar esa har 10 soniyada urilib turmasin — ilova bitta
+           tushunarli ekranga o'tadi. Chaqiruvchi baribir ApiException
+           oladi (pastdagi handler.next). */
+        final detail = data is Map ? data['detail'] : null;
+        onOutsideWorkHours?.call(detail is String ? detail : '');
       }
     }
 

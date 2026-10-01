@@ -178,6 +178,14 @@ class _ErrorBanner extends StatelessWidget {
             icon = Icons.pause_circle_outline_rounded;
             bg = c.warningSoft;
             fg = c.warning;
+          case 'OUTSIDE_WORK_HOURS':
+            // Kirish ish vaqtidan tashqarida ham ochiq — bu faqat ehtiyot
+            // shart: server biror kirish bosqichini to'ssa ham matn aniq.
+            title = l10n.outsideHoursTitle;
+            body = l10n.outsideHoursError;
+            icon = Icons.schedule_rounded;
+            bg = c.warningSoft;
+            fg = c.warning;
           case 'WRONG_CREDENTIALS':
           case 'UNAUTHORIZED':
           case 'INVALID_CREDENTIALS':

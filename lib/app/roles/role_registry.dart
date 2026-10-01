@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../features/admin/admin_home_page.dart';
 import '../../features/auth/domain/staff_user.dart';
+import '../../features/configurator/configurator_home_page.dart';
 import '../../features/housekeeper/home/housekeeper_shell.dart';
 import '../../features/maintenance/maintenance_home_page.dart';
 import '../../features/manager/manager_home_page.dart';
@@ -37,6 +38,14 @@ class RoleModule {
 /// tekshiriladi (menejerda ham housekeeping.* bor — u farrosh emas).
 abstract final class RoleRegistry {
   static final List<RoleModule> modules = [
+    // Sozlovchi birinchi: u ruxsat kodlarisiz va mehmonxonasiz — boshqa
+    // modullar uni umumiy xodim deb olib, ishlamaydigan bo'limga tushirardi
+    RoleModule(
+      id: 'configurator',
+      matches: (u) => u.isConfigurator,
+      homeBuilder: ConfiguratorHomePage.new,
+      label: (l10n) => l10n.roleConfigurator,
+    ),
     RoleModule(
       id: 'admin',
       matches: (u) => u.isAdmin,

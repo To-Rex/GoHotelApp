@@ -12,6 +12,7 @@ import '../features/auth/data/face_repository.dart';
 import '../features/chat/data/chat_repository.dart';
 import '../features/housekeeper/rooms/data/rooms_repository.dart';
 import '../features/housekeeper/tasks/data/tasks_repository.dart';
+import '../features/management/data/management_repository.dart';
 import '../features/notifications/data/notifications_repository.dart';
 import '../features/profile/data/profile_repository.dart';
 import '../features/reception/bookings/data/bookings_repository.dart';
@@ -82,5 +83,9 @@ Future<void> configureDependencies() async {
   // ishga tushiriladi, boshqa rollarda umuman tegilmaydi
   getIt.registerLazySingleton<CallWatcherService>(
     () => CallWatcherService(getIt()),
+  );
+  // Boshqaruv (admin/menejer): puls, xonalar xaritasi, jamoa, murojaatlar
+  getIt.registerLazySingleton<ManagementRepository>(
+    () => ManagementRepository(getIt()),
   );
 }

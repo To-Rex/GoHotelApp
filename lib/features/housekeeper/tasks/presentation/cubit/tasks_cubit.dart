@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/bloc/safe_emit.dart';
 import '../../data/tasks_repository.dart';
 import '../../domain/cleaning_task.dart';
 
@@ -68,7 +69,7 @@ class TasksState extends Equatable {
   List<Object?> get props => [loading, tasks, filter, error];
 }
 
-class TasksCubit extends Cubit<TasksState> {
+class TasksCubit extends Cubit<TasksState> with SafeEmit<TasksState> {
   TasksCubit(this._repository) : super(const TasksState());
 
   final TasksRepository _repository;

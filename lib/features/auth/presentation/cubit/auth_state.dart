@@ -21,6 +21,13 @@ enum AuthStatus {
   /// Sessiya saqlanadi: xizmat tiklangach xodim qaytadan kirmasdan
   /// ishini davom ettiradi.
   serviceStopped,
+
+  /// Xodimning ish vaqti emas, mehmonxona esa ish vaqtidan tashqari
+  /// ishlashni cheklagan — ish vaqti ekrani ko'rsatiladi.
+  ///
+  /// Sessiya saqlanadi: ish vaqti boshlanishi bilan (`/auth/me` shuni
+  /// tasdiqlasa) xodim qaytadan kirmasdan ishini davom ettiradi.
+  outsideWorkHours,
 }
 
 class AuthState extends Equatable {

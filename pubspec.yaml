@@ -2,7 +2,7 @@ name: gohotels
 description: "GoHotel Staff — mehmonxona xodimlari uchun mobil ilova (farrosh, resepshn, menejer va boshqalar)."
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.2+3
 
 environment:
   sdk: ^3.13.2

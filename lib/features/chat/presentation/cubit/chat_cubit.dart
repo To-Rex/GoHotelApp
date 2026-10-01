@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/bloc/safe_emit.dart';
 import '../../../../core/network/api_exception.dart';
 import '../../data/chat_repository.dart';
 import '../../domain/staff_message.dart';
@@ -60,7 +61,7 @@ class ChatState extends Equatable {
 
 /// Xodimlar chati. Ochiq turganda har 10 soniyada jim yangilanadi —
 /// resepshn javobi kutdirmay ko'rinadi.
-class ChatCubit extends Cubit<ChatState> {
+class ChatCubit extends Cubit<ChatState> with SafeEmit<ChatState> {
   ChatCubit(this._repository) : super(const ChatState());
 
   final ChatRepository _repository;

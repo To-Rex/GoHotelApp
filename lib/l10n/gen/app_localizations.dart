@@ -489,6 +489,48 @@ abstract class S {
   /// **'Qayta tekshirish'**
   String get serviceStoppedRetry;
 
+  /// No description provided for @outsideHoursTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ish vaqtingiz emas'**
+  String get outsideHoursTitle;
+
+  /// No description provided for @outsideHoursBody.
+  ///
+  /// In uz, this message translates to:
+  /// **'Mehmonxonada ish vaqtidan tashqari ishlash cheklangan. Ish vaqtingiz boshlanganda ilova ishni o\'zi davom ettiradi.'**
+  String get outsideHoursBody;
+
+  /// No description provided for @outsideHoursScheduleLabel.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ish vaqtingiz'**
+  String get outsideHoursScheduleLabel;
+
+  /// No description provided for @outsideHoursHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ilova har daqiqada o\'zi tekshiradi. Ish vaqtidan tashqari ishlash kerak bo\'lsa, administratorga murojaat qiling.'**
+  String get outsideHoursHint;
+
+  /// No description provided for @outsideHoursRetry.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qayta tekshirish'**
+  String get outsideHoursRetry;
+
+  /// No description provided for @outsideHoursStill.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hozircha ish vaqtingiz emas'**
+  String get outsideHoursStill;
+
+  /// No description provided for @outsideHoursError.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hozir ish vaqtingiz emas. Ish vaqti boshlanganda davom ettirishingiz mumkin.'**
+  String get outsideHoursError;
+
   /// No description provided for @biometricEnableTitle.
   ///
   /// In uz, this message translates to:
@@ -1766,6 +1808,1421 @@ abstract class S {
   /// In uz, this message translates to:
   /// **'Yopish'**
   String get dismiss;
+
+  /// No description provided for @tabHome.
+  ///
+  /// In uz, this message translates to:
+  /// **'Asosiy'**
+  String get tabHome;
+
+  /// No description provided for @tabTeam.
+  ///
+  /// In uz, this message translates to:
+  /// **'Jamoa'**
+  String get tabTeam;
+
+  /// No description provided for @broadcastAction.
+  ///
+  /// In uz, this message translates to:
+  /// **'E\'lon'**
+  String get broadcastAction;
+
+  /// No description provided for @pulseTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Mehmonxona pulsi'**
+  String get pulseTitle;
+
+  /// No description provided for @pulseLive.
+  ///
+  /// In uz, this message translates to:
+  /// **'Jonli'**
+  String get pulseLive;
+
+  /// No description provided for @pulseUpdatedAt.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yangilandi {time}'**
+  String pulseUpdatedAt(String time);
+
+  /// No description provided for @pulsePartialWarning.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} bo\'lak yuklanmadi — pastga tortib yangilang'**
+  String pulsePartialWarning(int count);
+
+  /// No description provided for @occupancyTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Bandlik'**
+  String get occupancyTitle;
+
+  /// No description provided for @roomsOf.
+  ///
+  /// In uz, this message translates to:
+  /// **'{busy} / {total} xona band'**
+  String roomsOf(int busy, int total);
+
+  /// No description provided for @heroArrivals.
+  ///
+  /// In uz, this message translates to:
+  /// **'Keladi'**
+  String get heroArrivals;
+
+  /// No description provided for @heroDepartures.
+  ///
+  /// In uz, this message translates to:
+  /// **'Chiqadi'**
+  String get heroDepartures;
+
+  /// No description provided for @heroInHouse.
+  ///
+  /// In uz, this message translates to:
+  /// **'Turibdi'**
+  String get heroInHouse;
+
+  /// No description provided for @heroOverdue.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} xona chiqish vaqtidan o\'tgan'**
+  String heroOverdue(int count);
+
+  /// No description provided for @todayBookingsTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Bugungi bronlar'**
+  String get todayBookingsTitle;
+
+  /// No description provided for @financeTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Moliya'**
+  String get financeTitle;
+
+  /// No description provided for @financeIncome.
+  ///
+  /// In uz, this message translates to:
+  /// **'Tushum'**
+  String get financeIncome;
+
+  /// No description provided for @financeExpenses.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xarajat'**
+  String get financeExpenses;
+
+  /// No description provided for @financeNet.
+  ///
+  /// In uz, this message translates to:
+  /// **'Sof natija'**
+  String get financeNet;
+
+  /// No description provided for @financeDebt.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qarzdorlik'**
+  String get financeDebt;
+
+  /// No description provided for @financePayments.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} to\'lov'**
+  String financePayments(int count);
+
+  /// No description provided for @financeLast7.
+  ///
+  /// In uz, this message translates to:
+  /// **'Oxirgi 7 kun tushumi'**
+  String get financeLast7;
+
+  /// No description provided for @currencySuffix.
+  ///
+  /// In uz, this message translates to:
+  /// **'so\'m'**
+  String get currencySuffix;
+
+  /// No description provided for @moneyThousand.
+  ///
+  /// In uz, this message translates to:
+  /// **'ming'**
+  String get moneyThousand;
+
+  /// No description provided for @moneyMillion.
+  ///
+  /// In uz, this message translates to:
+  /// **'mln'**
+  String get moneyMillion;
+
+  /// No description provided for @hkTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xo\'jalik ishlari'**
+  String get hkTitle;
+
+  /// No description provided for @taskOpen.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kutmoqda'**
+  String get taskOpen;
+
+  /// No description provided for @taskInProgress.
+  ///
+  /// In uz, this message translates to:
+  /// **'Jarayonda'**
+  String get taskInProgress;
+
+  /// No description provided for @taskCompleted.
+  ///
+  /// In uz, this message translates to:
+  /// **'Bajarildi'**
+  String get taskCompleted;
+
+  /// No description provided for @taskCancelled.
+  ///
+  /// In uz, this message translates to:
+  /// **'Bekor qilingan'**
+  String get taskCancelled;
+
+  /// No description provided for @hkDoneToday.
+  ///
+  /// In uz, this message translates to:
+  /// **'Bugun bajarildi'**
+  String get hkDoneToday;
+
+  /// No description provided for @hkCleaningRooms.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} xona tozalanmoqda'**
+  String hkCleaningRooms(int count);
+
+  /// No description provided for @attentionTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Diqqat talab qiladi'**
+  String get attentionTitle;
+
+  /// No description provided for @attentionNone.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hammasi joyida — e\'tibor talab qiladigan holat yo\'q'**
+  String get attentionNone;
+
+  /// No description provided for @attentionComplaints.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} yangi shikoyat'**
+  String attentionComplaints(int count);
+
+  /// No description provided for @attentionFeedbackOpen.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} ochiq murojaat'**
+  String attentionFeedbackOpen(int count);
+
+  /// No description provided for @attentionDebtors.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} qarzdor bron · {amount}'**
+  String attentionDebtors(int count, String amount);
+
+  /// No description provided for @attentionProblems.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} xodim muammosi ochiq'**
+  String attentionProblems(int count);
+
+  /// No description provided for @attentionHandover.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} smena topshirishni kutmoqda'**
+  String attentionHandover(int count);
+
+  /// No description provided for @attentionOpenTasks.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} vazifa biriktirilmagan'**
+  String attentionOpenTasks(int count);
+
+  /// No description provided for @teamOnDuty.
+  ///
+  /// In uz, this message translates to:
+  /// **'{onDuty} / {total} xodim ish vaqtida'**
+  String teamOnDuty(int onDuty, int total);
+
+  /// No description provided for @shiftsOpen.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} ochiq smena'**
+  String shiftsOpen(int count);
+
+  /// No description provided for @roomMapTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xonalar xaritasi'**
+  String get roomMapTitle;
+
+  /// No description provided for @roomStateAvailable.
+  ///
+  /// In uz, this message translates to:
+  /// **'Bo\'sh'**
+  String get roomStateAvailable;
+
+  /// No description provided for @roomStateOccupied.
+  ///
+  /// In uz, this message translates to:
+  /// **'Band'**
+  String get roomStateOccupied;
+
+  /// No description provided for @roomStateReserved.
+  ///
+  /// In uz, this message translates to:
+  /// **'Bron'**
+  String get roomStateReserved;
+
+  /// No description provided for @roomStateCleaning.
+  ///
+  /// In uz, this message translates to:
+  /// **'Tozalanmoqda'**
+  String get roomStateCleaning;
+
+  /// No description provided for @roomStateMaintenance.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ta\'mirda'**
+  String get roomStateMaintenance;
+
+  /// No description provided for @roomStateInspection.
+  ///
+  /// In uz, this message translates to:
+  /// **'Tekshiruvda'**
+  String get roomStateInspection;
+
+  /// No description provided for @roomStateOutOfService.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xizmatdan tashqari'**
+  String get roomStateOutOfService;
+
+  /// No description provided for @roomStateUnknown.
+  ///
+  /// In uz, this message translates to:
+  /// **'Noma\'lum'**
+  String get roomStateUnknown;
+
+  /// No description provided for @floorLabel.
+  ///
+  /// In uz, this message translates to:
+  /// **'{number}-qavat'**
+  String floorLabel(int number);
+
+  /// No description provided for @floorOther.
+  ///
+  /// In uz, this message translates to:
+  /// **'Boshqa xonalar'**
+  String get floorOther;
+
+  /// No description provided for @roomsEmptyTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xonalar topilmadi'**
+  String get roomsEmptyTitle;
+
+  /// No description provided for @roomsEmptyBody.
+  ///
+  /// In uz, this message translates to:
+  /// **'Bu holatda xona yo\'q'**
+  String get roomsEmptyBody;
+
+  /// No description provided for @roomSinceLabel.
+  ///
+  /// In uz, this message translates to:
+  /// **'{duration} dan beri'**
+  String roomSinceLabel(String duration);
+
+  /// No description provided for @roomCapacity.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} kishilik'**
+  String roomCapacity(int count);
+
+  /// No description provided for @roomPrice.
+  ///
+  /// In uz, this message translates to:
+  /// **'Narx'**
+  String get roomPrice;
+
+  /// No description provided for @roomGuestTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Mehmon'**
+  String get roomGuestTitle;
+
+  /// No description provided for @roomNoStay.
+  ///
+  /// In uz, this message translates to:
+  /// **'Faol bron yo\'q'**
+  String get roomNoStay;
+
+  /// No description provided for @roomCompanions.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hamrohlar: {names}'**
+  String roomCompanions(String names);
+
+  /// No description provided for @roomChangeStatus.
+  ///
+  /// In uz, this message translates to:
+  /// **'Holatni o\'zgartirish'**
+  String get roomChangeStatus;
+
+  /// No description provided for @roomCreateTask.
+  ///
+  /// In uz, this message translates to:
+  /// **'Vazifa yaratish'**
+  String get roomCreateTask;
+
+  /// No description provided for @roomStatusChanged.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xona holati yangilandi'**
+  String get roomStatusChanged;
+
+  /// No description provided for @roomStatusBusyHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Band yoki bron qilingan xona holati bron orqali o\'zgaradi — kirish yoki chiqish rasmiylashtiring'**
+  String get roomStatusBusyHint;
+
+  /// No description provided for @notesLabel.
+  ///
+  /// In uz, this message translates to:
+  /// **'Izoh'**
+  String get notesLabel;
+
+  /// No description provided for @hourShort.
+  ///
+  /// In uz, this message translates to:
+  /// **'s'**
+  String get hourShort;
+
+  /// No description provided for @minuteShort.
+  ///
+  /// In uz, this message translates to:
+  /// **'d'**
+  String get minuteShort;
+
+  /// No description provided for @taskCreateTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yangi vazifa · {room}'**
+  String taskCreateTitle(String room);
+
+  /// No description provided for @taskTypeLabel.
+  ///
+  /// In uz, this message translates to:
+  /// **'Vazifa turi'**
+  String get taskTypeLabel;
+
+  /// No description provided for @taskTypeCleaning.
+  ///
+  /// In uz, this message translates to:
+  /// **'Tozalash'**
+  String get taskTypeCleaning;
+
+  /// No description provided for @taskTypeDeepCleaning.
+  ///
+  /// In uz, this message translates to:
+  /// **'Chuqur tozalash'**
+  String get taskTypeDeepCleaning;
+
+  /// No description provided for @taskTypeMaintenance.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ta\'mir'**
+  String get taskTypeMaintenance;
+
+  /// No description provided for @taskTypeInspection.
+  ///
+  /// In uz, this message translates to:
+  /// **'Tekshiruv'**
+  String get taskTypeInspection;
+
+  /// No description provided for @taskTypeTurnDown.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kechki tayyorlash'**
+  String get taskTypeTurnDown;
+
+  /// No description provided for @priorityLabel.
+  ///
+  /// In uz, this message translates to:
+  /// **'Muhimlik'**
+  String get priorityLabel;
+
+  /// No description provided for @priorityLow.
+  ///
+  /// In uz, this message translates to:
+  /// **'Past'**
+  String get priorityLow;
+
+  /// No description provided for @priorityMedium.
+  ///
+  /// In uz, this message translates to:
+  /// **'O\'rta'**
+  String get priorityMedium;
+
+  /// No description provided for @priorityHigh.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yuqori'**
+  String get priorityHigh;
+
+  /// No description provided for @priorityUrgent.
+  ///
+  /// In uz, this message translates to:
+  /// **'Shoshilinch'**
+  String get priorityUrgent;
+
+  /// No description provided for @assigneeLabel.
+  ///
+  /// In uz, this message translates to:
+  /// **'Mas\'ul'**
+  String get assigneeLabel;
+
+  /// No description provided for @assigneeNone.
+  ///
+  /// In uz, this message translates to:
+  /// **'Avtomatik (navbat bo\'yicha)'**
+  String get assigneeNone;
+
+  /// No description provided for @taskCreated.
+  ///
+  /// In uz, this message translates to:
+  /// **'Vazifa yaratildi'**
+  String get taskCreated;
+
+  /// No description provided for @create.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yaratish'**
+  String get create;
+
+  /// No description provided for @segmentStaff.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xodimlar'**
+  String get segmentStaff;
+
+  /// No description provided for @segmentShifts.
+  ///
+  /// In uz, this message translates to:
+  /// **'Smenalar'**
+  String get segmentShifts;
+
+  /// No description provided for @segmentTasks.
+  ///
+  /// In uz, this message translates to:
+  /// **'Vazifalar'**
+  String get segmentTasks;
+
+  /// No description provided for @segmentProblems.
+  ///
+  /// In uz, this message translates to:
+  /// **'Muammolar'**
+  String get segmentProblems;
+
+  /// No description provided for @staffSearchHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ism, login yoki telefon'**
+  String get staffSearchHint;
+
+  /// No description provided for @staffOnDutyBadge.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ish vaqtida'**
+  String get staffOnDutyBadge;
+
+  /// No description provided for @staffOffDuty.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ish vaqtidan tashqari'**
+  String get staffOffDuty;
+
+  /// No description provided for @staffOnline.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hozir ilovada'**
+  String get staffOnline;
+
+  /// No description provided for @staffStatusInactive.
+  ///
+  /// In uz, this message translates to:
+  /// **'Nofaol'**
+  String get staffStatusInactive;
+
+  /// No description provided for @staffStatusTerminated.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ishdan bo\'shagan'**
+  String get staffStatusTerminated;
+
+  /// No description provided for @staffLastLoginLabel.
+  ///
+  /// In uz, this message translates to:
+  /// **'Oxirgi kirish'**
+  String get staffLastLoginLabel;
+
+  /// No description provided for @staffNeverLoggedIn.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hali kirmagan'**
+  String get staffNeverLoggedIn;
+
+  /// No description provided for @staffEmptyTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xodimlar topilmadi'**
+  String get staffEmptyTitle;
+
+  /// No description provided for @staffEmptyBody.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qidiruvga mos xodim yo\'q'**
+  String get staffEmptyBody;
+
+  /// No description provided for @shiftsNotCashTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kassa rejimi o\'chirilgan'**
+  String get shiftsNotCashTitle;
+
+  /// No description provided for @shiftsNotCashBody.
+  ///
+  /// In uz, this message translates to:
+  /// **'Smenalar sozlamada «kassa» rejimi yoqilganda yuritiladi'**
+  String get shiftsNotCashBody;
+
+  /// No description provided for @shiftsOpenTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ochiq smenalar'**
+  String get shiftsOpenTitle;
+
+  /// No description provided for @shiftsClosedTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yopilgan smenalar'**
+  String get shiftsClosedTitle;
+
+  /// No description provided for @shiftsEmpty.
+  ///
+  /// In uz, this message translates to:
+  /// **'Smenalar hali yo\'q'**
+  String get shiftsEmpty;
+
+  /// No description provided for @shiftActive.
+  ///
+  /// In uz, this message translates to:
+  /// **'Faol'**
+  String get shiftActive;
+
+  /// No description provided for @shiftPendingHandover.
+  ///
+  /// In uz, this message translates to:
+  /// **'Topshirishni kutmoqda'**
+  String get shiftPendingHandover;
+
+  /// No description provided for @shiftForceClosed.
+  ///
+  /// In uz, this message translates to:
+  /// **'Majburiy yopilgan'**
+  String get shiftForceClosed;
+
+  /// No description provided for @shiftStarted.
+  ///
+  /// In uz, this message translates to:
+  /// **'Boshlandi {time}'**
+  String shiftStarted(String time);
+
+  /// No description provided for @shiftDurationLabel.
+  ///
+  /// In uz, this message translates to:
+  /// **'Davomiyligi'**
+  String get shiftDurationLabel;
+
+  /// No description provided for @shiftOpeningCash.
+  ///
+  /// In uz, this message translates to:
+  /// **'Boshlang\'ich kassa'**
+  String get shiftOpeningCash;
+
+  /// No description provided for @shiftCounted.
+  ///
+  /// In uz, this message translates to:
+  /// **'Sanalgan'**
+  String get shiftCounted;
+
+  /// No description provided for @shiftDiff.
+  ///
+  /// In uz, this message translates to:
+  /// **'Farq'**
+  String get shiftDiff;
+
+  /// No description provided for @shiftForceClose.
+  ///
+  /// In uz, this message translates to:
+  /// **'Majburiy yopish'**
+  String get shiftForceClose;
+
+  /// No description provided for @shiftForceCloseBody.
+  ///
+  /// In uz, this message translates to:
+  /// **'{name} smenasi yopiladi. Sanalgan summa kiritilmasa kutilgan summa bo\'yicha yopiladi.'**
+  String shiftForceCloseBody(String name);
+
+  /// No description provided for @shiftCountedCashLabel.
+  ///
+  /// In uz, this message translates to:
+  /// **'Sanalgan naqd (ixtiyoriy)'**
+  String get shiftCountedCashLabel;
+
+  /// No description provided for @shiftHandOver.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kassa keyingi xodimga topshirilsin'**
+  String get shiftHandOver;
+
+  /// No description provided for @shiftHandOverHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'O\'chirilsa pulni admin oladi va smena butunlay yopiladi'**
+  String get shiftHandOverHint;
+
+  /// No description provided for @shiftForceClosedDone.
+  ///
+  /// In uz, this message translates to:
+  /// **'Smena yopildi'**
+  String get shiftForceClosedDone;
+
+  /// No description provided for @tasksEmptyTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Vazifalar yo\'q'**
+  String get tasksEmptyTitle;
+
+  /// No description provided for @tasksEmptyBody.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xonalar xaritasidan vazifa yaratishingiz mumkin'**
+  String get tasksEmptyBody;
+
+  /// No description provided for @taskAssign.
+  ///
+  /// In uz, this message translates to:
+  /// **'Biriktirish'**
+  String get taskAssign;
+
+  /// No description provided for @taskReassign.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qayta biriktirish'**
+  String get taskReassign;
+
+  /// No description provided for @taskUnassigned.
+  ///
+  /// In uz, this message translates to:
+  /// **'Biriktirilmagan'**
+  String get taskUnassigned;
+
+  /// No description provided for @taskAssigned.
+  ///
+  /// In uz, this message translates to:
+  /// **'Vazifa biriktirildi'**
+  String get taskAssigned;
+
+  /// No description provided for @taskComplete.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yakunlash'**
+  String get taskComplete;
+
+  /// No description provided for @taskCancelAction.
+  ///
+  /// In uz, this message translates to:
+  /// **'Vazifani bekor qilish'**
+  String get taskCancelAction;
+
+  /// No description provided for @taskCompleteConfirm.
+  ///
+  /// In uz, this message translates to:
+  /// **'Vazifa yakunlangan deb belgilansinmi? Tozalash bo\'lsa xona bo\'sh holatga o\'tadi.'**
+  String get taskCompleteConfirm;
+
+  /// No description provided for @taskCancelConfirm.
+  ///
+  /// In uz, this message translates to:
+  /// **'Vazifa bekor qilinsinmi?'**
+  String get taskCancelConfirm;
+
+  /// No description provided for @taskWaiting.
+  ///
+  /// In uz, this message translates to:
+  /// **'{duration} kutmoqda'**
+  String taskWaiting(String duration);
+
+  /// No description provided for @taskWorking.
+  ///
+  /// In uz, this message translates to:
+  /// **'{duration} ishlanmoqda'**
+  String taskWorking(String duration);
+
+  /// No description provided for @taskChecklist.
+  ///
+  /// In uz, this message translates to:
+  /// **'{done}/{total} band'**
+  String taskChecklist(int done, int total);
+
+  /// No description provided for @taskChecklistLabel.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ish bandlari'**
+  String get taskChecklistLabel;
+
+  /// No description provided for @taskAutoCompleted.
+  ///
+  /// In uz, this message translates to:
+  /// **'Avtomatik yakunlangan'**
+  String get taskAutoCompleted;
+
+  /// No description provided for @taskCreatedAt.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yaratilgan'**
+  String get taskCreatedAt;
+
+  /// No description provided for @taskStartedAt.
+  ///
+  /// In uz, this message translates to:
+  /// **'Boshlangan'**
+  String get taskStartedAt;
+
+  /// No description provided for @assignSheetTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kimga biriktiriladi?'**
+  String get assignSheetTitle;
+
+  /// No description provided for @problemsEmptyTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Muammolar yo\'q'**
+  String get problemsEmptyTitle;
+
+  /// No description provided for @problemsEmptyBody.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xodimlar xabar qilgan muammolar shu yerda ko\'rinadi'**
+  String get problemsEmptyBody;
+
+  /// No description provided for @problemOpen.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ochiq'**
+  String get problemOpen;
+
+  /// No description provided for @problemResolved.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hal qilindi'**
+  String get problemResolved;
+
+  /// No description provided for @problemTake.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ishga olish'**
+  String get problemTake;
+
+  /// No description provided for @problemResolve.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hal qilindi deb belgilash'**
+  String get problemResolve;
+
+  /// No description provided for @problemReportedBy.
+  ///
+  /// In uz, this message translates to:
+  /// **'{name} xabar qildi'**
+  String problemReportedBy(String name);
+
+  /// No description provided for @problemResolvedTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hal qilinganlar'**
+  String get problemResolvedTitle;
+
+  /// No description provided for @feedbackTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Murojaatlar'**
+  String get feedbackTitle;
+
+  /// No description provided for @feedbackRequest.
+  ///
+  /// In uz, this message translates to:
+  /// **'Talab'**
+  String get feedbackRequest;
+
+  /// No description provided for @feedbackSuggestion.
+  ///
+  /// In uz, this message translates to:
+  /// **'Taklif'**
+  String get feedbackSuggestion;
+
+  /// No description provided for @feedbackComplaint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Shikoyat'**
+  String get feedbackComplaint;
+
+  /// No description provided for @feedbackNew.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yangi'**
+  String get feedbackNew;
+
+  /// No description provided for @feedbackInProgress.
+  ///
+  /// In uz, this message translates to:
+  /// **'Jarayonda'**
+  String get feedbackInProgress;
+
+  /// No description provided for @feedbackResolved.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hal qilindi'**
+  String get feedbackResolved;
+
+  /// No description provided for @feedbackRejected.
+  ///
+  /// In uz, this message translates to:
+  /// **'Rad etildi'**
+  String get feedbackRejected;
+
+  /// No description provided for @feedbackFilterOpen.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ochiq'**
+  String get feedbackFilterOpen;
+
+  /// No description provided for @feedbackFilterComplaints.
+  ///
+  /// In uz, this message translates to:
+  /// **'Shikoyatlar'**
+  String get feedbackFilterComplaints;
+
+  /// No description provided for @feedbackFilterResolved.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yopilgan'**
+  String get feedbackFilterResolved;
+
+  /// No description provided for @feedbackEmptyTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Murojaatlar yo\'q'**
+  String get feedbackEmptyTitle;
+
+  /// No description provided for @feedbackEmptyBody.
+  ///
+  /// In uz, this message translates to:
+  /// **'Mehmon murojaatlari qabulxona tomonidan kiritiladi'**
+  String get feedbackEmptyBody;
+
+  /// No description provided for @feedbackResolveAction.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hal qilish'**
+  String get feedbackResolveAction;
+
+  /// No description provided for @feedbackRejectAction.
+  ///
+  /// In uz, this message translates to:
+  /// **'Rad etish'**
+  String get feedbackRejectAction;
+
+  /// No description provided for @feedbackReopen.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qayta ochish'**
+  String get feedbackReopen;
+
+  /// No description provided for @feedbackResolutionLabel.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qaror / javob'**
+  String get feedbackResolutionLabel;
+
+  /// No description provided for @feedbackResolutionRequired.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yopishda javob matni shart'**
+  String get feedbackResolutionRequired;
+
+  /// No description provided for @feedbackRoom.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xona {number}'**
+  String feedbackRoom(String number);
+
+  /// No description provided for @feedbackAssigned.
+  ///
+  /// In uz, this message translates to:
+  /// **'Mas\'ul: {name}'**
+  String feedbackAssigned(String name);
+
+  /// No description provided for @feedbackStatusUpdated.
+  ///
+  /// In uz, this message translates to:
+  /// **'Murojaat holati yangilandi'**
+  String get feedbackStatusUpdated;
+
+  /// No description provided for @broadcastTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Barcha xodimlarga e\'lon'**
+  String get broadcastTitle;
+
+  /// No description provided for @broadcastBody.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xabar mehmonxonaning barcha faol xodimlariga push bo\'lib boradi'**
+  String get broadcastBody;
+
+  /// No description provided for @broadcastTitleHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Sarlavha'**
+  String get broadcastTitleHint;
+
+  /// No description provided for @broadcastMessageHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Matn (ixtiyoriy)'**
+  String get broadcastMessageHint;
+
+  /// No description provided for @broadcastSent.
+  ///
+  /// In uz, this message translates to:
+  /// **'E\'lon {count} qurilmaga yuborildi'**
+  String broadcastSent(int count);
+
+  /// No description provided for @roomStayNights.
+  ///
+  /// In uz, this message translates to:
+  /// **'{done} / {total} kecha'**
+  String roomStayNights(int done, int total);
+
+  /// No description provided for @roomActionsTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Amallar'**
+  String get roomActionsTitle;
+
+  /// No description provided for @broadcastPreview.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xodim telefonida shunday ko\'rinadi'**
+  String get broadcastPreview;
+
+  /// No description provided for @broadcastNow.
+  ///
+  /// In uz, this message translates to:
+  /// **'hozir'**
+  String get broadcastNow;
+
+  /// No description provided for @broadcastRecipients.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} faol xodimga yuboriladi'**
+  String broadcastRecipients(int count);
+
+  /// No description provided for @broadcastQuick.
+  ///
+  /// In uz, this message translates to:
+  /// **'Tez matnlar'**
+  String get broadcastQuick;
+
+  /// No description provided for @broadcastQuick1.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yig\'ilish 10 daqiqadan so\'ng'**
+  String get broadcastQuick1;
+
+  /// No description provided for @broadcastQuick2.
+  ///
+  /// In uz, this message translates to:
+  /// **'Smenani topshirishni unutmang'**
+  String get broadcastQuick2;
+
+  /// No description provided for @broadcastQuick3.
+  ///
+  /// In uz, this message translates to:
+  /// **'Tozalikka alohida e\'tibor bering'**
+  String get broadcastQuick3;
+
+  /// No description provided for @broadcastTitlePlaceholder.
+  ///
+  /// In uz, this message translates to:
+  /// **'E\'lon sarlavhasi'**
+  String get broadcastTitlePlaceholder;
+
+  /// No description provided for @broadcastBodyPlaceholder.
+  ///
+  /// In uz, this message translates to:
+  /// **'E\'lon matni shu yerda ko\'rinadi'**
+  String get broadcastBodyPlaceholder;
+
+  /// No description provided for @teamOnDutyNow.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hozir ish vaqtida'**
+  String get teamOnDutyNow;
+
+  /// No description provided for @teamNobodyOnDuty.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hozir ish vaqtida hech kim yo\'q'**
+  String get teamNobodyOnDuty;
+
+  /// No description provided for @staffActiveTasks.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} faol vazifa'**
+  String staffActiveTasks(int count);
+
+  /// No description provided for @staffNoTasks.
+  ///
+  /// In uz, this message translates to:
+  /// **'Faol vazifa yo\'q'**
+  String get staffNoTasks;
+
+  /// No description provided for @taskStepAssigned.
+  ///
+  /// In uz, this message translates to:
+  /// **'Biriktirilgan'**
+  String get taskStepAssigned;
+
+  /// No description provided for @taskTimelineTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Jarayon'**
+  String get taskTimelineTitle;
+
+  /// No description provided for @taskNotStarted.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hali boshlanmagan'**
+  String get taskNotStarted;
+
+  /// No description provided for @shiftSummaryTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Smena'**
+  String get shiftSummaryTitle;
+
+  /// No description provided for @assigneeAuto.
+  ///
+  /// In uz, this message translates to:
+  /// **'Avto'**
+  String get assigneeAuto;
+
+  /// No description provided for @roomsFreeNow.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hozir bo\'sh'**
+  String get roomsFreeNow;
+
+  /// No description provided for @stayCheckIn.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kelish'**
+  String get stayCheckIn;
+
+  /// No description provided for @stayCheckOut.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ketish'**
+  String get stayCheckOut;
+
+  /// No description provided for @roleConfigurator.
+  ///
+  /// In uz, this message translates to:
+  /// **'Sozlovchi'**
+  String get roleConfigurator;
+
+  /// No description provided for @configuratorTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Sozlovchi hisobi'**
+  String get configuratorTitle;
+
+  /// No description provided for @configuratorBody.
+  ///
+  /// In uz, this message translates to:
+  /// **'Mehmonxonalarni sozlash veb-ilovada bajariladi. Kompyuterda GoHotel\'ga shu login bilan kiring, mehmonxona va filialni tanlang — keyin uning barcha bo\'limlari va sozlamalari sizga ochiladi.'**
+  String get configuratorBody;
+
+  /// No description provided for @configuratorHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Mobil ilova mehmonxona xodimlari uchun.'**
+  String get configuratorHint;
+
+  /// No description provided for @financeDetails.
+  ///
+  /// In uz, this message translates to:
+  /// **'Batafsil'**
+  String get financeDetails;
+
+  /// No description provided for @periodCustom.
+  ///
+  /// In uz, this message translates to:
+  /// **'Tanlash'**
+  String get periodCustom;
+
+  /// No description provided for @financePickRange.
+  ///
+  /// In uz, this message translates to:
+  /// **'Davrni tanlang'**
+  String get financePickRange;
+
+  /// No description provided for @financeRevenue.
+  ///
+  /// In uz, this message translates to:
+  /// **'Jami tushum'**
+  String get financeRevenue;
+
+  /// No description provided for @financeRevenueParts.
+  ///
+  /// In uz, this message translates to:
+  /// **'Bronlar: {bookings} · Do\'kon: {shop}'**
+  String financeRevenueParts(String bookings, String shop);
+
+  /// No description provided for @financeAvgPayment.
+  ///
+  /// In uz, this message translates to:
+  /// **'o\'rtacha to\'lov {amount}'**
+  String financeAvgPayment(String amount);
+
+  /// No description provided for @financeVsPrevious.
+  ///
+  /// In uz, this message translates to:
+  /// **'oldingi davrga nisbatan'**
+  String get financeVsPrevious;
+
+  /// No description provided for @financeNoPrevious.
+  ///
+  /// In uz, this message translates to:
+  /// **'oldingi davrda tushum bo\'lmagan'**
+  String get financeNoPrevious;
+
+  /// No description provided for @financeInvoices.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hisob-fakturalar'**
+  String get financeInvoices;
+
+  /// No description provided for @financeInvoicesValue.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} ta · {amount}'**
+  String financeInvoicesValue(int count, String amount);
+
+  /// No description provided for @financeDiscounts.
+  ///
+  /// In uz, this message translates to:
+  /// **'Chegirmalar'**
+  String get financeDiscounts;
+
+  /// No description provided for @cashNowTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kassada hozir'**
+  String get cashNowTitle;
+
+  /// No description provided for @cashNowHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ochiq smenalarda kassada bo\'lishi kerak bo\'lgan naqd pul'**
+  String get cashNowHint;
+
+  /// No description provided for @cashDrawersCount.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ochiq: {active} · topshirilmoqda: {pending}'**
+  String cashDrawersCount(int active, int pending);
+
+  /// No description provided for @cashNoOpen.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hozir ochiq kassa yo\'q'**
+  String get cashNoOpen;
+
+  /// No description provided for @cashSimpleMode.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kassa smenalari yuritilmaydi — naqd pul harakati davr bo\'yicha quyida'**
+  String get cashSimpleMode;
+
+  /// No description provided for @cashBreakdown.
+  ///
+  /// In uz, this message translates to:
+  /// **'Boshlang\'ich {opening} + to\'lovlar {payments} + do\'kon {shop} − xarajat {expenses}'**
+  String cashBreakdown(
+    String opening,
+    String payments,
+    String shop,
+    String expenses,
+  );
+
+  /// No description provided for @cashCounted.
+  ///
+  /// In uz, this message translates to:
+  /// **'Sanab topshirildi: {amount}'**
+  String cashCounted(String amount);
+
+  /// No description provided for @cashFlowTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Naqd pul harakati'**
+  String get cashFlowTitle;
+
+  /// No description provided for @cashIn.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kirim'**
+  String get cashIn;
+
+  /// No description provided for @cashOut.
+  ///
+  /// In uz, this message translates to:
+  /// **'Chiqim'**
+  String get cashOut;
+
+  /// No description provided for @cashBalance.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qoldiq'**
+  String get cashBalance;
+
+  /// No description provided for @chartDaily.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kunlik tushum va xarajat'**
+  String get chartDaily;
+
+  /// No description provided for @chartWeekly.
+  ///
+  /// In uz, this message translates to:
+  /// **'Haftalik tushum va xarajat'**
+  String get chartWeekly;
+
+  /// No description provided for @chartBest.
+  ///
+  /// In uz, this message translates to:
+  /// **'Eng yaxshi: {day} — {amount}'**
+  String chartBest(String day, String amount);
+
+  /// No description provided for @chartAverage.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kuniga o\'rtacha {amount}'**
+  String chartAverage(String amount);
+
+  /// No description provided for @expenseCategoriesTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xarajatlar toifalari'**
+  String get expenseCategoriesTitle;
+
+  /// No description provided for @expensesNone.
+  ///
+  /// In uz, this message translates to:
+  /// **'Bu davrda xarajat yo\'q'**
+  String get expensesNone;
+
+  /// No description provided for @debtorsTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qarzdorlar'**
+  String get debtorsTitle;
+
+  /// No description provided for @debtorsSummary.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} ta bron · jami {amount}'**
+  String debtorsSummary(int count, String amount);
+
+  /// No description provided for @debtorsNone.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qarzdor yo\'q'**
+  String get debtorsNone;
+
+  /// No description provided for @debtorsMore.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yana {count} ta'**
+  String debtorsMore(int count);
+
+  /// No description provided for @debtorRoom.
+  ///
+  /// In uz, this message translates to:
+  /// **'{room}-xona'**
+  String debtorRoom(String room);
+
+  /// No description provided for @debtorCheckOut.
+  ///
+  /// In uz, this message translates to:
+  /// **'chiqish {date}'**
+  String debtorCheckOut(String date);
+
+  /// No description provided for @shiftsCashTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Smenalar kassasi'**
+  String get shiftsCashTitle;
+
+  /// No description provided for @shiftsClosedCount.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yopilgan smenalar: {count}'**
+  String shiftsClosedCount(int count);
+
+  /// No description provided for @shiftsShortage.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kamomad'**
+  String get shiftsShortage;
+
+  /// No description provided for @shiftsSurplus.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ortiqcha'**
+  String get shiftsSurplus;
+
+  /// No description provided for @shiftsNoneClosed.
+  ///
+  /// In uz, this message translates to:
+  /// **'Bu davrda smena yopilmagan'**
+  String get shiftsNoneClosed;
+
+  /// No description provided for @financeGuestUnknown.
+  ///
+  /// In uz, this message translates to:
+  /// **'Mehmon'**
+  String get financeGuestUnknown;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

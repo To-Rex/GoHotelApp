@@ -17,6 +17,7 @@ class ErrorState extends StatelessWidget {
     final message = friendlyError(context, error);
     // Ikonka xato turiga mos bo'lsin: ruxsat muammosi tarmoq muammosi emas.
     final icon = switch (error) {
+      ApiException(isOutsideWorkHours: true) => Icons.schedule_rounded,
       ApiException(isForbidden: true) => Icons.lock_outline_rounded,
       ApiException(isNetwork: true) => Icons.wifi_off_rounded,
       _ => Icons.error_outline_rounded,
@@ -61,6 +62,10 @@ String friendlyError(BuildContext context, Object error) {
   final l10n = context.l10n;
   if (error is ApiException) {
     if (error.isNetwork) return l10n.networkError;
+    // Ish vaqti tugagani "ruxsat yo'q" emas: ilova baribir ish vaqti
+    // ekraniga o'tadi, bu matn faqat o'sha o'tish bilan poyga qilgan
+    // snack/xato holatida ko'rinadi.
+    if (error.isOutsideWorkHours) return l10n.outsideHoursError;
     if (error.isForbidden) return l10n.permissionDenied;
     if (error.statusCode != null && error.statusCode! >= 500) {
       return l10n.serverError;
