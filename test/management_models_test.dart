@@ -9,6 +9,7 @@ import 'package:gohotels/features/management/domain/management_access.dart';
 import 'package:gohotels/features/management/domain/room_tile.dart';
 import 'package:gohotels/features/management/domain/shift_session.dart';
 import 'package:gohotels/features/management/domain/staff_member.dart';
+import 'package:gohotels/features/management/domain/staff_revenue.dart';
 import 'package:gohotels/features/management/presentation/cubit/room_map_cubit.dart';
 import 'package:gohotels/features/reception/bookings/domain/booking.dart';
 
@@ -407,6 +408,52 @@ void main() {
       expect(formatWhen(DateTime(2026, 9, 30, 9, 5), now), '09:05');
       expect(formatWhen(DateTime(2026, 9, 2, 9, 5), now), '02.09, 09:05');
       expect(isoDate(DateTime(2026, 1, 9)), '2026-01-09');
+    });
+  });
+
+  group('StaffRevenue', () {
+    test('server javobi: usullar kanonik guruhga, ulush jami tushumdan', () {
+      final report = StaffRevenueReport.fromJson({
+        'items': [
+          {
+            'user_id': 'u1', 'name': ' Dilnoza Rahimova ', 'user_type': 'EMPLOYEE', 'status': 'ACTIVE',
+            'revenue': 2230000, 'income': 2200000, 'payment_count': 7, 'refunds': 0,
+            'shop': 30000, 'shop_count': 1, 'cash': 1530000, 'expense': 0, 'expense_count': 0,
+            'cash_expense': 0,
+            'methods': [
+              {'key': 'CASH', 'pay': 1500000, 'shop': 30000},
+              // Eski karta kodlari bitta "card" ga yig'iladi
+              {'key': 'CREDIT_CARD', 'pay': 400000, 'shop': 0},
+              {'key': 'CARD', 'pay': 300000, 'shop': 0},
+            ],
+          },
+          {
+            'user_id': 'u2', 'name': null, 'user_type': 'ADMIN', 'status': 'INACTIVE',
+            'income': 770000, 'shop': 0, 'payment_count': 2,
+            'expense': 200000, 'cash_expense': 120000, 'cash': 300000,
+          },
+          {'user_id': 'u3', 'name': 'Faqat xarajat', 'expense': 50, 'revenue': 0},
+        ],
+      });
+      final first = report.items.first;
+      expect(first.name, 'Dilnoza Rahimova');
+      expect(first.methods.map((m) => m.key), ['cash', 'card']);
+      expect(first.methods[1].total, 700000);
+      expect(first.cashNet, 1530000);
+
+      final second = report.items[1];
+      expect(second.name, isNull);
+      expect(second.isAdmin, isTrue);
+      expect(second.active, isFalse);
+      // `revenue` yo'q eski javob — qismlardan
+      expect(second.revenue, 770000);
+      expect(second.cashNet, 180000);
+
+      expect(report.totalRevenue, 3000000);
+      expect(report.shareOf(first), closeTo(2230000 / 3000000, 1e-9));
+      expect(report.shareOf(report.items[2]), 0);
+      expect(report.earners.length, 2);
+      expect(StaffRevenueReport.fromJson(const {}).items, isEmpty);
     });
   });
 }

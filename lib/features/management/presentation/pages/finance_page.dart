@@ -16,11 +16,13 @@ import '../cubit/finance_cubit.dart';
 import '../widgets/animated_counter.dart';
 import '../widgets/finance_bar_chart.dart';
 import '../widgets/finance_widgets.dart';
+import '../widgets/staff_revenue_card.dart';
 
 /// Moliya — admin/menejer uchun alohida sahifa (puls kartasidan ochiladi).
 ///
 /// Davr: bugun, kecha, 7 kun, shu oy yoki istalgan oraliq. Ko'rsatiladi:
-/// jami tushum va oldingi davrga nisbatan o'zgarish, xarajat, sof natija,
+/// jami tushum va oldingi davrga nisbatan o'zgarish, tushum xodimlar
+/// (resepshnlar) kesimida, xarajat, sof natija,
 /// qarzdorlik, qaytarimlar; HOZIR kassalarda qancha pul borligi (ochiq
 /// smenalar bo'yicha) va davrdagi naqd pul harakati; kunlik grafik; to'lov
 /// usullari; xarajat toifalari; qarzdorlar; smenalardagi kamomad/ortiqcha.
@@ -287,6 +289,12 @@ class _Cards extends StatelessWidget {
           gap,
         ],
         _RevenueCard(summary: summary, previous: state.previous),
+        // Jami tushumni kim qabul qilgani — xodimlar kesimida. Ruxsat
+        // (moliya/kassa nazorati) bo'lmasa karta umuman chiqmaydi
+        if (!state.staffForbidden) ...[
+          gap,
+          StaffRevenueCard(report: state.staff),
+        ],
         gap,
         _KpiGrid(summary: summary),
         gap,

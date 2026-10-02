@@ -3241,6 +3241,96 @@ abstract class S {
   /// In uz, this message translates to:
   /// **'Kech chiqish va buzilgan narsalar uchun yozilgan — bron qarziga qo\'shiladi'**
   String get financePenaltiesHint;
+
+  /// No description provided for @staffRevenueTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Tushum — xodimlar bo\'yicha'**
+  String get staffRevenueTitle;
+
+  /// No description provided for @staffRevenueHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kim qancha pul qabul qilgan: bron to\'lovlari va do\'kon'**
+  String get staffRevenueHint;
+
+  /// No description provided for @staffRevenueNone.
+  ///
+  /// In uz, this message translates to:
+  /// **'Bu davrda xodimlar pul qabul qilmagan'**
+  String get staffRevenueNone;
+
+  /// No description provided for @staffRevenueShare.
+  ///
+  /// In uz, this message translates to:
+  /// **'jami tushumning {percent}'**
+  String staffRevenueShare(String percent);
+
+  /// No description provided for @staffRevenueShowAll.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hammasini ko\'rsatish ({count})'**
+  String staffRevenueShowAll(int count);
+
+  /// No description provided for @staffRevenueShowLess.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qisqartirish'**
+  String get staffRevenueShowLess;
+
+  /// No description provided for @staffUnknown.
+  ///
+  /// In uz, this message translates to:
+  /// **'Noma\'lum xodim'**
+  String get staffUnknown;
+
+  /// No description provided for @staffInactive.
+  ///
+  /// In uz, this message translates to:
+  /// **'Ishlamaydi'**
+  String get staffInactive;
+
+  /// No description provided for @staffBookings.
+  ///
+  /// In uz, this message translates to:
+  /// **'Bron to\'lovlari'**
+  String get staffBookings;
+
+  /// No description provided for @staffCashTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Naqd pul'**
+  String get staffCashTitle;
+
+  /// No description provided for @staffCounts.
+  ///
+  /// In uz, this message translates to:
+  /// **'{payments} ta to\'lov · {sales} ta savdo · {expenses} ta xarajat'**
+  String staffCounts(int payments, int sales, int expenses);
+
+  /// No description provided for @staffCashIn.
+  ///
+  /// In uz, this message translates to:
+  /// **'Naqd qabul qilingan'**
+  String get staffCashIn;
+
+  /// No description provided for @staffCashOut.
+  ///
+  /// In uz, this message translates to:
+  /// **'Naqd xarajat'**
+  String get staffCashOut;
+
+  /// No description provided for @staffCashNet.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qoldiq'**
+  String get staffCashNet;
+
+  /// No description provided for @staffShopShort.
+  ///
+  /// In uz, this message translates to:
+  /// **'do\'kon {amount}'**
+  String staffShopShort(String amount);
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

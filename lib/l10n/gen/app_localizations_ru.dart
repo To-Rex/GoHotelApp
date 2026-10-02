@@ -995,7 +995,15 @@ class SRu extends S {
 
   @override
   String financePayments(int count) {
-    return '$count платежей';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count платежа',
+      many: '$count платежей',
+      few: '$count платежа',
+      one: '$count платёж',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1747,4 +1755,58 @@ class SRu extends S {
   @override
   String get financePenaltiesHint =>
       'За поздний выезд и повреждения — добавляются к долгу по брони';
+
+  @override
+  String get staffRevenueTitle => 'Выручка по сотрудникам';
+
+  @override
+  String get staffRevenueHint => 'Кто сколько принял: оплаты броней и магазин';
+
+  @override
+  String get staffRevenueNone =>
+      'За этот период сотрудники не принимали оплату';
+
+  @override
+  String staffRevenueShare(String percent) {
+    return '$percent от общей выручки';
+  }
+
+  @override
+  String staffRevenueShowAll(int count) {
+    return 'Показать всех ($count)';
+  }
+
+  @override
+  String get staffRevenueShowLess => 'Свернуть';
+
+  @override
+  String get staffUnknown => 'Неизвестный сотрудник';
+
+  @override
+  String get staffInactive => 'Не работает';
+
+  @override
+  String get staffBookings => 'Оплаты броней';
+
+  @override
+  String get staffCashTitle => 'Наличные';
+
+  @override
+  String staffCounts(int payments, int sales, int expenses) {
+    return 'оплат: $payments · продаж: $sales · расходов: $expenses';
+  }
+
+  @override
+  String get staffCashIn => 'Принято наличными';
+
+  @override
+  String get staffCashOut => 'Расходы наличными';
+
+  @override
+  String get staffCashNet => 'Остаток';
+
+  @override
+  String staffShopShort(String amount) {
+    return 'магазин $amount';
+  }
 }

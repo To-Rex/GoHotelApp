@@ -11,6 +11,7 @@ import 'package:gohotels/features/management/data/management_repository.dart';
 import 'package:gohotels/features/management/domain/finance_report.dart';
 import 'package:gohotels/features/management/domain/finance_summary.dart';
 import 'package:gohotels/features/management/domain/shift_session.dart';
+import 'package:gohotels/features/management/domain/staff_revenue.dart';
 import 'package:gohotels/features/management/presentation/cubit/finance_cubit.dart';
 import 'package:gohotels/features/management/presentation/pages/finance_page.dart';
 import 'package:gohotels/features/management/presentation/widgets/finance_bar_chart.dart';
@@ -47,13 +48,72 @@ FinanceSummary _summary({double income = 4500000, double shop = 350000}) => Fina
   ],
 });
 
+/// Xodimlar kesimi: yig'indisi `_summary()` dagi jami tushumga teng
+/// (4 500 000 + 350 000). Uzun ism, administrator, ishdan ketgan va faqat
+/// xarajat qilgan xodim — sahifa hammasini sig'dirishi kerak.
+final _staffJson = <String, dynamic>{
+  'items': [
+    {
+      'user_id': 'u1', 'name': 'Abdurahmon Abdurahmonov-Toshpoʻlatov', 'user_type': 'EMPLOYEE',
+      'status': 'ACTIVE', 'revenue': 2450000, 'income': 2300000, 'payment_count': 8, 'refunds': 120000,
+      'shop': 150000, 'shop_count': 5, 'cash': 1600000, 'expense': 220000, 'expense_count': 2,
+      'cash_expense': 220000,
+      'methods': [
+        {'key': 'CASH', 'pay': 1450000, 'shop': 150000},
+        {'key': 'CARD', 'pay': 850000, 'shop': 0},
+      ],
+    },
+    {
+      'user_id': 'u2', 'name': 'Dilnoza Karimova', 'user_type': 'EMPLOYEE', 'status': 'ACTIVE',
+      'revenue': 1500000, 'income': 1300000, 'payment_count': 6, 'shop': 200000, 'shop_count': 4,
+      'cash': 700000, 'expense': 50000, 'expense_count': 1, 'cash_expense': 50000,
+      'methods': [
+        {'key': 'CASH', 'pay': 500000, 'shop': 200000},
+        {'key': 'ONLINE', 'pay': 500000, 'shop': 0},
+        {'key': 'BANK_TRANSFER', 'pay': 300000, 'shop': 0},
+      ],
+    },
+    {
+      'user_id': 'u3', 'name': 'Aziz Karimov', 'user_type': 'ADMIN', 'status': 'ACTIVE',
+      'revenue': 600000, 'income': 600000, 'payment_count': 2, 'shop': 0, 'shop_count': 0,
+      'cash': 0, 'methods': [{'key': 'CARD', 'pay': 600000, 'shop': 0}],
+    },
+    {
+      'user_id': 'u4', 'name': 'Sardor Rustamov', 'user_type': 'EMPLOYEE', 'status': 'INACTIVE',
+      'revenue': 200000, 'income': 200000, 'payment_count': 1, 'shop': 0, 'shop_count': 0,
+      'cash': 200000, 'methods': [{'key': 'CASH', 'pay': 200000, 'shop': 0}],
+    },
+    {
+      'user_id': 'u5', 'name': 'Malika Yusupova', 'user_type': 'EMPLOYEE', 'status': 'ACTIVE',
+      'revenue': 100000, 'income': 100000, 'payment_count': 1, 'shop': 0, 'shop_count': 0,
+      'cash': 100000, 'methods': [{'key': 'CASH', 'pay': 100000, 'shop': 0}],
+    },
+    {
+      'user_id': 'u6', 'name': 'Bekzod Aliyev', 'user_type': 'EMPLOYEE', 'status': 'ACTIVE',
+      'revenue': 0, 'income': 0, 'payment_count': 0, 'shop': 0, 'shop_count': 0,
+      'expense': 710000, 'expense_count': 4, 'cash_expense': 430000, 'methods': [],
+    },
+  ],
+};
+
 class _Repo extends Fake implements ManagementRepository {
-  _Repo({this.mode = 'cash', this.cashForbidden = false});
+  _Repo({this.mode = 'cash', this.cashForbidden = false, this.staffForbidden = false});
 
   final String mode;
   final bool cashForbidden;
+  final bool staffForbidden;
   final summaryCalls = <(DateTime, DateTime)>[];
   int dailyCalls = 0;
+  int staffCalls = 0;
+
+  @override
+  Future<StaffRevenueReport> getFinanceByStaff({required DateTime from, required DateTime to}) async {
+    staffCalls++;
+    if (staffForbidden) {
+      throw const ApiException(message: 'no', statusCode: 403, code: 'STAFF_REPORT_FORBIDDEN');
+    }
+    return StaffRevenueReport.fromJson(_staffJson);
+  }
 
   @override
   Future<FinanceSummary> getFinanceSummary({required DateTime from, required DateTime to}) async {
@@ -296,6 +356,9 @@ void main() {
       expect(s.cash!.totalExpected, 3480000);
       expect(s.debtors!.count, 7);
       expect(s.shifts!.closed, isNotEmpty);
+      expect(s.staff!.items.length, 6);
+      // Xodimlar yig'indisi = jami tushum
+      expect(s.staff!.totalRevenue, s.summary!.revenue);
       expect(s.failedSections, 0);
       // Joriy va oldingi davr so'raldi
       expect(repo.summaryCalls.map((c) => c.$1), containsAll([DateTime(2026, 10, 9), DateTime(2026, 10, 2)]));
@@ -316,6 +379,28 @@ void main() {
       await cubit.load();
       expect(cubit.state.cashForbidden, isTrue);
       expect(cubit.state.failedSections, 0);
+    });
+
+    test('xodimlar kesimi ruxsati yo\'q — karta yashiriladi, qayta so\'ralmaydi', () async {
+      final repo = _Repo(staffForbidden: true);
+      final cubit = FinanceCubit(repo, clock: () => _now);
+      addTearDown(cubit.close);
+      await cubit.load();
+      expect(cubit.state.staffForbidden, isTrue);
+      expect(cubit.state.staff, isNull);
+      expect(cubit.state.failedSections, 0);
+      await cubit.selectKind(FinanceRangeKind.week);
+      expect(repo.staffCalls, 1);
+    });
+
+    test('davr almashganda xodimlar kesimi ham yangilanadi', () async {
+      final repo = _Repo();
+      final cubit = FinanceCubit(repo, clock: () => _now);
+      addTearDown(cubit.close);
+      await cubit.load();
+      await cubit.selectKind(FinanceRangeKind.month);
+      expect(repo.staffCalls, 2);
+      expect(cubit.state.staff, isNotNull);
     });
 
     test('davr almashadi va ixtiyoriy davr', () async {
@@ -377,6 +462,59 @@ void main() {
           expect(tester.takeException(), isNull);
         });
       }
+
+      testWidgets('${locale.languageCode} · xodimlar kesimi', (tester) async {
+        tester.view.physicalSize = const Size(360 * 3, 740 * 3);
+        tester.view.devicePixelRatio = 3;
+        addTearDown(tester.view.reset);
+
+        final cubit = FinanceCubit(_Repo(), initial: FinanceRangeKind.week, clock: () => _now);
+        addTearDown(cubit.close);
+        await cubit.load();
+
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: AppTheme.light(),
+            locale: locale,
+            supportedLocales: S.supportedLocales,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            home: BlocProvider.value(value: cubit, child: const FinancePage()),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        // Karta "Jami tushum" dan keyin; dastlab 5 tasi, qolgani tugma bilan
+        final l10n = lookupS(locale);
+        await tester.scrollUntilVisible(
+          find.text(l10n.staffRevenueTitle),
+          200,
+          scrollable: find.byType(Scrollable).first,
+        );
+        await tester.drag(find.byType(Scrollable).first, const Offset(0, -260));
+        await tester.pumpAndSettle();
+        expect(find.text('Bekzod Aliyev'), findsNothing);
+        await _shot(tester, 'finance-${locale.languageCode}-staff-1');
+        await tester.tap(find.text(l10n.staffRevenueShowAll(6)));
+        await tester.pumpAndSettle();
+        expect(find.text('Bekzod Aliyev'), findsOneWidget);
+
+        // Qator bosilsa — batafsil oyna
+        // Kassa kartasida ham shu ism bor — birinchisi xodimlar kartasida.
+        // Qator shaffof sarlavha ostida qolmasin — ekran o'rtasiga
+        final row = find.text('Dilnoza Karimova').first;
+        Scrollable.ensureVisible(tester.element(row), alignment: 0.5);
+        await tester.pumpAndSettle();
+        await tester.tap(row);
+        await tester.pumpAndSettle();
+        expect(find.text(l10n.staffCounts(6, 4, 1)), findsOneWidget);
+        await _shot(tester, 'finance-${locale.languageCode}-staff-2');
+        expect(tester.takeException(), isNull);
+      });
     }
   });
 }

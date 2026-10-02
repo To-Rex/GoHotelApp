@@ -999,7 +999,13 @@ class SEn extends S {
 
   @override
   String financePayments(int count) {
-    return '$count payments';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count payments',
+      one: '$count payment',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1749,4 +1755,57 @@ class SEn extends S {
   @override
   String get financePenaltiesHint =>
       'For late check-out and damage — added to the booking debt';
+
+  @override
+  String get staffRevenueTitle => 'Revenue by staff';
+
+  @override
+  String get staffRevenueHint => 'Who took how much: booking payments and shop';
+
+  @override
+  String get staffRevenueNone => 'No money was taken by staff in this period';
+
+  @override
+  String staffRevenueShare(String percent) {
+    return '$percent of total revenue';
+  }
+
+  @override
+  String staffRevenueShowAll(int count) {
+    return 'Show all ($count)';
+  }
+
+  @override
+  String get staffRevenueShowLess => 'Show less';
+
+  @override
+  String get staffUnknown => 'Unknown staff member';
+
+  @override
+  String get staffInactive => 'Inactive';
+
+  @override
+  String get staffBookings => 'Booking payments';
+
+  @override
+  String get staffCashTitle => 'Cash';
+
+  @override
+  String staffCounts(int payments, int sales, int expenses) {
+    return '$payments payments · $sales sales · $expenses expenses';
+  }
+
+  @override
+  String get staffCashIn => 'Cash taken';
+
+  @override
+  String get staffCashOut => 'Cash expenses';
+
+  @override
+  String get staffCashNet => 'Balance';
+
+  @override
+  String staffShopShort(String amount) {
+    return 'shop $amount';
+  }
 }

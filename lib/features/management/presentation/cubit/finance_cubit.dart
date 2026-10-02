@@ -6,6 +6,7 @@ import '../../../../core/network/api_exception.dart';
 import '../../data/management_repository.dart';
 import '../../domain/finance_report.dart';
 import '../../domain/finance_summary.dart';
+import '../../domain/staff_revenue.dart';
 
 /// Moliya sahifasi holati.
 ///
@@ -25,6 +26,8 @@ class FinanceState extends Equatable {
     this.cashForbidden = false,
     this.debtors,
     this.shifts,
+    this.staff,
+    this.staffForbidden = false,
     this.error,
     this.failedSections = 0,
     this.updatedAt,
@@ -51,6 +54,11 @@ class FinanceState extends Equatable {
   final DebtorsReport? debtors;
   final ShiftDiffSummary? shifts;
 
+  /// Davr tushumi xodimlar kesimida; `staffForbidden` — ruxsat yo'q
+  /// (moliya/kassa nazorati kodi yo'q), karta ko'rsatilmaydi.
+  final StaffRevenueReport? staff;
+  final bool staffForbidden;
+
   /// Hech narsa yuklanmagan holdagi xato — to'liq xato ekrani.
   final Object? error;
   final int failedSections;
@@ -69,6 +77,8 @@ class FinanceState extends Equatable {
     bool? cashForbidden,
     DebtorsReport? debtors,
     ShiftDiffSummary? shifts,
+    StaffRevenueReport? staff,
+    bool? staffForbidden,
     Object? error,
     bool clearError = false,
     bool clearPeriodData = false,
@@ -85,6 +95,8 @@ class FinanceState extends Equatable {
     cashForbidden: cashForbidden ?? this.cashForbidden,
     debtors: debtors ?? this.debtors,
     shifts: clearPeriodData ? null : (shifts ?? this.shifts),
+    staff: clearPeriodData ? null : (staff ?? this.staff),
+    staffForbidden: staffForbidden ?? this.staffForbidden,
     error: clearError ? null : (error ?? this.error),
     failedSections: failedSections ?? this.failedSections,
     updatedAt: updatedAt ?? this.updatedAt,
@@ -102,6 +114,8 @@ class FinanceState extends Equatable {
     cashForbidden,
     debtors,
     shifts,
+    staff,
+    staffForbidden,
     error,
     failedSections,
     updatedAt,
@@ -206,8 +220,33 @@ class FinanceCubit extends Cubit<FinanceState> with SafeEmit<FinanceState> {
           (s, v) => s.copyWith(days: v),
         ),
       part(_loadShifts(range), (s, v) => s.copyWith(shifts: v)),
+      _loadStaff(seq, range).then((error) {
+        if (error != null) {
+          failures++;
+          firstError ??= error;
+        }
+      }),
     ]);
     return (failures, firstError);
+  }
+
+  /// Tushum xodimlar kesimida. Ruxsat yo'q (403) — xato emas, karta
+  /// yashiriladi va keyingi davrlarda qayta so'ralmaydi.
+  Future<Object?> _loadStaff(int seq, FinanceRange range) async {
+    if (state.staffForbidden) return null;
+    try {
+      final staff = await _repository.getFinanceByStaff(from: range.from, to: range.to);
+      if (seq == _seq) emit(state.copyWith(staff: staff));
+      return null;
+    } on ApiException catch (e) {
+      if (e.isForbidden) {
+        if (seq == _seq) emit(state.copyWith(staffForbidden: true));
+        return null;
+      }
+      return e;
+    } catch (e) {
+      return e;
+    }
   }
 
   /// Joriy holat: kassalar va qarzdorlar (davrga bog'liq emas).

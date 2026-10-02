@@ -7,6 +7,7 @@ import '../domain/hk_task.dart';
 import '../domain/room_tile.dart';
 import '../domain/shift_session.dart';
 import '../domain/staff_member.dart';
+import '../domain/staff_revenue.dart';
 
 /// Boshqaruv (admin/menejer) so'rovlari — bitta joyda.
 ///
@@ -68,6 +69,19 @@ class ManagementRepository {
       query: {'date_from': isoDate(from), 'date_to': isoDate(to)},
     );
     return FinanceSummary.fromJson(data);
+  }
+
+  /// Davr tushumi xodimlar kesimida (`/finance/by-staff`). Ruxsat — admin
+  /// yoki moliya/kassa nazorati kodi; bo'lmasa server 403 qaytaradi.
+  Future<StaffRevenueReport> getFinanceByStaff({
+    required DateTime from,
+    required DateTime to,
+  }) async {
+    final data = await _api.get<Map<String, dynamic>>(
+      '/finance/by-staff',
+      query: {'date_from': isoDate(from), 'date_to': isoDate(to)},
+    );
+    return StaffRevenueReport.fromJson(data);
   }
 
   /// Oxirgi [days] kunning har biri uchun tushum — chiziq uchun.

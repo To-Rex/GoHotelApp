@@ -1021,5 +1021,54 @@
       }
     }
   },
-  "financePenaltiesHint": "Kech chiqish va buzilgan narsalar uchun yozilgan — bron qarziga qo'shiladi"
+  "financePenaltiesHint": "Kech chiqish va buzilgan narsalar uchun yozilgan — bron qarziga qo'shiladi",
+  "staffRevenueTitle": "Tushum — xodimlar bo'yicha",
+  "staffRevenueHint": "Kim qancha pul qabul qilgan: bron to'lovlari va do'kon",
+  "staffRevenueNone": "Bu davrda xodimlar pul qabul qilmagan",
+  "staffRevenueShare": "jami tushumning {percent}",
+  "@staffRevenueShare": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "staffRevenueShowAll": "Hammasini ko'rsatish ({count})",
+  "@staffRevenueShowAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "staffRevenueShowLess": "Qisqartirish",
+  "staffUnknown": "Noma'lum xodim",
+  "staffInactive": "Ishlamaydi",
+  "staffBookings": "Bron to'lovlari",
+  "staffCashTitle": "Naqd pul",
+  "staffCounts": "{payments} ta to'lov · {sales} ta savdo · {expenses} ta xarajat",
+  "@staffCounts": {
+    "placeholders": {
+      "payments": {
+        "type": "int"
+      },
+      "sales": {
+        "type": "int"
+      },
+      "expenses": {
+        "type": "int"
+      }
+    }
+  },
+  "staffCashIn": "Naqd qabul qilingan",
+  "staffCashOut": "Naqd xarajat",
+  "staffCashNet": "Qoldiq",
+  "staffShopShort": "do'kon {amount}",
+  "@staffShopShort": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -1751,4 +1751,58 @@ class SUz extends S {
   @override
   String get financePenaltiesHint =>
       'Kech chiqish va buzilgan narsalar uchun yozilgan — bron qarziga qo\'shiladi';
+
+  @override
+  String get staffRevenueTitle => 'Tushum — xodimlar bo\'yicha';
+
+  @override
+  String get staffRevenueHint =>
+      'Kim qancha pul qabul qilgan: bron to\'lovlari va do\'kon';
+
+  @override
+  String get staffRevenueNone => 'Bu davrda xodimlar pul qabul qilmagan';
+
+  @override
+  String staffRevenueShare(String percent) {
+    return 'jami tushumning $percent';
+  }
+
+  @override
+  String staffRevenueShowAll(int count) {
+    return 'Hammasini ko\'rsatish ($count)';
+  }
+
+  @override
+  String get staffRevenueShowLess => 'Qisqartirish';
+
+  @override
+  String get staffUnknown => 'Noma\'lum xodim';
+
+  @override
+  String get staffInactive => 'Ishlamaydi';
+
+  @override
+  String get staffBookings => 'Bron to\'lovlari';
+
+  @override
+  String get staffCashTitle => 'Naqd pul';
+
+  @override
+  String staffCounts(int payments, int sales, int expenses) {
+    return '$payments ta to\'lov · $sales ta savdo · $expenses ta xarajat';
+  }
+
+  @override
+  String get staffCashIn => 'Naqd qabul qilingan';
+
+  @override
+  String get staffCashOut => 'Naqd xarajat';
+
+  @override
+  String get staffCashNet => 'Qoldiq';
+
+  @override
+  String staffShopShort(String amount) {
+    return 'do\'kon $amount';
+  }
 }
