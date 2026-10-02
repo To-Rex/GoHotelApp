@@ -3223,6 +3223,24 @@ abstract class S {
   /// In uz, this message translates to:
   /// **'Mehmon'**
   String get financeGuestUnknown;
+
+  /// No description provided for @financePenalties.
+  ///
+  /// In uz, this message translates to:
+  /// **'Jarimalar'**
+  String get financePenalties;
+
+  /// No description provided for @financePenaltiesValue.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} ta · {amount}'**
+  String financePenaltiesValue(int count, String amount);
+
+  /// No description provided for @financePenaltiesHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kech chiqish va buzilgan narsalar uchun yozilgan — bron qarziga qo\'shiladi'**
+  String get financePenaltiesHint;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

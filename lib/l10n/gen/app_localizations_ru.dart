@@ -1735,4 +1735,16 @@ class SRu extends S {
 
   @override
   String get financeGuestUnknown => 'Гость';
+
+  @override
+  String get financePenalties => 'Штрафы';
+
+  @override
+  String financePenaltiesValue(int count, String amount) {
+    return '$count шт. · $amount';
+  }
+
+  @override
+  String get financePenaltiesHint =>
+      'За поздний выезд и повреждения — добавляются к долгу по брони';
 }

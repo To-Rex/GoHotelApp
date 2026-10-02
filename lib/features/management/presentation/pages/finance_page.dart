@@ -537,6 +537,36 @@ class _KpiGrid extends StatelessWidget {
               ),
             ],
           ),
+          // Jarimalar (kech chiqish, shikast) — davrda yozilganlari
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Icon(
+                CupertinoIcons.exclamationmark_triangle,
+                size: 16,
+                color: summary.penaltyCount > 0 ? c.danger : c.textMuted,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Tooltip(
+                  message: l10n.financePenaltiesHint,
+                  child: Text(
+                    l10n.financePenalties,
+                    style: context.textStyles.bodyMedium!.copyWith(color: c.textMuted),
+                  ),
+                ),
+              ),
+              Text(
+                l10n.financePenaltiesValue(
+                  summary.penaltyCount,
+                  formatMoney(summary.penaltyTotal),
+                ),
+                style: context.textStyles.titleSmall!.copyWith(
+                  color: summary.penaltyCount > 0 ? c.danger : null,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );

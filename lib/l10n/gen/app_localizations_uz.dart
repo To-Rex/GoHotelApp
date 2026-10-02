@@ -1739,4 +1739,16 @@ class SUz extends S {
 
   @override
   String get financeGuestUnknown => 'Mehmon';
+
+  @override
+  String get financePenalties => 'Jarimalar';
+
+  @override
+  String financePenaltiesValue(int count, String amount) {
+    return '$count ta · $amount';
+  }
+
+  @override
+  String get financePenaltiesHint =>
+      'Kech chiqish va buzilgan narsalar uchun yozilgan — bron qarziga qo\'shiladi';
 }

@@ -661,5 +661,8 @@
   "shiftsShortage": "Недостача",
   "shiftsSurplus": "Излишек",
   "shiftsNoneClosed": "За период смены не закрывались",
-  "financeGuestUnknown": "Гость"
+  "financeGuestUnknown": "Гость",
+  "financePenalties": "Штрафы",
+  "financePenaltiesValue": "{count} шт. · {amount}",
+  "financePenaltiesHint": "За поздний выезд и повреждения — добавляются к долгу по брони"
 }

@@ -1737,4 +1737,16 @@ class SEn extends S {
 
   @override
   String get financeGuestUnknown => 'Guest';
+
+  @override
+  String get financePenalties => 'Penalties';
+
+  @override
+  String financePenaltiesValue(int count, String amount) {
+    return '$count · $amount';
+  }
+
+  @override
+  String get financePenaltiesHint =>
+      'For late check-out and damage — added to the booking debt';
 }

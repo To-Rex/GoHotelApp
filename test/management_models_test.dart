@@ -135,6 +135,17 @@ void main() {
       expect(f.methods.map((m) => m.total), [1000000, 500000]);
     });
 
+    test('jarimalar o\'qiladi; eski server javobida — nol', () {
+      final f = FinanceSummary.fromJson({'penalty_total': 200000, 'penalty_count': 2});
+      expect(f.penaltyTotal, 200000);
+      expect(f.penaltyCount, 2);
+      // Jarima sof natijaga alohida qo'shilmaydi: to'langanda tushumga kiradi
+      expect(f.net, 0);
+      final old = FinanceSummary.fromJson({'income': 10});
+      expect(old.penaltyTotal, 0);
+      expect(old.penaltyCount, 0);
+    });
+
     test('server shakli: pay + shop, eski kodlar o\'z usuliga yig\'iladi', () {
       final f = FinanceSummary.fromJson({
         'income': 900,

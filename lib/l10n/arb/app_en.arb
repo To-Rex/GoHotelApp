@@ -661,5 +661,8 @@
   "shiftsShortage": "Shortage",
   "shiftsSurplus": "Surplus",
   "shiftsNoneClosed": "No shifts closed in this period",
-  "financeGuestUnknown": "Guest"
+  "financeGuestUnknown": "Guest",
+  "financePenalties": "Penalties",
+  "financePenaltiesValue": "{count} · {amount}",
+  "financePenaltiesHint": "For late check-out and damage — added to the booking debt"
 }

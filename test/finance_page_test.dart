@@ -34,6 +34,8 @@ FinanceSummary _summary({double income = 4500000, double shop = 350000}) => Fina
   'shop_revenue': shop,
   'shop_paid_count': 9,
   'shop_debt': 85000,
+  'penalty_total': 200000,
+  'penalty_count': 2,
   'expense_categories': [
     {'name': 'Kommunal xizmatlar va internet to\'lovlari', 'total': 600000, 'count': 2},
     {'name': 'Tozalash vositalari', 'total': 380000, 'count': 5},

@@ -1008,5 +1008,18 @@
   "shiftsShortage": "Kamomad",
   "shiftsSurplus": "Ortiqcha",
   "shiftsNoneClosed": "Bu davrda smena yopilmagan",
-  "financeGuestUnknown": "Mehmon"
+  "financeGuestUnknown": "Mehmon",
+  "financePenalties": "Jarimalar",
+  "financePenaltiesValue": "{count} ta · {amount}",
+  "@financePenaltiesValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "financePenaltiesHint": "Kech chiqish va buzilgan narsalar uchun yozilgan — bron qarziga qo'shiladi"
 }
