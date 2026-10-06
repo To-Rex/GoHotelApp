@@ -8,10 +8,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:gohotels/app/theme/app_theme.dart';
 import 'package:gohotels/features/management/data/management_repository.dart';
+import 'package:gohotels/core/network/api_exception.dart';
+import 'package:gohotels/features/management/domain/finance_report.dart';
 import 'package:gohotels/features/management/domain/guest_feedback.dart';
 import 'package:gohotels/features/management/domain/hk_task.dart';
 import 'package:gohotels/features/management/domain/management_access.dart';
 import 'package:gohotels/features/management/domain/room_tile.dart';
+import 'package:gohotels/features/management/domain/shift_handover.dart';
 import 'package:gohotels/features/management/domain/shift_session.dart';
 import 'package:gohotels/features/management/domain/staff_member.dart';
 import 'package:gohotels/features/management/presentation/cubit/room_map_cubit.dart';
@@ -229,6 +232,65 @@ class _FakeRepo extends Fake implements ManagementRepository {
 }
 
 
+/// Kassa nazorati (admin / shift.force_close): kassada hozir va smenadan
+/// smenaga o'tgan pullar ham bor. `forbidden` — ruxsat yo'q (403).
+class _CashRepo extends _FakeRepo {
+  _CashRepo({this.forbidden = false});
+
+  final bool forbidden;
+  int handoverCalls = 0;
+
+  @override
+  Future<CashOverview> getCashOverview() async {
+    if (forbidden) {
+      throw const ApiException(message: 'no', statusCode: 403, code: 'FORBIDDEN');
+    }
+    return CashOverview.fromJson({
+      'mode': 'cash',
+      'total_expected': 14650000,
+      'sessions': [
+        {'id': 'o1', 'user_name': 'Abdurahmon Abdurahmonov-Toshpoʻlatov', 'status': 'PENDING_HANDOVER',
+         'opening_cash': 12500000, 'payments_cash': 1300000, 'shop_cash': 0, 'expenses_cash': 0,
+         'expected_cash': 13800000, 'counted_cash': 13750000},
+        {'id': 'o2', 'user_name': 'Dilnoza Karimova', 'status': 'ACTIVE', 'opening_cash': 0,
+         'payments_cash': 850000, 'shop_cash': 0, 'expenses_cash': 0, 'expected_cash': 850000},
+      ],
+    });
+  }
+
+  @override
+  Future<HandoverReport> getShiftHandovers({DateTime? from, DateTime? to, int limit = 30}) async {
+    handoverCalls++;
+    if (forbidden) {
+      throw const ApiException(message: 'no', statusCode: 403, code: 'FORBIDDEN');
+    }
+    return HandoverReport.fromJson({
+      'summary': {
+        'handed_over_total': 1250000, 'handed_over_count': 1,
+        'taken_out_total': 900000, 'taken_out_count': 1,
+        'pending_total': 13750000, 'pending_count': 1,
+      },
+      'items': [
+        {'id': 'h1', 'kind': 'PENDING', 'from_user_name': 'Abdurahmon Abdurahmonov-Toshpoʻlatov',
+         'ended_at': _now.subtract(const Duration(minutes: 5)).toUtc().toIso8601String(),
+         'expected_cash': 13800000, 'counted_cash': 13750000, 'cash_diff': -50000, 'branch_name': 'Markaziy filial'},
+        {'id': 'h2', 'kind': 'HANDOVER', 'from_user_name': 'Sardor Rustamov', 'to_user_name': 'Bekzod Aliyev',
+         'ended_at': _now.subtract(const Duration(days: 1)).toUtc().toIso8601String(),
+         'accepted_at': _now.subtract(const Duration(days: 1)).toUtc().toIso8601String(),
+         'expected_cash': 1285000, 'counted_cash': 1250000, 'cash_diff': -35000, 'force_closed': true,
+         'corrected': true, 'received_opening_cash': 1200000},
+        {'id': 'h3', 'kind': 'CASH_OUT', 'from_user_name': 'Malika Yusupova',
+         'ended_at': _now.subtract(const Duration(days: 2)).toUtc().toIso8601String(),
+         'expected_cash': 900000, 'counted_cash': 900000, 'cash_diff': 0},
+        {'id': 'h4', 'kind': 'FORCE_TAKEN', 'from_user_name': 'Jasur Tursunov', 'closed_by_name': 'Aziz Karimov',
+         'ended_at': _now.subtract(const Duration(days: 3)).toUtc().toIso8601String(),
+         'expected_cash': 300000, 'counted_cash': 300000, 'cash_diff': 0},
+      ],
+    });
+  }
+}
+
+
 /// Ixtiyoriy skrinshotlar: `GOHOTEL_SHOTS=<papka>` muhit o'zgaruvchisi va
 /// `--update-goldens` bilan ishga tushirilsa, har bosqich PNG bo'lib
 /// saqlanadi — dizaynni qurilmasiz ko'rib chiqish uchun. Oddiy test
@@ -309,6 +371,54 @@ void _phone(WidgetTester tester) {
 
 void main() {
   setUpAll(_loadInter);
+
+  group('Smenalar: kassada hozir va smenadan smenaga', () {
+    test('ruxsat bo\'lsa yuklanadi, ochiq smenaga summa bog\'lanadi', () async {
+      final cubit = TeamCubit(_CashRepo());
+      addTearDown(cubit.close);
+      await cubit.loadSegment(TeamSegment.shifts);
+      expect(cubit.state.cash!.totalExpected, 14650000);
+      expect(cubit.state.expectedCashOf('o2'), 850000);
+      expect(cubit.state.expectedCashOf('c1'), isNull);
+      final report = cubit.state.handovers!;
+      expect(report.items.map((h) => h.kind), [
+        HandoverKind.pending,
+        HandoverKind.handover,
+        HandoverKind.cashOut,
+        HandoverKind.forceTaken,
+      ]);
+      expect(report.items[1].mismatch, -50000);
+      expect(report.items[0].mismatch, isNull);
+      expect(report.handedOverTotal, 1250000);
+      expect(cubit.state.cashForbidden, isFalse);
+      // Smenalar ro'yxati avvalgidek
+      expect(cubit.state.shifts.items.length, 4);
+      expect(cubit.state.shifts.error, isNull);
+    });
+
+    test('ruxsat yo\'q (403) — bo\'limlar yashiriladi, qayta so\'ralmaydi, ro\'yxat buzilmaydi', () async {
+      final repo = _CashRepo(forbidden: true);
+      final cubit = TeamCubit(repo);
+      addTearDown(cubit.close);
+      await cubit.loadSegment(TeamSegment.shifts);
+      expect(cubit.state.cashForbidden, isTrue);
+      expect(cubit.state.cash, isNull);
+      expect(cubit.state.handovers, isNull);
+      expect(cubit.state.shifts.items.length, 4);
+      await cubit.loadSegment(TeamSegment.shifts, silent: true);
+      expect(repo.handoverCalls, 1);
+    });
+
+    test('eski server (endpoint yo\'q) — smenalar ro\'yxati turaveradi', () async {
+      final cubit = TeamCubit(_FakeRepo());
+      addTearDown(cubit.close);
+      await cubit.loadSegment(TeamSegment.shifts);
+      expect(cubit.state.cash, isNull);
+      expect(cubit.state.handovers, isNull);
+      expect(cubit.state.cashForbidden, isFalse);
+      expect(cubit.state.shifts.items.length, 4);
+    });
+  });
 
   for (final locale in const [Locale('uz'), Locale('ru'), Locale('en')]) {
     group('til: ${locale.languageCode}', () {
@@ -422,6 +532,53 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.textContaining('Vannaxonadagi'), findsOneWidget);
         await _shot(tester, '08_problems_${locale.languageCode}');
+      });
+
+      testWidgets('Smenalar: kassada hozir va smenadan smenaga o\'tgan pullar sig\'adi', (
+        tester,
+      ) async {
+        _phone(tester);
+        final cubit = TeamCubit(_CashRepo());
+        addTearDown(cubit.close);
+        await cubit.load();
+
+        await tester.pumpWidget(
+          _host(
+            BlocProvider.value(
+              value: cubit,
+              child: const TeamPage(access: _access),
+            ),
+            locale,
+          ),
+        );
+        await tester.pumpAndSettle();
+        cubit.selectSegment(TeamSegment.shifts);
+        await tester.pumpAndSettle();
+        final l10n = lookupS(locale);
+        expect(find.text(l10n.cashNowTitle), findsWidgets);
+        await _shot(tester, '05c_shifts_cash_${locale.languageCode}');
+        await tester.scrollUntilVisible(
+          find.text(l10n.handoversTitle.toUpperCase()),
+          200,
+          scrollable: find.byType(Scrollable).last,
+        );
+        await tester.pumpAndSettle();
+        expect(find.text(l10n.handoversTitle.toUpperCase()), findsOneWidget);
+        await tester.scrollUntilVisible(
+          find.textContaining('Bekzod Aliyev', findRichText: true),
+          200,
+          scrollable: find.byType(Scrollable).last,
+        );
+        await tester.pumpAndSettle();
+        await _shot(tester, '05d_shifts_handovers_${locale.languageCode}');
+        await tester.scrollUntilVisible(
+          find.textContaining('Jasur Tursunov', findRichText: true),
+          200,
+          scrollable: find.byType(Scrollable).last,
+        );
+        await tester.pumpAndSettle();
+        await _shot(tester, '05e_shifts_handovers2_${locale.languageCode}');
+        expect(tester.takeException(), isNull);
       });
 
       testWidgets('Oynalar: e\'lon, majburiy yopish, vazifa yaratish', (

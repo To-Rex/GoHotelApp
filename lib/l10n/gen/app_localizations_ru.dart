@@ -1809,4 +1809,53 @@ class SRu extends S {
   String staffShopShort(String amount) {
     return 'магазин $amount';
   }
+
+  @override
+  String get handoversTitle => 'Деньги от смены к смене';
+
+  @override
+  String get handoversHint =>
+      'Каждая сданная касса: от кого кому, сколько пересчитано и разница';
+
+  @override
+  String get handoversPassed => 'Следующей смене';
+
+  @override
+  String get handoversTakenOut => 'Изъято';
+
+  @override
+  String get handoversPending => 'Ожидает приёма';
+
+  @override
+  String handoversMore(int count) {
+    return 'Ещё $count — полный список на странице «Смены» в веб-версии';
+  }
+
+  @override
+  String get handoverKindPending => 'Ожидает приёма';
+
+  @override
+  String get handoverKindCashOut => 'Изъято из кассы (выемка)';
+
+  @override
+  String get handoverKindForceTaken =>
+      'Закрыта принудительно — забрал руководитель';
+
+  @override
+  String handoverAccepted(String time) {
+    return 'принято: $time';
+  }
+
+  @override
+  String get handoverCorrected => 'Исправлено';
+
+  @override
+  String handoverReceivedOpening(String amount) {
+    return 'Принявший начал с $amount';
+  }
+
+  @override
+  String handoverExpected(String amount) {
+    return 'ожидалось $amount';
+  }
 }

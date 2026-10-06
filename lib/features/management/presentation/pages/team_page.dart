@@ -20,6 +20,7 @@ import '../widgets/avatar_stack.dart';
 import '../widgets/day_timeline.dart';
 import '../widgets/force_close_sheet.dart';
 import '../widgets/minute_ticker.dart';
+import '../widgets/shift_cash_widgets.dart';
 import '../widgets/stagger_in.dart';
 import '../widgets/stat_tabs.dart';
 import '../widgets/state_palette.dart';
@@ -541,6 +542,12 @@ class _ShiftsView extends StatelessWidget {
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 130),
         children: [
+          // KASSADA HOZIR — ochiq smenalar kassasidagi jami naqd pul
+          // (admin yoki shift.force_close; ruxsat bo'lmasa ko'rinmaydi)
+          if (state.cash != null && state.cash!.isCashMode) ...[
+            TeamCashNowCard(cash: state.cash!),
+            const SizedBox(height: 20),
+          ],
           if (open.isNotEmpty) ...[
             _SectionTitle(text: l10n.shiftsOpenTitle, count: open.length),
             StaggerIn(
@@ -550,9 +557,19 @@ class _ShiftsView extends StatelessWidget {
                     session: s,
                     canForceClose: access.canForceClose,
                     onForceClose: () => showForceCloseSheet(context, s),
+                    expectedCash: state.expectedCashOf(s.id),
                   ),
               ],
             ),
+            const SizedBox(height: 20),
+          ],
+          // SMENADAN SMENAGA o'tgan pullar — kimdan kimga, qancha
+          if (state.handovers != null && state.handovers!.items.isNotEmpty) ...[
+            _SectionTitle(
+              text: l10n.handoversTitle,
+              count: state.handovers!.items.length,
+            ),
+            HandoversCard(report: state.handovers!),
             const SizedBox(height: 20),
           ],
           if (closed.isNotEmpty) ...[
@@ -586,11 +603,15 @@ class _OpenShiftCard extends StatelessWidget {
     required this.session,
     required this.canForceClose,
     required this.onForceClose,
+    this.expectedCash,
   });
 
   final ShiftSession session;
   final bool canForceClose;
   final VoidCallback onForceClose;
+
+  /// Kassada hozir bo'lishi kerak bo'lgan summa (faqat nazorat qiluvchiga).
+  final double? expectedCash;
 
   @override
   Widget build(BuildContext context) {
@@ -741,6 +762,41 @@ class _OpenShiftCard extends StatelessWidget {
                           ],
                         ),
                       ),
+                      // Kassada hozir — shu kassada bo'lishi kerak bo'lgan
+                      // naqd pul (faqat nazorat qiluvchiga, server hisobi)
+                      if (expectedCash != null) ...[
+                        const SizedBox(height: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 9,
+                          ),
+                          decoration: BoxDecoration(
+                            color: c.successSoft,
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  l10n.cashNowTitle,
+                                  style: context.textStyles.bodyMedium!.copyWith(
+                                    color: c.success,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                formatMoney(expectedCash!),
+                                style: context.textStyles.titleMedium!.copyWith(
+                                  color: c.success,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                       if (canForceClose) ...[
                         const SizedBox(height: 14),
                         SizedBox(
@@ -1424,12 +1480,18 @@ class _SectionTitle extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(2, 6, 2, 10),
       child: Row(
         children: [
-          Text(
-            text.toUpperCase(),
-            style: context.textStyles.labelSmall!.copyWith(
-              color: c.textMuted,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 0.6,
+          // Uzun sarlavha (masalan "Smenadan smenaga o'tgan pullar") tor
+          // ekranda sonni chetga surib yubormasin
+          Flexible(
+            child: Text(
+              text.toUpperCase(),
+              style: context.textStyles.labelSmall!.copyWith(
+                color: c.textMuted,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.6,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           const SizedBox(width: 8),

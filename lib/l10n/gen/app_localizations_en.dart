@@ -1808,4 +1808,52 @@ class SEn extends S {
   String staffShopShort(String amount) {
     return 'shop $amount';
   }
+
+  @override
+  String get handoversTitle => 'Cash passed between shifts';
+
+  @override
+  String get handoversHint =>
+      'Every handed-over drawer: from whom to whom, the counted amount and the difference';
+
+  @override
+  String get handoversPassed => 'To next shift';
+
+  @override
+  String get handoversTakenOut => 'Taken out';
+
+  @override
+  String get handoversPending => 'Awaiting';
+
+  @override
+  String handoversMore(int count) {
+    return '$count more — the full list is on the Shifts page on the web';
+  }
+
+  @override
+  String get handoverKindPending => 'Awaiting acceptance';
+
+  @override
+  String get handoverKindCashOut => 'Taken out (day close)';
+
+  @override
+  String get handoverKindForceTaken => 'Force-closed — taken by manager';
+
+  @override
+  String handoverAccepted(String time) {
+    return 'accepted: $time';
+  }
+
+  @override
+  String get handoverCorrected => 'Corrected';
+
+  @override
+  String handoverReceivedOpening(String amount) {
+    return 'The receiver started with $amount';
+  }
+
+  @override
+  String handoverExpected(String amount) {
+    return 'expected $amount';
+  }
 }

@@ -1805,4 +1805,52 @@ class SUz extends S {
   String staffShopShort(String amount) {
     return 'do\'kon $amount';
   }
+
+  @override
+  String get handoversTitle => 'Smenadan smenaga o\'tgan pullar';
+
+  @override
+  String get handoversHint =>
+      'Har topshirilgan kassa: kimdan kimga, qancha sanab berildi va farq';
+
+  @override
+  String get handoversPassed => 'Keyingi smenaga';
+
+  @override
+  String get handoversTakenOut => 'Kassadan olindi';
+
+  @override
+  String get handoversPending => 'Qabul kutilmoqda';
+
+  @override
+  String handoversMore(int count) {
+    return 'Yana $count ta — to\'liq ro\'yxat vebdagi Smenalar sahifasida';
+  }
+
+  @override
+  String get handoverKindPending => 'Qabul kutilmoqda';
+
+  @override
+  String get handoverKindCashOut => 'Kassadan olindi (kesim)';
+
+  @override
+  String get handoverKindForceTaken => 'Majburiy yopildi — rahbar oldi';
+
+  @override
+  String handoverAccepted(String time) {
+    return 'qabul: $time';
+  }
+
+  @override
+  String get handoverCorrected => 'Tuzatilgan';
+
+  @override
+  String handoverReceivedOpening(String amount) {
+    return 'Qabul qiluvchi $amount bilan boshlagan';
+  }
+
+  @override
+  String handoverExpected(String amount) {
+    return 'kutilgan $amount';
+  }
 }

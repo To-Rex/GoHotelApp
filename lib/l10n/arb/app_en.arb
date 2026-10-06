@@ -679,5 +679,18 @@
   "staffCashIn": "Cash taken",
   "staffCashOut": "Cash expenses",
   "staffCashNet": "Balance",
-  "staffShopShort": "shop {amount}"
+  "staffShopShort": "shop {amount}",
+  "handoversTitle": "Cash passed between shifts",
+  "handoversHint": "Every handed-over drawer: from whom to whom, the counted amount and the difference",
+  "handoversPassed": "To next shift",
+  "handoversTakenOut": "Taken out",
+  "handoversPending": "Awaiting",
+  "handoversMore": "{count} more — the full list is on the Shifts page on the web",
+  "handoverKindPending": "Awaiting acceptance",
+  "handoverKindCashOut": "Taken out (day close)",
+  "handoverKindForceTaken": "Force-closed — taken by manager",
+  "handoverAccepted": "accepted: {time}",
+  "handoverCorrected": "Corrected",
+  "handoverReceivedOpening": "The receiver started with {amount}",
+  "handoverExpected": "expected {amount}"
 }

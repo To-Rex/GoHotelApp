@@ -1070,5 +1070,46 @@
         "type": "String"
       }
     }
+  },
+  "handoversTitle": "Smenadan smenaga o'tgan pullar",
+  "handoversHint": "Har topshirilgan kassa: kimdan kimga, qancha sanab berildi va farq",
+  "handoversPassed": "Keyingi smenaga",
+  "handoversTakenOut": "Kassadan olindi",
+  "handoversPending": "Qabul kutilmoqda",
+  "handoversMore": "Yana {count} ta — to'liq ro'yxat vebdagi Smenalar sahifasida",
+  "@handoversMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "handoverKindPending": "Qabul kutilmoqda",
+  "handoverKindCashOut": "Kassadan olindi (kesim)",
+  "handoverKindForceTaken": "Majburiy yopildi — rahbar oldi",
+  "handoverAccepted": "qabul: {time}",
+  "@handoverAccepted": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "handoverCorrected": "Tuzatilgan",
+  "handoverReceivedOpening": "Qabul qiluvchi {amount} bilan boshlagan",
+  "@handoverReceivedOpening": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "handoverExpected": "kutilgan {amount}",
+  "@handoverExpected": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
   }
 }

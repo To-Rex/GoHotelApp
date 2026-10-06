@@ -679,5 +679,18 @@
   "staffCashIn": "Принято наличными",
   "staffCashOut": "Расходы наличными",
   "staffCashNet": "Остаток",
-  "staffShopShort": "магазин {amount}"
+  "staffShopShort": "магазин {amount}",
+  "handoversTitle": "Деньги от смены к смене",
+  "handoversHint": "Каждая сданная касса: от кого кому, сколько пересчитано и разница",
+  "handoversPassed": "Следующей смене",
+  "handoversTakenOut": "Изъято",
+  "handoversPending": "Ожидает приёма",
+  "handoversMore": "Ещё {count} — полный список на странице «Смены» в веб-версии",
+  "handoverKindPending": "Ожидает приёма",
+  "handoverKindCashOut": "Изъято из кассы (выемка)",
+  "handoverKindForceTaken": "Закрыта принудительно — забрал руководитель",
+  "handoverAccepted": "принято: {time}",
+  "handoverCorrected": "Исправлено",
+  "handoverReceivedOpening": "Принявший начал с {amount}",
+  "handoverExpected": "ожидалось {amount}"
 }

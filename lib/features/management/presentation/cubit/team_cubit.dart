@@ -4,11 +4,14 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/management_repository.dart';
+import '../../domain/finance_report.dart';
 import '../../domain/guest_feedback.dart';
 import '../../domain/hk_task.dart';
+import '../../domain/shift_handover.dart';
 import '../../domain/shift_session.dart';
 import '../../domain/staff_member.dart';
 import '../../../../core/bloc/safe_emit.dart';
+import '../../../../core/network/api_exception.dart';
 
 /// "Jamoa" bo'limining ichki sahifalari.
 enum TeamSegment { staff, shifts, tasks, problems }
@@ -41,6 +44,9 @@ class TeamState extends Equatable {
     this.problems = const Section(),
     this.shiftMode,
     this.query = '',
+    this.cash,
+    this.handovers,
+    this.cashForbidden = false,
   });
 
   final TeamSegment segment;
@@ -52,6 +58,21 @@ class TeamState extends Equatable {
   /// `cash` — kassa smenalari yuritiladi; boshqa qiymatda bo'lim yo'q.
   final String? shiftMode;
   final String query;
+
+  /// Kassada hozir (ochiq smenalar kassasi) va smenadan smenaga o'tgan
+  /// pullar — admin yoki `shift.force_close`. `cashForbidden` — ruxsat yo'q,
+  /// bo'limlar ko'rsatilmaydi. Yuklanmagan (eski server, tarmoq) — `null`.
+  final CashOverview? cash;
+  final HandoverReport? handovers;
+  final bool cashForbidden;
+
+  /// Ochiq smena kassasida hozir bo'lishi kerak bo'lgan summa.
+  double? expectedCashOf(String sessionId) {
+    for (final d in cash?.drawers ?? const <CashDrawer>[]) {
+      if (d.id == sessionId) return d.expectedCash;
+    }
+    return null;
+  }
 
   bool get cashMode => shiftMode == 'cash';
 
@@ -92,6 +113,9 @@ class TeamState extends Equatable {
     Section<StaffProblem>? problems,
     String? shiftMode,
     String? query,
+    CashOverview? cash,
+    HandoverReport? handovers,
+    bool? cashForbidden,
   }) => TeamState(
     segment: segment ?? this.segment,
     staff: staff ?? this.staff,
@@ -100,10 +124,24 @@ class TeamState extends Equatable {
     problems: problems ?? this.problems,
     shiftMode: shiftMode ?? this.shiftMode,
     query: query ?? this.query,
+    cash: cash ?? this.cash,
+    handovers: handovers ?? this.handovers,
+    cashForbidden: cashForbidden ?? this.cashForbidden,
   );
 
   @override
-  List<Object?> get props => [segment, staff, shifts, tasks, problems, shiftMode, query];
+  List<Object?> get props => [
+    segment,
+    staff,
+    shifts,
+    tasks,
+    problems,
+    shiftMode,
+    query,
+    cash,
+    handovers,
+    cashForbidden,
+  ];
 }
 
 /// Jamoa: xodimlar, kassa smenalari, xo'jalik vazifalari, muammolar.
@@ -179,6 +217,9 @@ class TeamCubit extends Cubit<TeamState> with SafeEmit<TeamState> {
               : const <ShiftSession>[];
           if (stale()) return;
           emit(state.copyWith(shiftMode: mode, shifts: Section(items: items, loading: false)));
+          // Kassada hozir va smenadan smenaga o'tgan pullar — qo'shimcha:
+          // yiqilsa ham smenalar ro'yxati turaveradi
+          if (mode == 'cash' && !state.cashForbidden) await _loadCash(stale);
         } catch (e) {
           if (stale()) return;
           emit(state.copyWith(shifts: state.shifts.copyWith(loading: false, error: silent ? null : e)));
@@ -206,6 +247,34 @@ class TeamCubit extends Cubit<TeamState> with SafeEmit<TeamState> {
           emit(state.copyWith(problems: state.problems.copyWith(loading: false, error: silent ? null : e)));
         }
     }
+  }
+
+  /// Kassalar holati va topshirishlar. Ruxsat yo'q (403) — xato emas,
+  /// bo'limlar yashiriladi va qayta so'ralmaydi; boshqa xato (masalan eski
+  /// server) — oxirgi ma'lum qiymat qoladi.
+  Future<void> _loadCash(bool Function() stale) async {
+    Future<T?> attempt<T>(Future<T> Function() call) async {
+      try {
+        return await call();
+      } on ApiException catch (e) {
+        if (e.isForbidden && !stale()) emit(state.copyWith(cashForbidden: true));
+        return null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    final results = await Future.wait([
+      attempt(_repository.getCashOverview),
+      attempt(() => _repository.getShiftHandovers(limit: 30)),
+    ]);
+    if (stale() || state.cashForbidden) return;
+    emit(
+      state.copyWith(
+        cash: results[0] as CashOverview?,
+        handovers: results[1] as HandoverReport?,
+      ),
+    );
   }
 
   static int _taskOrder(HkTask a, HkTask b) {

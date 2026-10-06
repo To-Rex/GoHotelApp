@@ -3331,6 +3331,84 @@ abstract class S {
   /// In uz, this message translates to:
   /// **'do\'kon {amount}'**
   String staffShopShort(String amount);
+
+  /// No description provided for @handoversTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Smenadan smenaga o\'tgan pullar'**
+  String get handoversTitle;
+
+  /// No description provided for @handoversHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Har topshirilgan kassa: kimdan kimga, qancha sanab berildi va farq'**
+  String get handoversHint;
+
+  /// No description provided for @handoversPassed.
+  ///
+  /// In uz, this message translates to:
+  /// **'Keyingi smenaga'**
+  String get handoversPassed;
+
+  /// No description provided for @handoversTakenOut.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kassadan olindi'**
+  String get handoversTakenOut;
+
+  /// No description provided for @handoversPending.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qabul kutilmoqda'**
+  String get handoversPending;
+
+  /// No description provided for @handoversMore.
+  ///
+  /// In uz, this message translates to:
+  /// **'Yana {count} ta — to\'liq ro\'yxat vebdagi Smenalar sahifasida'**
+  String handoversMore(int count);
+
+  /// No description provided for @handoverKindPending.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qabul kutilmoqda'**
+  String get handoverKindPending;
+
+  /// No description provided for @handoverKindCashOut.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kassadan olindi (kesim)'**
+  String get handoverKindCashOut;
+
+  /// No description provided for @handoverKindForceTaken.
+  ///
+  /// In uz, this message translates to:
+  /// **'Majburiy yopildi — rahbar oldi'**
+  String get handoverKindForceTaken;
+
+  /// No description provided for @handoverAccepted.
+  ///
+  /// In uz, this message translates to:
+  /// **'qabul: {time}'**
+  String handoverAccepted(String time);
+
+  /// No description provided for @handoverCorrected.
+  ///
+  /// In uz, this message translates to:
+  /// **'Tuzatilgan'**
+  String get handoverCorrected;
+
+  /// No description provided for @handoverReceivedOpening.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qabul qiluvchi {amount} bilan boshlagan'**
+  String handoverReceivedOpening(String amount);
+
+  /// No description provided for @handoverExpected.
+  ///
+  /// In uz, this message translates to:
+  /// **'kutilgan {amount}'**
+  String handoverExpected(String amount);
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

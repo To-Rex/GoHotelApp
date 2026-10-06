@@ -5,6 +5,7 @@ import '../domain/format.dart';
 import '../domain/guest_feedback.dart';
 import '../domain/hk_task.dart';
 import '../domain/room_tile.dart';
+import '../domain/shift_handover.dart';
 import '../domain/shift_session.dart';
 import '../domain/staff_member.dart';
 import '../domain/staff_revenue.dart';
@@ -221,6 +222,24 @@ class ManagementRepository {
   Future<String> getShiftMode() async {
     final data = await _api.get<Map<String, dynamic>>('/shifts/settings');
     return data['mode'] as String? ?? 'simple';
+  }
+
+  /// Smenadan smenaga o'tgan pullar (`/shifts/handovers`, admin yoki
+  /// `shift.force_close`). Sana berilmasa — eng oxirgilari.
+  Future<HandoverReport> getShiftHandovers({
+    DateTime? from,
+    DateTime? to,
+    int limit = 30,
+  }) async {
+    final data = await _api.get<Map<String, dynamic>>(
+      '/shifts/handovers',
+      query: {
+        'date_from': ?(from == null ? null : isoDate(from)),
+        'date_to': ?(to == null ? null : isoDate(to)),
+        'limit': limit,
+      },
+    );
+    return HandoverReport.fromJson(data);
   }
 
   Future<List<ShiftSession>> getShiftHistory({int limit = 50}) async {
