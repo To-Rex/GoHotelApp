@@ -1111,5 +1111,63 @@
         "type": "String"
       }
     }
-  }
+  },
+  "debtWhy": "Nima uchun",
+  "debtReasonRoom": "Turar joy ({room}-xona)",
+  "@debtReasonRoom": {
+    "placeholders": {
+      "room": {
+        "type": "String"
+      }
+    }
+  },
+  "debtReasonRoomPlain": "Turar joy",
+  "debtReasonExtension": "Chiqishda qayta hisob (uzaytirilgan muddat)",
+  "debtReasonService": "Xizmat: {name}",
+  "@debtReasonService": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "debtReasonPenalty": "Jarima",
+  "debtReasonPenaltyWith": "Jarima ({details})",
+  "@debtReasonPenaltyWith": {
+    "placeholders": {
+      "details": {
+        "type": "String"
+      }
+    }
+  },
+  "debtReasonShop": "Do'kon: {products}",
+  "@debtReasonShop": {
+    "placeholders": {
+      "products": {
+        "type": "String"
+      }
+    }
+  },
+  "debtReasonShopPlain": "Do'kon",
+  "debtPenaltyLate": "kech chiqish",
+  "debtPenaltyDamage": "shikast",
+  "debtPenaltyOther": "boshqa",
+  "debtAcknowledged": "Qarz bilan chiqarilgan: {note}",
+  "@debtAcknowledged": {
+    "placeholders": {
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "debtOverdueDays": "{days} kundan beri",
+  "@debtOverdueDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "debtLeftWithDebt": "Mehmon qarz bilan chiqib ketgan",
+  "debtTakeBeforeLeave": "Mehmon ketmasidan oldin to'lovni oling"
 }

@@ -692,5 +692,21 @@
   "handoverAccepted": "принято: {time}",
   "handoverCorrected": "Исправлено",
   "handoverReceivedOpening": "Принявший начал с {amount}",
-  "handoverExpected": "ожидалось {amount}"
+  "handoverExpected": "ожидалось {amount}",
+  "debtWhy": "Почему",
+  "debtReasonRoom": "Проживание (номер {room})",
+  "debtReasonRoomPlain": "Проживание",
+  "debtReasonExtension": "Пересчёт при выезде (продление)",
+  "debtReasonService": "Услуга: {name}",
+  "debtReasonPenalty": "Штраф",
+  "debtReasonPenaltyWith": "Штраф ({details})",
+  "debtReasonShop": "Магазин: {products}",
+  "debtReasonShopPlain": "Магазин",
+  "debtPenaltyLate": "поздний выезд",
+  "debtPenaltyDamage": "ущерб",
+  "debtPenaltyOther": "другое",
+  "debtAcknowledged": "Выписан с долгом: {note}",
+  "debtOverdueDays": "уже {days} дн.",
+  "debtLeftWithDebt": "Гость выехал с долгом",
+  "debtTakeBeforeLeave": "Примите оплату до отъезда гостя"
 }

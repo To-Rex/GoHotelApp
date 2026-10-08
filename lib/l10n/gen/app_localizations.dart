@@ -3409,6 +3409,102 @@ abstract class S {
   /// In uz, this message translates to:
   /// **'kutilgan {amount}'**
   String handoverExpected(String amount);
+
+  /// No description provided for @debtWhy.
+  ///
+  /// In uz, this message translates to:
+  /// **'Nima uchun'**
+  String get debtWhy;
+
+  /// No description provided for @debtReasonRoom.
+  ///
+  /// In uz, this message translates to:
+  /// **'Turar joy ({room}-xona)'**
+  String debtReasonRoom(String room);
+
+  /// No description provided for @debtReasonRoomPlain.
+  ///
+  /// In uz, this message translates to:
+  /// **'Turar joy'**
+  String get debtReasonRoomPlain;
+
+  /// No description provided for @debtReasonExtension.
+  ///
+  /// In uz, this message translates to:
+  /// **'Chiqishda qayta hisob (uzaytirilgan muddat)'**
+  String get debtReasonExtension;
+
+  /// No description provided for @debtReasonService.
+  ///
+  /// In uz, this message translates to:
+  /// **'Xizmat: {name}'**
+  String debtReasonService(String name);
+
+  /// No description provided for @debtReasonPenalty.
+  ///
+  /// In uz, this message translates to:
+  /// **'Jarima'**
+  String get debtReasonPenalty;
+
+  /// No description provided for @debtReasonPenaltyWith.
+  ///
+  /// In uz, this message translates to:
+  /// **'Jarima ({details})'**
+  String debtReasonPenaltyWith(String details);
+
+  /// No description provided for @debtReasonShop.
+  ///
+  /// In uz, this message translates to:
+  /// **'Do\'kon: {products}'**
+  String debtReasonShop(String products);
+
+  /// No description provided for @debtReasonShopPlain.
+  ///
+  /// In uz, this message translates to:
+  /// **'Do\'kon'**
+  String get debtReasonShopPlain;
+
+  /// No description provided for @debtPenaltyLate.
+  ///
+  /// In uz, this message translates to:
+  /// **'kech chiqish'**
+  String get debtPenaltyLate;
+
+  /// No description provided for @debtPenaltyDamage.
+  ///
+  /// In uz, this message translates to:
+  /// **'shikast'**
+  String get debtPenaltyDamage;
+
+  /// No description provided for @debtPenaltyOther.
+  ///
+  /// In uz, this message translates to:
+  /// **'boshqa'**
+  String get debtPenaltyOther;
+
+  /// No description provided for @debtAcknowledged.
+  ///
+  /// In uz, this message translates to:
+  /// **'Qarz bilan chiqarilgan: {note}'**
+  String debtAcknowledged(String note);
+
+  /// No description provided for @debtOverdueDays.
+  ///
+  /// In uz, this message translates to:
+  /// **'{days} kundan beri'**
+  String debtOverdueDays(int days);
+
+  /// No description provided for @debtLeftWithDebt.
+  ///
+  /// In uz, this message translates to:
+  /// **'Mehmon qarz bilan chiqib ketgan'**
+  String get debtLeftWithDebt;
+
+  /// No description provided for @debtTakeBeforeLeave.
+  ///
+  /// In uz, this message translates to:
+  /// **'Mehmon ketmasidan oldin to\'lovni oling'**
+  String get debtTakeBeforeLeave;
 }
 
 class _SDelegate extends LocalizationsDelegate<S> {

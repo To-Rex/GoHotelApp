@@ -2,9 +2,12 @@ import 'package:flutter/cupertino.dart' show CupertinoIcons;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../../app/di.dart';
 import '../../../../../core/extensions/context_x.dart';
+import '../../../../../core/widgets/debt_reasons.dart';
 import '../../../../../core/widgets/glass.dart';
 import '../../../../../core/widgets/status_chip.dart';
+import '../../data/bookings_repository.dart';
 import '../../domain/booking.dart';
 
 /// Bron tafsiloti: mehmon, muddat, mehmonlar soni va to'lov holati.
@@ -181,6 +184,10 @@ class _BookingDetailSheet extends StatelessWidget {
                 ),
               ),
 
+              // NIMA UCHUN qarz — server hisob varag'idan (uzaytirilgan
+              // muddat va do'kon qarzi ham)
+              _DebtReasonsSection(booking: booking),
+
               const SizedBox(height: 12),
               Wrap(
                 spacing: 6,
@@ -218,6 +225,96 @@ class _BookingDetailSheet extends StatelessWidget {
   static String _money(double value) => value
       .toStringAsFixed(0)
       .replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+$)'), (m) => '${m[1]} ');
+}
+
+/// Qarz sabablari — oyna ochilganda serverdan olinadi. Tarmoq bo'lmasa
+/// yoki qarz yo'q bo'lsa hech narsa ko'rsatilmaydi (oyna buzilmaydi).
+class _DebtReasonsSection extends StatefulWidget {
+  const _DebtReasonsSection({required this.booking});
+
+  final Booking booking;
+
+  @override
+  State<_DebtReasonsSection> createState() => _DebtReasonsSectionState();
+}
+
+class _DebtReasonsSectionState extends State<_DebtReasonsSection> {
+  Future<BookingDebt>? _debt;
+
+  static const _tracked = {'CONFIRMED', 'CHECKED_IN', 'CHECKED_OUT'};
+
+  @override
+  void initState() {
+    super.initState();
+    if (_tracked.contains(widget.booking.status) &&
+        getIt.isRegistered<BookingsRepository>()) {
+      _debt = getIt<BookingsRepository>().getDebt(widget.booking.id);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final future = _debt;
+    if (future == null) return const SizedBox.shrink();
+    final c = context.colors;
+    final l10n = context.l10n;
+    return FutureBuilder<BookingDebt>(
+      future: future,
+      builder: (context, snapshot) {
+        final debt = snapshot.data;
+        if (debt == null || !debt.hasDebt) return const SizedBox.shrink();
+        return Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: c.dangerSoft.withValues(alpha: 0.55),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(color: c.danger.withValues(alpha: 0.25)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(CupertinoIcons.exclamationmark_triangle_fill, size: 16, color: c.danger),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        debt.status == 'CHECKED_OUT'
+                            ? l10n.debtLeftWithDebt
+                            : l10n.debtTakeBeforeLeave,
+                        style: context.textStyles.labelLarge!.copyWith(color: c.danger),
+                      ),
+                    ),
+                    Text(
+                      _BookingDetailSheet._money(debt.totalDebt),
+                      style: context.textStyles.titleSmall!.copyWith(color: c.danger),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  l10n.debtWhy,
+                  style: context.textStyles.labelSmall!.copyWith(color: c.textMuted),
+                ),
+                const SizedBox(height: 6),
+                DebtReasonChips(reasons: debt.items),
+                if ((debt.ackNote ?? '').isNotEmpty) ...[
+                  const SizedBox(height: 6),
+                  Text(
+                    l10n.debtAcknowledged(debt.ackNote!),
+                    style: context.textStyles.labelSmall!.copyWith(color: c.danger),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
 
 class _Row extends StatelessWidget {

@@ -115,6 +115,8 @@ class _NotificationTile extends StatelessWidget {
       ),
       'problemAccepted' => (Icons.task_alt_rounded, c.successSoft, c.success),
       'inventory' => (Icons.inventory_2_outlined, c.warningSoft, c.warning),
+      // Qarz eslatmalari (qarz bilan chiqib ketdi, bugun chiqadi, ro'yxat)
+      'debt' => (Icons.payments_outlined, c.dangerSoft, c.danger),
       _ => (Icons.info_outline_rounded, c.infoSoft, c.info),
     };
   }

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../app/di.dart';
 import '../../../../core/extensions/context_x.dart';
 import '../../../../core/widgets/app_card.dart';
+import '../../../../core/widgets/debt_reasons.dart';
 import '../../../../core/widgets/error_state.dart';
 import '../../../../core/widgets/glass.dart';
 import '../../../../core/widgets/loading_state.dart';
@@ -1065,11 +1066,26 @@ class _DebtorsCard extends StatelessWidget {
                             [
                               if (item.roomNumber != null) l10n.debtorRoom(item.roomNumber!),
                               if (item.checkOut != null) l10n.debtorCheckOut(_fullDate(item.checkOut!)),
+                              if ((item.overdueDays ?? 0) > 0) l10n.debtOverdueDays(item.overdueDays!),
                             ].join(' · '),
                             style: context.textStyles.labelSmall!.copyWith(color: c.textMuted),
-                            maxLines: 1,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
+                          // NIMA UCHUN qarz — to'lanmagan haqlar
+                          if (item.reasons.isNotEmpty) ...[
+                            const SizedBox(height: 6),
+                            DebtReasonChips(reasons: item.reasons),
+                          ],
+                          if ((item.ackNote ?? '').isNotEmpty) ...[
+                            const SizedBox(height: 4),
+                            Text(
+                              l10n.debtAcknowledged(item.ackNote!),
+                              style: context.textStyles.labelSmall!.copyWith(color: c.danger),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
                         ],
                       ),
                     ),

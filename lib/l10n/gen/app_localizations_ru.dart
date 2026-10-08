@@ -1858,4 +1858,64 @@ class SRu extends S {
   String handoverExpected(String amount) {
     return 'ожидалось $amount';
   }
+
+  @override
+  String get debtWhy => 'Почему';
+
+  @override
+  String debtReasonRoom(String room) {
+    return 'Проживание (номер $room)';
+  }
+
+  @override
+  String get debtReasonRoomPlain => 'Проживание';
+
+  @override
+  String get debtReasonExtension => 'Пересчёт при выезде (продление)';
+
+  @override
+  String debtReasonService(String name) {
+    return 'Услуга: $name';
+  }
+
+  @override
+  String get debtReasonPenalty => 'Штраф';
+
+  @override
+  String debtReasonPenaltyWith(String details) {
+    return 'Штраф ($details)';
+  }
+
+  @override
+  String debtReasonShop(String products) {
+    return 'Магазин: $products';
+  }
+
+  @override
+  String get debtReasonShopPlain => 'Магазин';
+
+  @override
+  String get debtPenaltyLate => 'поздний выезд';
+
+  @override
+  String get debtPenaltyDamage => 'ущерб';
+
+  @override
+  String get debtPenaltyOther => 'другое';
+
+  @override
+  String debtAcknowledged(String note) {
+    return 'Выписан с долгом: $note';
+  }
+
+  @override
+  String debtOverdueDays(int days) {
+    return 'уже $days дн.';
+  }
+
+  @override
+  String get debtLeftWithDebt => 'Гость выехал с долгом';
+
+  @override
+  String get debtTakeBeforeLeave => 'Примите оплату до отъезда гостя';
 }

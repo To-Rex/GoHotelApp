@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../core/debt/debt_reason.dart';
+
 import 'shift_session.dart';
 
 /// Moliya sahifasining davri: bugun, kecha, 7 kun, shu oy yoki ixtiyoriy.
@@ -266,6 +268,9 @@ class CashOverview extends Equatable {
 }
 
 /// Qarzdor bron (`GET /finance/debtors` → `items`).
+///
+/// `reasons` — qarzning SABABI (to'lanmagan haqlar). Eski server bu
+/// maydonlarni yubormaydi — ro'yxat bo'sh qoladi.
 class DebtorItem extends Equatable {
   const DebtorItem({
     required this.id,
@@ -274,6 +279,10 @@ class DebtorItem extends Equatable {
     this.roomNumber,
     this.reservationNumber,
     this.checkOut,
+    this.reasons = const [],
+    this.overdueDays,
+    this.ackNote,
+    this.status,
   });
 
   final String id;
@@ -282,6 +291,14 @@ class DebtorItem extends Equatable {
   final String? reservationNumber;
   final DateTime? checkOut;
   final double debt;
+  final List<DebtReason> reasons;
+
+  /// Chiqib ketganidan beri necha kun to'lanmagan.
+  final int? overdueDays;
+
+  /// Qarz bilan chiqarilgan bo'lsa — sababi.
+  final String? ackNote;
+  final String? status;
 
   factory DebtorItem.fromJson(Map<String, dynamic> json) => DebtorItem(
     id: '${json['id'] ?? ''}',
@@ -292,10 +309,16 @@ class DebtorItem extends Equatable {
         ? DateTime.tryParse(json['check_out_date'] as String)
         : null,
     debt: (json['debt_amount'] as num?)?.toDouble() ?? 0,
+    reasons: DebtReason.listFrom(json['reasons']),
+    overdueDays: (json['overdue_days'] as num?)?.toInt(),
+    ackNote: (json['acknowledged'] is Map<String, dynamic>)
+        ? (json['acknowledged'] as Map<String, dynamic>)['note'] as String?
+        : null,
+    status: json['status'] as String?,
   );
 
   @override
-  List<Object?> get props => [id, debt];
+  List<Object?> get props => [id, debt, reasons.length, overdueDays, ackNote];
 }
 
 class DebtorsReport extends Equatable {

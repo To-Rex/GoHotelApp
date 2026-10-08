@@ -692,5 +692,21 @@
   "handoverAccepted": "accepted: {time}",
   "handoverCorrected": "Corrected",
   "handoverReceivedOpening": "The receiver started with {amount}",
-  "handoverExpected": "expected {amount}"
+  "handoverExpected": "expected {amount}",
+  "debtWhy": "Why",
+  "debtReasonRoom": "Accommodation (room {room})",
+  "debtReasonRoomPlain": "Accommodation",
+  "debtReasonExtension": "Recalculated at check-out (extension)",
+  "debtReasonService": "Service: {name}",
+  "debtReasonPenalty": "Penalty",
+  "debtReasonPenaltyWith": "Penalty ({details})",
+  "debtReasonShop": "Shop: {products}",
+  "debtReasonShopPlain": "Shop",
+  "debtPenaltyLate": "late check-out",
+  "debtPenaltyDamage": "damage",
+  "debtPenaltyOther": "other",
+  "debtAcknowledged": "Checked out with debt: {note}",
+  "debtOverdueDays": "for {days} days",
+  "debtLeftWithDebt": "The guest left with a debt",
+  "debtTakeBeforeLeave": "Take the payment before the guest leaves"
 }

@@ -1,3 +1,4 @@
+import '../../../../core/debt/debt_reason.dart';
 import '../../../../core/network/api_client.dart';
 import '../domain/booking.dart';
 
@@ -26,6 +27,14 @@ class BookingsRepository {
     return data
         .map((e) => Booking.fromJson(e as Map<String, dynamic>))
         .toList();
+  }
+
+  /// Bron qarzi va uning SABABLARI (`GET /reservations/{id}/debt`).
+  Future<BookingDebt> getDebt(String reservationId) async {
+    final data = await _api.get<Map<String, dynamic>>(
+      '/reservations/$reservationId/debt',
+    );
+    return BookingDebt.fromJson(data);
   }
 
   static String? _trimmed(String? value) {

@@ -191,6 +191,19 @@ class _Repo extends Fake implements ManagementRepository {
           'reservation_number': 'RES-00313-20260908-9UF$i',
           'check_out_date': '2026-10-1$i',
           'debt_amount': 100000.0 * (i + 1),
+          // Qarz SABABI — eng kattasida jarima + do'kon, keyingisida uzaytirish
+          if (i == 6) ...{
+            'overdue_days': 3,
+            'acknowledged': {'note': 'Ertaga olib keladi'},
+            'reasons': [
+              {'kind': 'penalty', 'amount': 450000, 'charged': 450000, 'penalty_kind': 'DAMAGE', 'note': 'televizor'},
+              {'kind': 'shop', 'amount': 250000, 'charged': 300000, 'products': 'Cola ×2'},
+            ],
+          },
+          if (i == 5)
+            'reasons': [
+              {'kind': 'extension', 'amount': 600000, 'charged': 600000},
+            ],
         },
     ],
   });
@@ -309,6 +322,11 @@ void main() {
 
       final debtors = await repo.getDebtorsReport();
       expect(debtors.items.first.debt, 700000); // eng kattasi birinchi
+      // Qarzning sababi ham keladi
+      expect(debtors.items.first.reasons.map((r) => r.kind), ['penalty', 'shop']);
+      expect(debtors.items.first.overdueDays, 3);
+      expect(debtors.items.first.ackNote, 'Ertaga olib keladi');
+      expect(debtors.items.last.reasons, isEmpty); // eski server shakli
 
       final shifts = ShiftDiffSummary.of(
         await repo.getShiftHistory(),

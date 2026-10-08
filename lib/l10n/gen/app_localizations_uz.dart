@@ -1853,4 +1853,65 @@ class SUz extends S {
   String handoverExpected(String amount) {
     return 'kutilgan $amount';
   }
+
+  @override
+  String get debtWhy => 'Nima uchun';
+
+  @override
+  String debtReasonRoom(String room) {
+    return 'Turar joy ($room-xona)';
+  }
+
+  @override
+  String get debtReasonRoomPlain => 'Turar joy';
+
+  @override
+  String get debtReasonExtension =>
+      'Chiqishda qayta hisob (uzaytirilgan muddat)';
+
+  @override
+  String debtReasonService(String name) {
+    return 'Xizmat: $name';
+  }
+
+  @override
+  String get debtReasonPenalty => 'Jarima';
+
+  @override
+  String debtReasonPenaltyWith(String details) {
+    return 'Jarima ($details)';
+  }
+
+  @override
+  String debtReasonShop(String products) {
+    return 'Do\'kon: $products';
+  }
+
+  @override
+  String get debtReasonShopPlain => 'Do\'kon';
+
+  @override
+  String get debtPenaltyLate => 'kech chiqish';
+
+  @override
+  String get debtPenaltyDamage => 'shikast';
+
+  @override
+  String get debtPenaltyOther => 'boshqa';
+
+  @override
+  String debtAcknowledged(String note) {
+    return 'Qarz bilan chiqarilgan: $note';
+  }
+
+  @override
+  String debtOverdueDays(int days) {
+    return '$days kundan beri';
+  }
+
+  @override
+  String get debtLeftWithDebt => 'Mehmon qarz bilan chiqib ketgan';
+
+  @override
+  String get debtTakeBeforeLeave => 'Mehmon ketmasidan oldin to\'lovni oling';
 }

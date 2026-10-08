@@ -800,7 +800,8 @@ class _AttentionCard extends StatelessWidget {
             pulse.debtorCount,
             formatMoney(pulse.debtTotal),
           ),
-          onTap: () => TodayBookingsPage.open(context),
+          // Moliya sahifasida qarzdorlar — har biri SABABI bilan
+          onTap: () => FinancePage.open(context),
         ),
     ];
 

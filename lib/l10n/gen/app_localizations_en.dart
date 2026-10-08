@@ -1856,4 +1856,64 @@ class SEn extends S {
   String handoverExpected(String amount) {
     return 'expected $amount';
   }
+
+  @override
+  String get debtWhy => 'Why';
+
+  @override
+  String debtReasonRoom(String room) {
+    return 'Accommodation (room $room)';
+  }
+
+  @override
+  String get debtReasonRoomPlain => 'Accommodation';
+
+  @override
+  String get debtReasonExtension => 'Recalculated at check-out (extension)';
+
+  @override
+  String debtReasonService(String name) {
+    return 'Service: $name';
+  }
+
+  @override
+  String get debtReasonPenalty => 'Penalty';
+
+  @override
+  String debtReasonPenaltyWith(String details) {
+    return 'Penalty ($details)';
+  }
+
+  @override
+  String debtReasonShop(String products) {
+    return 'Shop: $products';
+  }
+
+  @override
+  String get debtReasonShopPlain => 'Shop';
+
+  @override
+  String get debtPenaltyLate => 'late check-out';
+
+  @override
+  String get debtPenaltyDamage => 'damage';
+
+  @override
+  String get debtPenaltyOther => 'other';
+
+  @override
+  String debtAcknowledged(String note) {
+    return 'Checked out with debt: $note';
+  }
+
+  @override
+  String debtOverdueDays(int days) {
+    return 'for $days days';
+  }
+
+  @override
+  String get debtLeftWithDebt => 'The guest left with a debt';
+
+  @override
+  String get debtTakeBeforeLeave => 'Take the payment before the guest leaves';
 }
