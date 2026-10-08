@@ -28,6 +28,10 @@ class AuthCubit extends Cubit<AuthState> {
   final AppPrefs prefs;
   final BiometricService biometrics;
 
+  /// Filial hozirgina almashtirildi — ilova darvozasi ustidagi sahifalarni
+  /// yopadi (bir martalik belgi).
+  bool branchJustSwitched = false;
+
   /// Ilova ochilganda: sessiya bo'lsa (kerak bo'lsa biometrika bilan) kirish.
   Future<void> appStarted() async {
     if (prefs.biometricEnabled && await biometrics.isAvailable) {
@@ -45,6 +49,30 @@ class AuthCubit extends Cubit<AuthState> {
     final ok = await biometrics.authenticate(localizedReason);
     if (!ok) return; // foydalanuvchi bekor qildi — locked'da qolamiz
     await _tryRestore();
+  }
+
+  /// Administrator: boshqa filialga o'tish. Muvaffaqiyatli bo'lsa yangi
+  /// foydalanuvchi (yangi filial) holatga yoziladi — qobiq butunlay qayta
+  /// quriladi va barcha ekranlar shu filial ma'lumotini oladi. Xato bo'lsa
+  /// matni qaytadi (holat o'zgarmaydi).
+  Future<String?> switchBranch(String branchId) async {
+    final user = state.user;
+    final hotelId = user?.hotelId;
+    if (user == null || hotelId == null || !user.canSwitchBranch) {
+      return null;
+    }
+    if (branchId == user.branchId) return null;
+    try {
+      final next = await repository.switchBranch(
+        hotelId: hotelId,
+        branchId: branchId,
+      );
+      branchJustSwitched = true;
+      emit(_signedIn(next));
+      return null;
+    } on ApiException catch (e) {
+      return e.message;
+    }
   }
 
   /// Qulf ekranidan "boshqa hisob bilan kirish".

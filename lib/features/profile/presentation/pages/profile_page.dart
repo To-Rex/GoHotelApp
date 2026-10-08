@@ -11,6 +11,7 @@ import '../../../../core/widgets/app_avatar.dart';
 import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/confirm_sheet.dart';
 import '../../../auth/presentation/cubit/auth_cubit.dart';
+import '../../../auth/presentation/widgets/branch_switch_sheet.dart';
 import '../../../auth/presentation/widgets/face_settings_sheet.dart';
 import '../cubit/profile_cubit.dart';
 import '../widgets/settings_sheets.dart';
@@ -183,6 +184,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     label: l10n.hotelLabel,
                     value: user.hotelName!,
                   ),
+                if (user.branchName?.isNotEmpty == true)
+                  _InfoRow(
+                    icon: CupertinoIcons.arrow_branch,
+                    label: l10n.branchLabel,
+                    value: user.branchName!,
+                  ),
                 _InfoRow(
                   icon: Icons.schedule_rounded,
                   label: l10n.scheduleLabel,
@@ -206,6 +213,25 @@ class _ProfilePageState extends State<ProfilePage> {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: Column(
               children: [
+                // Administrator: filiallar alohida — boshqa filialga o'tish
+                if (user.canSwitchBranch) ...[
+                  ListTile(
+                    leading: _settingIcon(
+                      context,
+                      CupertinoIcons.arrow_branch,
+                      c.successSoft,
+                      c.success,
+                    ),
+                    title: Text(l10n.branchSwitchTitle),
+                    subtitle: Text(user.branchName ?? l10n.branchLabel),
+                    trailing: const Icon(
+                      CupertinoIcons.chevron_right,
+                      size: 18,
+                    ),
+                    onTap: () => showBranchSwitchSheet(context),
+                  ),
+                  Divider(height: 1, indent: 72, color: c.outline),
+                ],
                 BlocBuilder<SettingsCubit, SettingsState>(
                   builder: (context, settings) => ListTile(
                     leading: _settingIcon(

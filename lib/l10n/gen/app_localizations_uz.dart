@@ -584,6 +584,19 @@ class SUz extends S {
   String get hotelLabel => 'Mehmonxona';
 
   @override
+  String get branchLabel => 'Filial';
+
+  @override
+  String get branchSwitchTitle => 'Filialni almashtirish';
+
+  @override
+  String get branchSwitchHint =>
+      'Har filialning xonalari, mehmonlari, kassasi va hisobotlari alohida. Tanlangan filial ma\'lumotlari ochiladi.';
+
+  @override
+  String get branchMain => 'Asosiy filial';
+
+  @override
   String get scheduleLabel => 'Ish vaqti';
 
   @override
@@ -1486,7 +1499,7 @@ class SUz extends S {
 
   @override
   String get broadcastBody =>
-      'Xabar mehmonxonaning barcha faol xodimlariga push bo\'lib boradi';
+      'Xabar shu filialning barcha faol xodimlari va administratorlarga push bo\'lib boradi';
 
   @override
   String get broadcastTitleHint => 'Sarlavha';

@@ -1173,6 +1173,30 @@ abstract class S {
   /// **'Mehmonxona'**
   String get hotelLabel;
 
+  /// No description provided for @branchLabel.
+  ///
+  /// In uz, this message translates to:
+  /// **'Filial'**
+  String get branchLabel;
+
+  /// No description provided for @branchSwitchTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Filialni almashtirish'**
+  String get branchSwitchTitle;
+
+  /// No description provided for @branchSwitchHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Har filialning xonalari, mehmonlari, kassasi va hisobotlari alohida. Tanlangan filial ma\'lumotlari ochiladi.'**
+  String get branchSwitchHint;
+
+  /// No description provided for @branchMain.
+  ///
+  /// In uz, this message translates to:
+  /// **'Asosiy filial'**
+  String get branchMain;
+
   /// No description provided for @scheduleLabel.
   ///
   /// In uz, this message translates to:
@@ -2796,7 +2820,7 @@ abstract class S {
   /// No description provided for @broadcastBody.
   ///
   /// In uz, this message translates to:
-  /// **'Xabar mehmonxonaning barcha faol xodimlariga push bo\'lib boradi'**
+  /// **'Xabar shu filialning barcha faol xodimlari va administratorlarga push bo\'lib boradi'**
   String get broadcastBody;
 
   /// No description provided for @broadcastTitleHint.

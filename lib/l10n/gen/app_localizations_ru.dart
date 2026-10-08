@@ -583,6 +583,19 @@ class SRu extends S {
   String get hotelLabel => 'Отель';
 
   @override
+  String get branchLabel => 'Филиал';
+
+  @override
+  String get branchSwitchTitle => 'Сменить филиал';
+
+  @override
+  String get branchSwitchHint =>
+      'У каждого филиала свои номера, гости, касса и отчёты. Откроются данные выбранного филиала.';
+
+  @override
+  String get branchMain => 'Основной филиал';
+
+  @override
   String get scheduleLabel => 'Рабочее время';
 
   @override
@@ -1489,7 +1502,7 @@ class SRu extends S {
 
   @override
   String get broadcastBody =>
-      'Уйдёт push-уведомлением всем активным сотрудникам';
+      'Уйдёт push-уведомлением всем активным сотрудникам этого филиала и администраторам';
 
   @override
   String get broadcastTitleHint => 'Заголовок';

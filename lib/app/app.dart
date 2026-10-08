@@ -180,8 +180,21 @@ class _AuthGateState extends State<AuthGate> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
-      listenWhen: (a, b) => a.status != b.status,
+      listenWhen: (a, b) =>
+          a.status != b.status || a.user?.branchId != b.user?.branchId,
       listener: (context, state) {
+        if (state.status == AuthStatus.authenticated &&
+            context.read<AuthCubit>().branchJustSwitched) {
+          /* Administrator filialni almashtirdi: qobiq yangi filial bilan
+             qayta quriladi, ustidagi sahifalar (profil, moliya...) esa
+             eski filial ma'lumoti bilan qolmasin — yopiladi. */
+          context.read<AuthCubit>().branchJustSwitched = false;
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (!mounted) return;
+            Navigator.maybeOf(context)?.popUntil((route) => route.isFirst);
+          });
+          return;
+        }
         if (state.status == AuthStatus.authenticated) {
           _maybeOfferBiometric();
           /* Push: kirish tugashi bilan FCM tokeni serverga ro'yxatdan
@@ -217,8 +230,12 @@ class _AuthGateState extends State<AuthGate> {
               // boshqalar → o'z bo'limlari (yoki umumiy skelet).
               // FaceEnrollGate — yuzi biriktirilmagan xodimdan (frontend'dagi
               // kabi) yuz biriktirishni talab qiladi.
+              // Kalitda filial ham: filial almashganda qobiq va uning
+              // barcha cubitlari yangidan quriladi (eski filial keshi qolmaydi)
               KeyedSubtree(
-                key: ValueKey(state.user!.id),
+                key: ValueKey(
+                  '${state.user!.id}|${state.user!.hotelId}|${state.user!.branchId}',
+                ),
                 child: FaceEnrollGate(
                   user: state.user!,
                   child: RoleRegistry.resolve(state.user!).homeBuilder(),

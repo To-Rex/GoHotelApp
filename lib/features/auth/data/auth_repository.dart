@@ -21,6 +21,28 @@ class FaceRequired extends LoginOutcome {
   final String faceToken;
 }
 
+/// Administrator tanlay oladigan filial (`GET /auth/context/options`).
+class BranchOption {
+  const BranchOption({
+    required this.id,
+    required this.name,
+    this.code,
+    this.isMain = false,
+  });
+
+  final String id;
+  final String name;
+  final String? code;
+  final bool isMain;
+
+  factory BranchOption.fromJson(Map<String, dynamic> json) => BranchOption(
+    id: json['id'] as String,
+    name: json['name'] as String? ?? '',
+    code: json['code'] as String?,
+    isMain: json['is_main'] == true,
+  );
+}
+
 class AuthRepository {
   AuthRepository({required this.api, required this.tokens});
 
@@ -78,6 +100,37 @@ class AuthRepository {
   Future<StaffUser> me() async {
     final data = await api.get<Map<String, dynamic>>('/auth/me');
     return StaffUser.fromJson(data);
+  }
+
+  /// Mehmonxonaning filiallari (administrator — faqat o'z mehmonxonasi).
+  /// Asosiy filial birinchi.
+  Future<List<BranchOption>> branchOptions(String hotelId) async {
+    final data = await api.get<Map<String, dynamic>>('/auth/context/options');
+    final hotels = (data['hotels'] as List<dynamic>? ?? [])
+        .cast<Map<String, dynamic>>();
+    final hotel = hotels.firstWhere(
+      (h) => h['id'] == hotelId,
+      orElse: () => hotels.isNotEmpty ? hotels.first : const {},
+    );
+    return (hotel['branches'] as List<dynamic>? ?? [])
+        .cast<Map<String, dynamic>>()
+        .map(BranchOption.fromJson)
+        .toList();
+  }
+
+  /// Filialga o'tish: server yangi token juftligini beradi (tanlov tokenda
+  /// turadi), keyingi barcha so'rovlar shu filial ichida ishlaydi.
+  /// Tokenlar AVVAL saqlanadi — `/auth/me` yangi token bilan ketsin.
+  Future<StaffUser> switchBranch({
+    required String hotelId,
+    required String branchId,
+  }) async {
+    final data = await api.post<Map<String, dynamic>>(
+      '/auth/context',
+      data: {'hotel_id': hotelId, 'branch_id': branchId},
+    );
+    await _saveTokens(data);
+    return me();
   }
 
   Future<void> logout() async {

@@ -12,6 +12,7 @@ class StaffUser extends Equatable {
     this.hotelId,
     this.hotelName,
     this.branchId,
+    this.branchName,
     this.email,
     this.phone,
     this.workStart = '09:00',
@@ -30,6 +31,10 @@ class StaffUser extends Equatable {
   final String? hotelId;
   final String? hotelName;
   final String? branchId;
+
+  /// Joriy filial nomi: xodimda — o'z filiali, administratorda — tanlagani.
+  /// Filiallar to'liq ajratilgan: barcha ma'lumot shu filialniki.
+  final String? branchName;
   final String? email;
   final String? phone;
   final String workStart;
@@ -56,6 +61,10 @@ class StaffUser extends Equatable {
   /// tanlab sozlaydi. Mobil ilovada unga faqat yo'riqnoma sahifasi ochiladi.
   bool get isConfigurator => userType == 'CONFIGURATOR';
 
+  /// Administrator o'z mehmonxonasining filiallari orasida o'ta oladi
+  /// (`POST /auth/context`). Xodim — faqat o'z filialida.
+  bool get canSwitchBranch => userType == 'ADMIN' && hotelId != null;
+
   /// Ruxsat tekshiruvi. `pattern` yulduzchali bo'lishi mumkin
   /// (masalan `housekeeping.*`) — xodimning istalgan mos kodi yetarli.
   bool hasPermission(String pattern) {
@@ -79,6 +88,7 @@ class StaffUser extends Equatable {
     hotelId: json['hotel_id'] as String?,
     hotelName: json['hotel_name'] as String?,
     branchId: json['branch_id'] as String?,
+    branchName: json['branch_name'] as String?,
     email: json['email'] as String?,
     phone: json['phone'] as String?,
     workStart: json['work_start'] as String? ?? '09:00',
@@ -93,12 +103,17 @@ class StaffUser extends Equatable {
   /// Ish vaqti va uning bayroqlari ham tenglikka kiradi: aks holda
   /// `/auth/me` yangilangan foydalanuvchini qaytarsa ham Bloc uni "o'sha
   /// holat" deb tashlab yuborar, ekran esa eski soatni ko'rsatib qolardi.
+  /// Mehmonxona va filial ham — filial almashganda butun ekran yangilanadi.
   @override
   List<Object?> get props => [
     id,
     userType,
     username,
     permissions,
+    hotelId,
+    hotelName,
+    branchId,
+    branchName,
     workStart,
     workEnd,
     allowOutsideWorkHours,

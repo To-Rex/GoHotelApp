@@ -191,7 +191,8 @@ class _ManagementShellState extends State<ManagementShell>
             Text(l10n.tabTeam, style: context.textStyles.headlineSmall),
             if (widget.user.hotelName?.isNotEmpty == true)
               Text(
-                widget.user.hotelName!,
+                // Jamoa — joriy filialniki (filiallar ajratilgan)
+                [widget.user.hotelName!, ?widget.user.branchName].join(' · '),
                 style: context.textStyles.bodySmall!.copyWith(color: c.textMuted),
                 overflow: TextOverflow.ellipsis,
               ),

@@ -585,6 +585,19 @@ class SEn extends S {
   String get hotelLabel => 'Hotel';
 
   @override
+  String get branchLabel => 'Branch';
+
+  @override
+  String get branchSwitchTitle => 'Switch branch';
+
+  @override
+  String get branchSwitchHint =>
+      'Each branch has its own rooms, guests, cash desk and reports. The selected branch\'s data will open.';
+
+  @override
+  String get branchMain => 'Main branch';
+
+  @override
   String get scheduleLabel => 'Working hours';
 
   @override
@@ -1491,7 +1504,7 @@ class SEn extends S {
 
   @override
   String get broadcastBody =>
-      'Sent as a push notification to every active employee';
+      'Sent as a push to all active staff of this branch and to administrators';
 
   @override
   String get broadcastTitleHint => 'Title';
