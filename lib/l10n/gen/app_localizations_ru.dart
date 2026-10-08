@@ -120,6 +120,10 @@ class SRu extends S {
   String get faceNoCameraReason => 'Камера на устройстве не работает';
 
   @override
+  String get faceCameraRequiredHint =>
+      'В аккаунт можно войти только с привязанным лицом. Если камера не работает — администратор или менеджер удалит ваше лицо и разрешит вход по паролю.';
+
+  @override
   String get faceNotRecognized => 'Лицо не совпало. Попробуйте ещё раз.';
 
   @override

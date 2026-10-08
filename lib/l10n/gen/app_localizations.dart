@@ -315,6 +315,12 @@ abstract class S {
   /// **'Qurilmada kamera ishlamayapti'**
   String get faceNoCameraReason;
 
+  /// No description provided for @faceCameraRequiredHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hisobga faqat biriktirilgan yuz bilan kiriladi. Kamera ishlamasa — administrator yoki menejer yuzingizni o\'chirib, parol bilan kirishga ruxsat beradi.'**
+  String get faceCameraRequiredHint;
+
   /// No description provided for @faceNotRecognized.
   ///
   /// In uz, this message translates to:

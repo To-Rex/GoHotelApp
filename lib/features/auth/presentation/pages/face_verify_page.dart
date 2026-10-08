@@ -10,8 +10,10 @@ import 'face_capture_page.dart';
 /// Kirishning ikkinchi bosqichi: yuz surati bilan tasdiqlash.
 ///
 /// Old kamera ochiladi, surat serverdagi yuz profili bilan solishtiriladi.
-/// Kamera ishlamasa "kamerasiz kirish" yo'li bor (server sessiya yozuviga
-/// sababni saqlaydi).
+/// Hisobga faqat O'SHA yuz bilan kiriladi: "kamerasiz kirish" faqat server
+/// yuzni tekshira olmaganda (`FACE_ENGINE_UNAVAILABLE`) taklif qilinadi —
+/// ilgari bu tugma hammaga ko'rinib, parolni bilgan har kim yuz
+/// tekshiruvini chetlab o'tardi.
 class FaceVerifyPage extends StatefulWidget {
   const FaceVerifyPage({super.key});
 
@@ -141,11 +143,24 @@ class _FaceVerifyPageState extends State<FaceVerifyPage> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    OutlinedButton.icon(
-                      onPressed: _skipNoCamera,
-                      icon: const Icon(Icons.no_photography_outlined),
-                      label: Text(l10n.faceNoCameraBtn),
-                    ),
+                    if (state.errorCode == 'FACE_ENGINE_UNAVAILABLE')
+                      // Server yuzni tekshira olmaydi — parol yetarli
+                      OutlinedButton.icon(
+                        onPressed: _skipNoCamera,
+                        icon: const Icon(Icons.no_photography_outlined),
+                        label: Text(l10n.faceNoCameraBtn),
+                      )
+                    else
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Text(
+                          l10n.faceCameraRequiredHint,
+                          textAlign: TextAlign.center,
+                          style: context.textStyles.bodySmall!.copyWith(
+                            color: c.textMuted,
+                          ),
+                        ),
+                      ),
                   ],
                   const SizedBox(height: 24),
                 ],
@@ -164,6 +179,8 @@ class _FaceVerifyPageState extends State<FaceVerifyPage> {
         return l10n.faceNotDetected;
       case 'FACE_MISMATCH':
         return l10n.faceNotRecognized;
+      case 'FACE_REQUIRED':
+        return l10n.faceCameraRequiredHint;
       default:
         return state.error ?? l10n.faceNotRecognized;
     }

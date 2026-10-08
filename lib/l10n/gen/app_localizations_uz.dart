@@ -121,6 +121,10 @@ class SUz extends S {
   String get faceNoCameraReason => 'Qurilmada kamera ishlamayapti';
 
   @override
+  String get faceCameraRequiredHint =>
+      'Hisobga faqat biriktirilgan yuz bilan kiriladi. Kamera ishlamasa — administrator yoki menejer yuzingizni o\'chirib, parol bilan kirishga ruxsat beradi.';
+
+  @override
   String get faceNotRecognized => 'Yuz mos kelmadi. Qayta urinib ko\'ring.';
 
   @override

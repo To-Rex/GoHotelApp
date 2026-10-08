@@ -121,6 +121,10 @@ class SEn extends S {
   String get faceNoCameraReason => 'Camera is not working on this device';
 
   @override
+  String get faceCameraRequiredHint =>
+      'This account opens only with the enrolled face. If the camera does not work, an administrator or manager can remove your face and allow password login.';
+
+  @override
   String get faceNotRecognized => 'Face didn\'t match. Please try again.';
 
   @override
