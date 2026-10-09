@@ -122,7 +122,7 @@ class SEn extends S {
 
   @override
   String get faceCameraRequiredHint =>
-      'This account opens only with the enrolled face. If the camera does not work, an administrator or manager can remove your face and allow password login.';
+      'This account is protected by face — only the enrolled face opens it.';
 
   @override
   String get faceNotRecognized => 'Face didn\'t match. Please try again.';

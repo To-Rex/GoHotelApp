@@ -36,7 +36,7 @@
   "faceRetry": "Retake photo",
   "faceNoCameraBtn": "Sign in without camera",
   "faceNoCameraReason": "Camera is not working on this device",
-  "faceCameraRequiredHint": "This account opens only with the enrolled face. If the camera does not work, an administrator or manager can remove your face and allow password login.",
+  "faceCameraRequiredHint": "This account is protected by face — only the enrolled face opens it.",
   "faceNotRecognized": "Face didn't match. Please try again.",
   "faceNotDetected": "No face detected — look straight at the camera and try again.",
   "devicePendingTitle": "Device awaiting approval",

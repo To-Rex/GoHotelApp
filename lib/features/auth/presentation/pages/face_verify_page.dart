@@ -1,21 +1,28 @@
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/extensions/context_x.dart';
+import '../../../../core/services/camera_service.dart';
 import '../cubit/auth_cubit.dart';
 import 'face_capture_page.dart';
 
 /// Kirishning ikkinchi bosqichi: yuz surati bilan tasdiqlash.
 ///
 /// Old kamera ochiladi, surat serverdagi yuz profili bilan solishtiriladi.
-/// Hisobga faqat O'SHA yuz bilan kiriladi: "kamerasiz kirish" faqat server
-/// yuzni tekshira olmaganda (`FACE_ENGINE_UNAVAILABLE`) taklif qilinadi —
-/// ilgari bu tugma hammaga ko'rinib, parolni bilgan har kim yuz
-/// tekshiruvini chetlab o'tardi.
+/// Kamerali qurilmada bosqich majburiy — hisobni faqat biriktirilgan yuz
+/// ochadi. "Kamerasiz kirish" faqat qurilmada kamera topilmaganda yoki
+/// server yuzni tekshira olmaganda (`FACE_ENGINE_UNAVAILABLE`) ko'rinadi —
+/// ilgari u hammaga ko'rinib, parolni bilgan har kim yuz tekshiruvini
+/// chetlab o'tardi.
 class FaceVerifyPage extends StatefulWidget {
-  const FaceVerifyPage({super.key});
+  const FaceVerifyPage({super.key, this.cameraProbe});
+
+  /// Qurilma kameralarini aniqlash (testda almashtiriladi); sukutda
+  /// [cachedCameras].
+  final Future<List<CameraDescription>> Function()? cameraProbe;
 
   @override
   State<FaceVerifyPage> createState() => _FaceVerifyPageState();
@@ -23,6 +30,26 @@ class FaceVerifyPage extends StatefulWidget {
 
 class _FaceVerifyPageState extends State<FaceVerifyPage> {
   String? _imagePath;
+
+  /// Qurilmada kamera yo'q (yoki kamera xizmati ishlamadi) — yuzni
+  /// tekshirishning imkoni yo'q, parol yetarli.
+  bool _noCamera = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _probeCamera();
+  }
+
+  Future<void> _probeCamera() async {
+    bool missing;
+    try {
+      missing = (await (widget.cameraProbe ?? cachedCameras)()).isEmpty;
+    } catch (_) {
+      missing = true;
+    }
+    if (mounted && missing) setState(() => _noCamera = true);
+  }
 
   Future<void> _capture() async {
     // MyID uslubidagi avtomatik yuz suratga olish: yuz ovalga to'g'ri
@@ -143,8 +170,10 @@ class _FaceVerifyPageState extends State<FaceVerifyPage> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    if (state.errorCode == 'FACE_ENGINE_UNAVAILABLE')
-                      // Server yuzni tekshira olmaydi — parol yetarli
+                    if (_noCamera ||
+                        state.errorCode == 'FACE_ENGINE_UNAVAILABLE')
+                      // Kamera yo'q yoki server yuzni tekshira olmaydi —
+                      // parol yetarli
                       OutlinedButton.icon(
                         onPressed: _skipNoCamera,
                         icon: const Icon(Icons.no_photography_outlined),
@@ -179,8 +208,6 @@ class _FaceVerifyPageState extends State<FaceVerifyPage> {
         return l10n.faceNotDetected;
       case 'FACE_MISMATCH':
         return l10n.faceNotRecognized;
-      case 'FACE_REQUIRED':
-        return l10n.faceCameraRequiredHint;
       default:
         return state.error ?? l10n.faceNotRecognized;
     }

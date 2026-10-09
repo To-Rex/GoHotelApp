@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -11,8 +12,9 @@ import 'package:gohotels/features/auth/presentation/pages/face_verify_page.dart'
 import 'package:gohotels/l10n/gen/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Yuz bosqichi: hisobga faqat biriktirilgan yuz bilan kiriladi —
-/// "Kamerasiz kirish" faqat server yuzni tekshira olmaganda ko'rinadi.
+/// Yuz bosqichi: kamerali qurilmada majburiy (faqat biriktirilgan yuz ochadi);
+/// "Kamerasiz kirish" faqat kamera topilmaganda yoki server yuzni tekshira
+/// olmaganda ko'rinadi.
 
 class _Repo extends Fake implements AuthRepository {}
 
@@ -26,6 +28,12 @@ class _TestCubit extends AuthCubit {
 
   void set(AuthState state) => emit(state);
 }
+
+const _front = CameraDescription(
+  name: '1',
+  lensDirection: CameraLensDirection.front,
+  sensorOrientation: 270,
+);
 
 Future<_TestCubit> _cubit() async {
   SharedPreferences.setMockInitialValues({});
@@ -45,7 +53,7 @@ void _phoneScreen(WidgetTester tester) {
   addTearDown(tester.view.reset);
 }
 
-Widget _host(AuthCubit cubit) => BlocProvider<AuthCubit>.value(
+Widget _host(AuthCubit cubit, List<CameraDescription> cameras) => BlocProvider<AuthCubit>.value(
   value: cubit,
   child: MaterialApp(
     theme: AppTheme.light(),
@@ -57,20 +65,29 @@ Widget _host(AuthCubit cubit) => BlocProvider<AuthCubit>.value(
       GlobalWidgetsLocalizations.delegate,
       GlobalCupertinoLocalizations.delegate,
     ],
-    home: const FaceVerifyPage(),
+    home: FaceVerifyPage(cameraProbe: () async => cameras),
   ),
 );
 
 void main() {
-  testWidgets('yuz bosqichida "Kamerasiz kirish" tugmasi yo\'q', (tester) async {
+  testWidgets('kamerali qurilmada "Kamerasiz kirish" tugmasi yo\'q', (tester) async {
     _phoneScreen(tester);
     final cubit = await _cubit();
     cubit.set(const AuthState(status: AuthStatus.faceStep, faceToken: 't'));
-    await tester.pumpWidget(_host(cubit));
+    await tester.pumpWidget(_host(cubit, [_front]));
     await tester.pumpAndSettle();
     expect(find.text('Kamerasiz kirish'), findsNothing);
-    expect(find.textContaining('faqat biriktirilgan yuz'), findsOneWidget);
+    expect(find.textContaining('biriktirilgan yuz'), findsOneWidget);
     expect(find.text('Kamerani ochish'), findsOneWidget);
+  });
+
+  testWidgets('kamerasiz qurilmada tugma chiqadi', (tester) async {
+    _phoneScreen(tester);
+    final cubit = await _cubit();
+    cubit.set(const AuthState(status: AuthStatus.faceStep, faceToken: 't'));
+    await tester.pumpWidget(_host(cubit, const []));
+    await tester.pumpAndSettle();
+    expect(find.text('Kamerasiz kirish'), findsOneWidget);
   });
 
   testWidgets('server yuzni tekshira olmasa — tugma chiqadi', (tester) async {
@@ -84,7 +101,7 @@ void main() {
         errorCode: 'FACE_ENGINE_UNAVAILABLE',
       ),
     );
-    await tester.pumpWidget(_host(cubit));
+    await tester.pumpWidget(_host(cubit, [_front]));
     await tester.pumpAndSettle();
     expect(find.text('Kamerasiz kirish'), findsOneWidget);
   });

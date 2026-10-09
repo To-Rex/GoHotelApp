@@ -36,7 +36,7 @@
   "faceRetry": "Qayta suratga olish",
   "faceNoCameraBtn": "Kamerasiz kirish",
   "faceNoCameraReason": "Qurilmada kamera ishlamayapti",
-  "faceCameraRequiredHint": "Hisobga faqat biriktirilgan yuz bilan kiriladi. Kamera ishlamasa — administrator yoki menejer yuzingizni o'chirib, parol bilan kirishga ruxsat beradi.",
+  "faceCameraRequiredHint": "Bu hisob yuz bilan himoyalangan — uni faqat biriktirilgan yuz ochadi.",
   "faceNotRecognized": "Yuz mos kelmadi. Qayta urinib ko'ring.",
   "faceNotDetected": "Yuz aniqlanmadi — kameraga to'g'ri qarab qayta uriring.",
   "devicePendingTitle": "Qurilma tasdiq kutmoqda",

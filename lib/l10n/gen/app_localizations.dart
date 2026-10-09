@@ -318,7 +318,7 @@ abstract class S {
   /// No description provided for @faceCameraRequiredHint.
   ///
   /// In uz, this message translates to:
-  /// **'Hisobga faqat biriktirilgan yuz bilan kiriladi. Kamera ishlamasa — administrator yoki menejer yuzingizni o\'chirib, parol bilan kirishga ruxsat beradi.'**
+  /// **'Bu hisob yuz bilan himoyalangan — uni faqat biriktirilgan yuz ochadi.'**
   String get faceCameraRequiredHint;
 
   /// No description provided for @faceNotRecognized.

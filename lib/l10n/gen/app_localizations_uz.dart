@@ -122,7 +122,7 @@ class SUz extends S {
 
   @override
   String get faceCameraRequiredHint =>
-      'Hisobga faqat biriktirilgan yuz bilan kiriladi. Kamera ishlamasa — administrator yoki menejer yuzingizni o\'chirib, parol bilan kirishga ruxsat beradi.';
+      'Bu hisob yuz bilan himoyalangan — uni faqat biriktirilgan yuz ochadi.';
 
   @override
   String get faceNotRecognized => 'Yuz mos kelmadi. Qayta urinib ko\'ring.';
