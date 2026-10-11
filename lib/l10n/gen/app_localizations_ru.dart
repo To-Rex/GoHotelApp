@@ -922,6 +922,11 @@ class SRu extends S {
   String get methodBankTransfer => 'Банковский перевод';
 
   @override
+  String shiftNonCash(Object list) {
+    return 'Безнал: $list';
+  }
+
+  @override
   String get methodOther => 'Другое';
 
   @override

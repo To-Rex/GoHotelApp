@@ -923,6 +923,11 @@ class SUz extends S {
   String get methodBankTransfer => 'Bank o\'tkazmasi';
 
   @override
+  String shiftNonCash(Object list) {
+    return 'Naqdsiz: $list';
+  }
+
+  @override
   String get methodOther => 'Boshqa';
 
   @override

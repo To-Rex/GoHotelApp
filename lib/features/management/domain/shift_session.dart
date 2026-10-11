@@ -1,5 +1,32 @@
 import 'package:equatable/equatable.dart';
 
+import 'finance_summary.dart';
+
+/// Sessiyada qabul qilingan to'lov usuli (`cash_breakdown.methods` qatori).
+///
+/// Naqdsiz pul kassaga KIRMAYDI va smenadan smenaga o'tmaydi — bu shu
+/// sessiya ko'rsatkichi, shuning uchun har yangi smenada tabiiy 0 dan
+/// boshlanadi (naqd kassa kabi).
+class ShiftMethodRow extends Equatable {
+  const ShiftMethodRow({required this.method, required this.income});
+
+  final String method;
+
+  /// Bron to'lovlari + do'kon savdosi (xarajat alohida).
+  final double income;
+
+  factory ShiftMethodRow.fromJson(Map<String, dynamic> json) => ShiftMethodRow(
+    method: json['method'] as String? ?? '',
+    income:
+        (json['income'] as num?)?.toDouble() ??
+        ((json['payments'] as num?)?.toDouble() ?? 0) +
+            ((json['shop'] as num?)?.toDouble() ?? 0),
+  );
+
+  @override
+  List<Object?> get props => [method, income];
+}
+
 /// Kassa smenasi (`GET /shifts/history` qatori).
 ///
 /// Yopilgan sessiyalarda kassa raqamlari ochiq keladi, ochiqlarida yashirin
@@ -20,6 +47,8 @@ class ShiftSession extends Equatable {
     this.notes,
     this.acceptedByName,
     this.closedByName,
+    this.methods = const [],
+    this.nonCashIncome = 0,
   });
 
   final String id;
@@ -39,8 +68,36 @@ class ShiftSession extends Equatable {
   final String? acceptedByName;
   final String? closedByName;
 
+  /// To'lov usullari tarkibi — backend uni faqat YOPILGAN sessiyalarga
+  /// beradi ("ko'r sanash": ochiq sessiyada kassa raqamlari kabi yashiriladi).
+  final List<ShiftMethodRow> methods;
+
+  /// Naqd bo'lmagan turlarda jami qabul qilingan summa.
+  final double nonCashIncome;
+
   bool get isOpen => status == 'ACTIVE' || status == 'PENDING_HANDOVER';
   bool get isPendingHandover => status == 'PENDING_HANDOVER';
+
+  /// Naqdsiz turlar bo'yicha yig'indi — kanonik usullar (eski kodlar ham
+  /// qo'shiladi), faqat summa mavjudlari va barqaror tartibda: karta, online,
+  /// o'tkazma, boshqa.
+  ///
+  /// Yangi smenada ro'yxat BO'SH bo'ladi — "har smenada 0 dan boshlanadi"
+  /// qoidasi shu tarzda ko'rinadi (0 qatorlar bilan shovqin qilinmaydi).
+  List<PaymentMethodShare> get nonCashMethods {
+    final sums = <String, double>{};
+    for (final row in methods) {
+      final key = PaymentMethodShare.canonical(row.method);
+      if (key == 'cash') continue;
+      sums[key] = (sums[key] ?? 0) + row.income;
+    }
+    const order = ['card', 'online', 'bank_transfer', 'other'];
+    return [
+      for (final key in order)
+        if ((sums[key] ?? 0) > 0)
+          PaymentMethodShare(key: key, total: sums[key]!),
+    ];
+  }
 
   /// Smena qancha davom etgan (ochiq bo'lsa — hozirgacha).
   Duration elapsed(DateTime now) {
@@ -71,6 +128,11 @@ class ShiftSession extends Equatable {
     notes: json['notes'] as String?,
     acceptedByName: json['accepted_by_name'] as String?,
     closedByName: json['closed_by_name'] as String?,
+    methods: ((json['methods'] as List?) ?? const [])
+        .whereType<Map<String, dynamic>>()
+        .map(ShiftMethodRow.fromJson)
+        .toList(),
+    nonCashIncome: (json['non_cash_income'] as num?)?.toDouble() ?? 0,
   );
 
   @override

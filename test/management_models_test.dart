@@ -329,6 +329,39 @@ void main() {
       expect(closed.cashDiff, -5);
       expect(closed.isOpen, isFalse);
     });
+
+    test('naqdsiz to\'lovlar kanonik usullarga yig\'iladi', () {
+      // Naqdsiz pul kassaga kirmaydi — sessiya ko'rsatkichi bo'lib qoladi:
+      // eski kodlar kanonik guruhga yig'iladi, naqd hisobga qo'shilmaydi,
+      // summa bo'lmasa qator umuman chiqmaydi (yangi smena 0 dan boshlanadi).
+      final closed = ShiftSession.fromJson({
+        'id': 's3',
+        'user_id': 'u',
+        'status': 'CLOSED',
+        'non_cash_income': 250000,
+        'methods': [
+          {'method': 'CASH', 'payments': 500000, 'shop': 0, 'income': 500000},
+          {'method': 'CREDIT_CARD', 'payments': 100000, 'shop': 20000, 'income': 120000},
+          {'method': 'MOBILE_PAYMENT', 'payments': 0, 'shop': 30000, 'income': 30000},
+          {'method': 'WALLET', 'payments': 100000, 'shop': 0, 'income': 100000},
+        ],
+      });
+      expect(closed.nonCashIncome, 250000);
+      final keys = closed.nonCashMethods.map((m) => m.key).toList();
+      expect(keys, ['card', 'online', 'other']);
+      final card = closed.nonCashMethods.first;
+      expect(card.total, 120000);
+      expect(closed.nonCashMethods.last.total, 100000);
+
+      // Yangi (hali to'lov bo'lmagan) smenada ro'yxat bo'sh bo'ladi
+      final fresh = ShiftSession.fromJson({
+        'id': 's4',
+        'user_id': 'u',
+        'status': 'ACTIVE',
+      });
+      expect(fresh.nonCashMethods, isEmpty);
+      expect(fresh.nonCashIncome, 0);
+    });
   });
 
   group('GuestFeedback / StaffProblem', () {

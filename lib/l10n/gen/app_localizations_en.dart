@@ -926,6 +926,11 @@ class SEn extends S {
   String get methodBankTransfer => 'Bank transfer';
 
   @override
+  String shiftNonCash(Object list) {
+    return 'Non-cash: $list';
+  }
+
+  @override
   String get methodOther => 'Other';
 
   @override

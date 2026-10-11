@@ -418,6 +418,7 @@
   "methodCard": "Card",
   "methodOnline": "Online",
   "methodBankTransfer": "Bank transfer",
+  "shiftNonCash": "Non-cash: {list}",
   "methodOther": "Other",
   "callWatchTitle": "Identify guests by phone call",
   "callWatchBody": "When a guest calls, their name and room appear on the desktop screen. This needs permission to read the incoming number.",

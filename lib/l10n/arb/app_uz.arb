@@ -418,6 +418,7 @@
   "methodCard": "Bank kartasi",
   "methodOnline": "Online to'lov",
   "methodBankTransfer": "Bank o'tkazmasi",
+  "shiftNonCash": "Naqdsiz: {list}",
   "methodOther": "Boshqa",
   "callWatchTitle": "Qo'ng'iroq bo'yicha mehmonni aniqlash",
   "callWatchBody": "Mehmon qo'ng'iroq qilganda uning ismi va xonasi kompyuter ekranida ko'rinadi. Buning uchun qurilmadan qo'ng'iroq raqamini o'qishga ruxsat kerak.",

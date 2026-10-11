@@ -847,6 +847,13 @@ class _ClosedShiftRow extends StatelessWidget {
         ? c.success
         : (delta < 0 ? c.danger : c.warning);
     final now = DateTime.now();
+    // Kanonik usul kaliti -> nom (karta / online / o'tkazma / boshqa)
+    String methodName(String key) => switch (key) {
+      'card' => l10n.methodCard,
+      'online' => l10n.methodOnline,
+      'bank_transfer' => l10n.methodBankTransfer,
+      _ => l10n.methodOther,
+    };
 
     return IntrinsicHeight(
       child: Row(
@@ -917,6 +924,28 @@ class _ClosedShiftRow extends StatelessWidget {
                                 color: c.warning,
                                 fontWeight: FontWeight.w600,
                               ),
+                            ),
+                          ),
+                        // Naqdsiz to'lovlar — shu smenada qabul qilingan
+                        // (kassaga kirmaydi, smenadan smenaga o'tmaydi).
+                        // Yangi smenada summa bo'lmasa qator umuman chiqmaydi.
+                        if (session.nonCashMethods.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 3),
+                            child: Text(
+                              l10n.shiftNonCash(
+                                session.nonCashMethods
+                                    .map(
+                                      (m) =>
+                                          '${methodName(m.key)} ${formatMoney(m.total)}',
+                                    )
+                                    .join(' · '),
+                              ),
+                              style: context.textStyles.labelSmall!.copyWith(
+                                color: c.textMuted,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                       ],

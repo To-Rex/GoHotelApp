@@ -1797,6 +1797,12 @@ abstract class S {
   /// **'Bank o\'tkazmasi'**
   String get methodBankTransfer;
 
+  /// No description provided for @shiftNonCash.
+  ///
+  /// In uz, this message translates to:
+  /// **'Naqdsiz: {list}'**
+  String shiftNonCash(Object list);
+
   /// No description provided for @methodOther.
   ///
   /// In uz, this message translates to:
