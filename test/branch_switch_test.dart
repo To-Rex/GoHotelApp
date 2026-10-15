@@ -16,6 +16,7 @@ import 'package:gohotels/core/storage/token_store.dart';
 import 'package:gohotels/features/auth/data/auth_repository.dart';
 import 'package:gohotels/features/auth/domain/staff_user.dart';
 import 'package:gohotels/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:gohotels/features/auth/presentation/widgets/branch_scope_label.dart';
 import 'package:gohotels/features/auth/presentation/widgets/branch_switch_sheet.dart';
 import 'package:gohotels/l10n/gen/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -294,5 +295,85 @@ void main() {
     expect(cubit.state.user!.branchId, 'b2');
     // Oyna yopildi
     expect(find.text('Filialni almashtirish'), findsNothing);
+  });
+
+  group('BranchScopeLabel — asosiy sahifada joriy filial', () {
+    Future<void> pumpLabel(WidgetTester tester, AuthCubit cubit) async {
+      await tester.pumpWidget(
+        BlocProvider.value(
+          value: cubit,
+          child: MaterialApp(
+            theme: AppTheme.light(),
+            locale: const Locale('uz'),
+            supportedLocales: S.supportedLocales,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            home: const Scaffold(
+              body: Align(
+                alignment: Alignment.topLeft,
+                child: BranchScopeLabel(),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+    }
+
+    testWidgets('admin: filial ko\'rinadi, bosilganda almashtirish oynasi ochiladi', (
+      tester,
+    ) async {
+      final repo = _FakeAuthRepo();
+      late AuthCubit cubit;
+      await tester.runAsync(() async {
+        cubit = await _signedIn(repo, _admin());
+      });
+      await pumpLabel(tester, cubit);
+      expect(find.text('Markaz'), findsOneWidget);
+
+      await tester.tap(find.text('Markaz'));
+      await tester.pumpAndSettle();
+      expect(find.text('Filialni almashtirish'), findsOneWidget);
+      expect(find.text('Chilonzor'), findsOneWidget);
+    });
+
+    testWidgets('xodim: filial ko\'rinadi, bosilsa hech narsa ochilmaydi', (tester) async {
+      final repo = _FakeAuthRepo();
+      late AuthCubit cubit;
+      final employee = StaffUser(
+        id: 'u2',
+        userType: 'EMPLOYEE',
+        username: 'farrosh',
+        firstName: 'D',
+        lastName: 'K',
+        permissions: const [],
+        hotelId: 'h1',
+        branchId: 'b1',
+        branchName: 'Markaz',
+      );
+      await tester.runAsync(() async {
+        cubit = await _signedIn(repo, employee);
+      });
+      await pumpLabel(tester, cubit);
+      expect(find.text('Markaz'), findsOneWidget);
+
+      await tester.tap(find.text('Markaz'));
+      await tester.pumpAndSettle();
+      expect(find.text('Filialni almashtirish'), findsNothing);
+    });
+
+    testWidgets('filial nomi bo\'lmasa qator umuman chiqmaydi', (tester) async {
+      final repo = _FakeAuthRepo();
+      late AuthCubit cubit;
+      await tester.runAsync(() async {
+        cubit = await _signedIn(repo, _admin(branchName: ''));
+      });
+      await pumpLabel(tester, cubit);
+      expect(tester.getSize(find.byType(BranchScopeLabel)), Size.zero);
+    });
   });
 }

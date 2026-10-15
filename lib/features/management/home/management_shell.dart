@@ -11,6 +11,7 @@ import '../../../core/widgets/ticker_indexed_stack.dart';
 import '../../../l10n/gen/app_localizations.dart';
 import '../../auth/domain/staff_user.dart';
 import '../../auth/presentation/cubit/auth_cubit.dart';
+import '../../auth/presentation/widgets/branch_scope_label.dart';
 import '../../chat/presentation/cubit/chat_cubit.dart';
 import '../../chat/presentation/pages/chat_page.dart';
 import '../../notifications/presentation/cubit/notifications_cubit.dart';
@@ -179,6 +180,9 @@ class _ManagementShellState extends State<ManagementShell>
               style: context.textStyles.headlineSmall,
               overflow: TextOverflow.ellipsis,
             ),
+            // Qaysi filial — admin uchun bosiladi (almashtirish), boshqalar
+            // uchun faqat ko'rsatkich
+            const BranchScopeLabel(),
           ],
         );
       case 1:

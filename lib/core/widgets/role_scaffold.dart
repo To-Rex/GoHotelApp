@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../app/di.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';
+import '../../features/auth/presentation/widgets/branch_scope_label.dart';
 import '../../features/chat/presentation/cubit/chat_cubit.dart';
 import '../../features/chat/presentation/pages/chat_page.dart';
 import '../../features/notifications/presentation/cubit/notifications_cubit.dart';
@@ -72,7 +73,15 @@ class _RoleScaffoldState extends State<RoleScaffold> {
       case 2:
         return Text(l10n.profileTitle, style: context.textStyles.headlineSmall);
       default:
-        return Text(label, style: context.textStyles.headlineSmall);
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(label, style: context.textStyles.headlineSmall),
+            // Joriy filial ko'rsatkichi (web'dagi navbar kabi)
+            const BranchScopeLabel(),
+          ],
+        );
     }
   }
 
