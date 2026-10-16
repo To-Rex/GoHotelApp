@@ -1334,6 +1334,22 @@ class SRu extends S {
   String get shiftForceClose => 'Закрыть принудительно';
 
   @override
+  String get shiftApprovePending => 'Касса ожидает подтверждения';
+
+  @override
+  String get shiftApproveBtn => 'Подтвердить кассу';
+
+  @override
+  String get shiftApproveTitle => 'Подтвердить кассу';
+
+  @override
+  String get shiftApproveConfirm =>
+      'После подтверждения сессия закроется и (если сотрудник продолжает работать) новая касса откроется с 0.';
+
+  @override
+  String get shiftApproveDone => 'Касса подтверждена';
+
+  @override
   String shiftForceCloseBody(String name) {
     return 'Смена $name будет закрыта. Без подсчитанной суммы она закроется по ожидаемой кассе.';
   }

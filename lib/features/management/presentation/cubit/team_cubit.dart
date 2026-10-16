@@ -307,6 +307,12 @@ class TeamCubit extends Cubit<TeamState> with SafeEmit<TeamState> {
     await loadSegment(TeamSegment.shifts, silent: true);
   }
 
+  /// Tasdiq rejimida topshirilgan kassani tasdiqlash (admin/menejer).
+  Future<void> approveHandover(String sessionId) async {
+    await _repository.approveShift(sessionId);
+    await loadSegment(TeamSegment.shifts, silent: true);
+  }
+
   Future<void> assignTask(String taskId, String userId) async {
     final updated = await _repository.assignTask(taskId, userId);
     _replaceTask(updated);

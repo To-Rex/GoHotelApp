@@ -49,6 +49,7 @@ class ShiftSession extends Equatable {
     this.closedByName,
     this.methods = const [],
     this.nonCashIncome = 0,
+    this.pendingApproval,
   });
 
   final String id;
@@ -74,6 +75,13 @@ class ShiftSession extends Equatable {
 
   /// Naqd bo'lmagan turlarda jami qabul qilingan summa.
   final double nonCashIncome;
+
+  /// Tasdiq rejimida topshirilgan sessiya kutayotgani:
+  /// "close_cash" (kassa topshirildi) | "end_shift" (smena tugallandi).
+  /// Faqat admin/menejer tasdiqlagach sessiya yopiladi.
+  final String? pendingApproval;
+
+  bool get isPendingApproval => pendingApproval != null;
 
   bool get isOpen => status == 'ACTIVE' || status == 'PENDING_HANDOVER';
   bool get isPendingHandover => status == 'PENDING_HANDOVER';
@@ -133,6 +141,7 @@ class ShiftSession extends Equatable {
         .map(ShiftMethodRow.fromJson)
         .toList(),
     nonCashIncome: (json['non_cash_income'] as num?)?.toDouble() ?? 0,
+    pendingApproval: json['pending_approval'] as String?,
   );
 
   @override

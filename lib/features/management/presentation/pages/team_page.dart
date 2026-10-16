@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/extensions/context_x.dart';
 import '../../../../core/widgets/app_avatar.dart';
 import '../../../../core/widgets/app_card.dart';
+import '../../../../core/widgets/confirm_sheet.dart';
 import '../../../../core/widgets/empty_state.dart';
 import '../../../../core/widgets/error_state.dart';
 import '../../../../core/widgets/loading_state.dart';
@@ -508,6 +509,29 @@ class _ShiftsView extends StatelessWidget {
   final TeamState state;
   final ManagementAccess access;
 
+  /// Tasdiq rejimi: topshirilgan kassani tasdiqlash (admin/menejer).
+  /// Tasdiqlangach sessiya yopiladi va (kassir davom etsa) yangi kassa
+  /// 0 so'mdan ochiladi.
+  Future<void> _approve(BuildContext context, ShiftSession s) async {
+    final l10n = context.l10n;
+    final ok = await showConfirmSheet(
+      context,
+      title: l10n.shiftApproveTitle,
+      body: l10n.shiftApproveConfirm,
+      confirmLabel: l10n.shiftApproveBtn,
+      icon: Icons.verified_user_rounded,
+    );
+    if (!ok || !context.mounted) return;
+    try {
+      await context.read<TeamCubit>().approveHandover(s.id);
+      if (context.mounted) context.showSnack(l10n.shiftApproveDone);
+    } catch (e) {
+      if (context.mounted) {
+        context.showSnack(friendlyError(context, e), isError: true);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -557,6 +581,7 @@ class _ShiftsView extends StatelessWidget {
                     session: s,
                     canForceClose: access.canForceClose,
                     onForceClose: () => showForceCloseSheet(context, s),
+                    onApprove: () => _approve(context, s),
                     expectedCash: state.expectedCashOf(s.id),
                   ),
               ],
@@ -603,12 +628,16 @@ class _OpenShiftCard extends StatelessWidget {
     required this.session,
     required this.canForceClose,
     required this.onForceClose,
+    required this.onApprove,
     this.expectedCash,
   });
 
   final ShiftSession session;
   final bool canForceClose;
   final VoidCallback onForceClose;
+
+  /// Tasdiq rejimida topshirilgan kassani tasdiqlash (admin/menejer)
+  final VoidCallback onApprove;
 
   /// Kassada hozir bo'lishi kerak bo'lgan summa (faqat nazorat qiluvchiga).
   final double? expectedCash;
@@ -794,6 +823,52 @@ class _OpenShiftCard extends StatelessWidget {
                                 ),
                               ),
                             ],
+                          ),
+                        ),
+                      ],
+                      // Tasdiq rejimi: topshirilgan kassa admin/menejer
+                      // tasdig'ini kutmoqda
+                      if (session.isPendingApproval) ...[
+                        const SizedBox(height: 12),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.hourglass_top_rounded,
+                              size: 15,
+                              color: c.warning,
+                            ),
+                            const SizedBox(width: 6),
+                            Expanded(
+                              child: Text(
+                                l10n.shiftApprovePending,
+                                style: context.textStyles.labelSmall!.copyWith(
+                                  color: c.warning,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                      if (canForceClose && session.isPendingApproval) ...[
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: double.infinity,
+                          child: TextButton.icon(
+                            onPressed: onApprove,
+                            style: TextButton.styleFrom(
+                              foregroundColor: c.success,
+                              backgroundColor: c.successSoft,
+                              minimumSize: const Size.fromHeight(46),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                            ),
+                            icon: const Icon(
+                              CupertinoIcons.checkmark_seal_fill,
+                              size: 17,
+                            ),
+                            label: Text(l10n.shiftApproveBtn),
                           ),
                         ),
                       ],

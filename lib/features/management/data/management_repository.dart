@@ -271,6 +271,13 @@ class ManagementRepository {
     );
   }
 
+  /// Tasdiq rejimida topshirilgan kassani TASDIQLASH (admin/menejer) —
+  /// tasdiqlangach sessiya yopiladi va (kassir davom etsa) yangi kassa
+  /// 0 so'mdan ochiladi.
+  Future<void> approveShift(String sessionId) async {
+    await _api.post<dynamic>('/shifts/$sessionId/approve', data: {});
+  }
+
   // --- Murojaatlar --------------------------------------------------------
 
   Future<(List<GuestFeedback>, int)> getFeedback({

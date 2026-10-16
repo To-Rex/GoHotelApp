@@ -1329,6 +1329,22 @@ class SUz extends S {
   String get shiftForceClose => 'Majburiy yopish';
 
   @override
+  String get shiftApprovePending => 'Kassa tasdiq kutmoqda';
+
+  @override
+  String get shiftApproveBtn => 'Kassani tasdiqlash';
+
+  @override
+  String get shiftApproveTitle => 'Kassani tasdiqlash';
+
+  @override
+  String get shiftApproveConfirm =>
+      'Tasdiqlangach sessiya yopiladi va (xodim ishda davom etsa) yangi kassa 0 so\'mdan ochiladi.';
+
+  @override
+  String get shiftApproveDone => 'Kassa tasdiqlandi';
+
+  @override
   String shiftForceCloseBody(String name) {
     return '$name smenasi yopiladi. Sanalgan summa kiritilmasa kutilgan summa bo\'yicha yopiladi.';
   }

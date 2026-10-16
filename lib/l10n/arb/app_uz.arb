@@ -693,6 +693,11 @@
   "shiftCounted": "Sanalgan",
   "shiftDiff": "Farq",
   "shiftForceClose": "Majburiy yopish",
+  "shiftApprovePending": "Kassa tasdiq kutmoqda",
+  "shiftApproveBtn": "Kassani tasdiqlash",
+  "shiftApproveTitle": "Kassani tasdiqlash",
+  "shiftApproveConfirm": "Tasdiqlangach sessiya yopiladi va (xodim ishda davom etsa) yangi kassa 0 so'mdan ochiladi.",
+  "shiftApproveDone": "Kassa tasdiqlandi",
   "shiftForceCloseBody": "{name} smenasi yopiladi. Sanalgan summa kiritilmasa kutilgan summa bo'yicha yopiladi.",
   "@shiftForceCloseBody": {
     "placeholders": {

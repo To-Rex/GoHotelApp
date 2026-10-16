@@ -1336,6 +1336,22 @@ class SEn extends S {
   String get shiftForceClose => 'Force close';
 
   @override
+  String get shiftApprovePending => 'Drawer awaiting approval';
+
+  @override
+  String get shiftApproveBtn => 'Approve handover';
+
+  @override
+  String get shiftApproveTitle => 'Approve the handover';
+
+  @override
+  String get shiftApproveConfirm =>
+      'After approval the session closes and (if the employee keeps working) a new drawer opens at 0.';
+
+  @override
+  String get shiftApproveDone => 'Handover approved';
+
+  @override
   String shiftForceCloseBody(String name) {
     return '$name\'s shift will be closed. Without a counted amount it closes at the expected cash.';
   }

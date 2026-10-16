@@ -2511,6 +2511,36 @@ abstract class S {
   /// **'Majburiy yopish'**
   String get shiftForceClose;
 
+  /// No description provided for @shiftApprovePending.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kassa tasdiq kutmoqda'**
+  String get shiftApprovePending;
+
+  /// No description provided for @shiftApproveBtn.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kassani tasdiqlash'**
+  String get shiftApproveBtn;
+
+  /// No description provided for @shiftApproveTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kassani tasdiqlash'**
+  String get shiftApproveTitle;
+
+  /// No description provided for @shiftApproveConfirm.
+  ///
+  /// In uz, this message translates to:
+  /// **'Tasdiqlangach sessiya yopiladi va (xodim ishda davom etsa) yangi kassa 0 so\'mdan ochiladi.'**
+  String get shiftApproveConfirm;
+
+  /// No description provided for @shiftApproveDone.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kassa tasdiqlandi'**
+  String get shiftApproveDone;
+
   /// No description provided for @shiftForceCloseBody.
   ///
   /// In uz, this message translates to:
