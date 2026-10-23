@@ -787,4 +787,40 @@ void main() {
     expect(find.text('open'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('Smenalar: topshirishni kutish holati aniq ko\'rinadi', (
+    tester,
+  ) async {
+    _phone(tester);
+    final l10n = lookupS(const Locale('uz'));
+    final repo = _ApprovalRepo();
+    final cubit = TeamCubit(repo);
+    addTearDown(cubit.close);
+    await cubit.load();
+
+    await tester.pumpWidget(
+      _host(
+        BlocProvider.value(
+          value: cubit,
+          child: const TeamPage(access: _access),
+        ),
+        const Locale('uz'),
+      ),
+    );
+    await tester.pumpAndSettle();
+    cubit.selectSegment(TeamSegment.shifts);
+    await tester.pumpAndSettle();
+
+    expect(find.text(l10n.shiftPendingHandover), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text(l10n.shiftApproveBtn),
+      200,
+      scrollable: find.byType(Scrollable).last,
+    );
+    await tester.pumpAndSettle();
+    expect(find.text(l10n.shiftApprovePending), findsOneWidget);
+    expect(find.text(l10n.shiftApproveConfirm), findsOneWidget);
+    expect(find.text(l10n.shiftApproveBtn), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 }

@@ -680,32 +680,44 @@ class _OpenShiftCard extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 2),
                                 // Holat — ism ostida: uzun yozuv ismni siqmaydi
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 7,
-                                      height: 7,
-                                      decoration: BoxDecoration(
-                                        color: accent,
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 6),
-                                    Flexible(
-                                      child: Text(
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 3,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: pending
+                                        ? c.warningSoft
+                                        : c.successSoft,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
                                         pending
-                                            ? l10n.shiftPendingHandover
-                                            : l10n.shiftActive,
-                                        style: context.textStyles.bodySmall!
-                                            .copyWith(
-                                              color: accent,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
+                                            ? Icons.hourglass_top_rounded
+                                            : Icons.circle,
+                                        size: pending ? 12 : 7,
+                                        color: accent,
                                       ),
-                                    ),
-                                  ],
+                                      const SizedBox(width: 4),
+                                      Flexible(
+                                        child: Text(
+                                          pending
+                                              ? l10n.shiftPendingHandover
+                                              : l10n.shiftActive,
+                                          style: context.textStyles.bodySmall!
+                                              .copyWith(
+                                                color: accent,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -827,27 +839,62 @@ class _OpenShiftCard extends StatelessWidget {
                         ),
                       ],
                       // Tasdiq rejimi: topshirilgan kassa admin/menejer
-                      // tasdig'ini kutmoqda
+                      // tasdig'ini kutmoqda. Holat alohida ajralib turadi:
+                      // nima bo'ldi va keyingi qadam nima — bir qarashda.
                       if (session.isPendingApproval) ...[
                         const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.hourglass_top_rounded,
-                              size: 15,
-                              color: c.warning,
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(12, 11, 12, 11),
+                          decoration: BoxDecoration(
+                            color: c.warningSoft,
+                            borderRadius: BorderRadius.circular(14),
+                            border: Border.all(
+                              color: c.warning.withValues(alpha: 0.22),
                             ),
-                            const SizedBox(width: 6),
-                            Expanded(
-                              child: Text(
-                                l10n.shiftApprovePending,
-                                style: context.textStyles.labelSmall!.copyWith(
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 32,
+                                height: 32,
+                                decoration: BoxDecoration(
+                                  color: c.warning.withValues(alpha: 0.14),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.hourglass_top_rounded,
+                                  size: 17,
                                   color: c.warning,
-                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
-                            ),
-                          ],
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      l10n.shiftApprovePending,
+                                      style: context.textStyles.titleSmall!
+                                          .copyWith(
+                                            color: c.warning,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                    ),
+                                    const SizedBox(height: 3),
+                                    Text(
+                                      l10n.shiftApproveConfirm,
+                                      style: context.textStyles.bodySmall!
+                                          .copyWith(
+                                            color: c.textMuted,
+                                            height: 1.35,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                       if (canForceClose && session.isPendingApproval) ...[

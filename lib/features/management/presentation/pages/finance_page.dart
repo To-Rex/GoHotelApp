@@ -765,15 +765,32 @@ class _DrawerRow extends StatelessWidget {
             ),
           if (drawer.isPendingHandover)
             Container(
-              margin: const EdgeInsets.only(top: 5),
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              margin: const EdgeInsets.only(top: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
               decoration: BoxDecoration(
                 color: c.warningSoft,
                 borderRadius: BorderRadius.circular(100),
+                border: Border.all(
+                  color: c.warning.withValues(alpha: 0.22),
+                ),
               ),
-              child: Text(
-                l10n.shiftPendingHandover,
-                style: context.textStyles.labelSmall!.copyWith(color: c.warning),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.hourglass_top_rounded,
+                    size: 12,
+                    color: c.warning,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    l10n.shiftPendingHandover,
+                    style: context.textStyles.labelSmall!.copyWith(
+                      color: c.warning,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
               ),
             ),
           const SizedBox(height: 6),
