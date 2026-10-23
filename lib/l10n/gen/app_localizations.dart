@@ -2541,6 +2541,36 @@ abstract class S {
   /// **'Kassa tasdiqlandi'**
   String get shiftApproveDone;
 
+  /// No description provided for @handoverBannerOne.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kassa topshirildi: {name} · {amount}'**
+  String handoverBannerOne(String name, String amount);
+
+  /// No description provided for @handoverBannerMany.
+  ///
+  /// In uz, this message translates to:
+  /// **'{count} ta kassa topshirildi · {amount}'**
+  String handoverBannerMany(int count, String amount);
+
+  /// No description provided for @handoverSheetTitle.
+  ///
+  /// In uz, this message translates to:
+  /// **'Kassani qabul qilish'**
+  String get handoverSheetTitle;
+
+  /// No description provided for @handoverSheetHint.
+  ///
+  /// In uz, this message translates to:
+  /// **'Avval naqd pulni sanab oling. Tasdiqlagach sessiya yopiladi.'**
+  String get handoverSheetHint;
+
+  /// No description provided for @handoverLastDone.
+  ///
+  /// In uz, this message translates to:
+  /// **'Barcha kassalar tasdiqlandi'**
+  String get handoverLastDone;
+
   /// No description provided for @shiftForceCloseBody.
   ///
   /// In uz, this message translates to:

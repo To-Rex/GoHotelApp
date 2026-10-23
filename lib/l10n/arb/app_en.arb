@@ -549,6 +549,31 @@
   "shiftApproveTitle": "Approve the handover",
   "shiftApproveConfirm": "After approval the session closes and (if the employee keeps working) a new drawer opens at 0.",
   "shiftApproveDone": "Handover approved",
+  "handoverBannerOne": "Drawer handed over: {name} · {amount}",
+  "@handoverBannerOne": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "handoverBannerMany": "{count} drawers handed over · {amount}",
+  "@handoverBannerMany": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "handoverSheetTitle": "Receive cash drawer",
+  "handoverSheetHint": "Count the cash first. The session closes once you approve.",
+  "handoverLastDone": "All drawers approved",
   "shiftForceCloseBody": "{name}'s shift will be closed. Without a counted amount it closes at the expected cash.",
   "shiftCountedCashLabel": "Counted cash (optional)",
   "shiftHandOver": "Hand the cash over to the next employee",

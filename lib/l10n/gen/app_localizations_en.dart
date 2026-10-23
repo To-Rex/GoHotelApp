@@ -1352,6 +1352,26 @@ class SEn extends S {
   String get shiftApproveDone => 'Handover approved';
 
   @override
+  String handoverBannerOne(String name, String amount) {
+    return 'Drawer handed over: $name · $amount';
+  }
+
+  @override
+  String handoverBannerMany(int count, String amount) {
+    return '$count drawers handed over · $amount';
+  }
+
+  @override
+  String get handoverSheetTitle => 'Receive cash drawer';
+
+  @override
+  String get handoverSheetHint =>
+      'Count the cash first. The session closes once you approve.';
+
+  @override
+  String get handoverLastDone => 'All drawers approved';
+
+  @override
   String shiftForceCloseBody(String name) {
     return '$name\'s shift will be closed. Without a counted amount it closes at the expected cash.';
   }

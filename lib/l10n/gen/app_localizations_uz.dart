@@ -1345,6 +1345,26 @@ class SUz extends S {
   String get shiftApproveDone => 'Kassa tasdiqlandi';
 
   @override
+  String handoverBannerOne(String name, String amount) {
+    return 'Kassa topshirildi: $name · $amount';
+  }
+
+  @override
+  String handoverBannerMany(int count, String amount) {
+    return '$count ta kassa topshirildi · $amount';
+  }
+
+  @override
+  String get handoverSheetTitle => 'Kassani qabul qilish';
+
+  @override
+  String get handoverSheetHint =>
+      'Avval naqd pulni sanab oling. Tasdiqlagach sessiya yopiladi.';
+
+  @override
+  String get handoverLastDone => 'Barcha kassalar tasdiqlandi';
+
+  @override
   String shiftForceCloseBody(String name) {
     return '$name smenasi yopiladi. Sanalgan summa kiritilmasa kutilgan summa bo\'yicha yopiladi.';
   }

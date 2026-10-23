@@ -1350,6 +1350,26 @@ class SRu extends S {
   String get shiftApproveDone => 'Касса подтверждена';
 
   @override
+  String handoverBannerOne(String name, String amount) {
+    return 'Касса передана: $name · $amount';
+  }
+
+  @override
+  String handoverBannerMany(int count, String amount) {
+    return 'Передано касс: $count · $amount';
+  }
+
+  @override
+  String get handoverSheetTitle => 'Приём кассы';
+
+  @override
+  String get handoverSheetHint =>
+      'Сначала пересчитайте наличные. После подтверждения сессия закроется.';
+
+  @override
+  String get handoverLastDone => 'Все кассы подтверждены';
+
+  @override
   String shiftForceCloseBody(String name) {
     return 'Смена $name будет закрыта. Без подсчитанной суммы она закроется по ожидаемой кассе.';
   }

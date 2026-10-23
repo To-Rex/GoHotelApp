@@ -27,6 +27,7 @@ import '../presentation/pages/pulse_page.dart';
 import '../presentation/pages/room_map_page.dart';
 import '../presentation/pages/team_page.dart';
 import '../presentation/widgets/broadcast_sheet.dart';
+import '../presentation/widgets/shift_approval_sheet.dart';
 
 /// Boshqaruv qobig'i — admin va menejer uchun bitta shell, ruxsatlar farqli.
 ///
@@ -49,6 +50,12 @@ class ManagementShell extends StatefulWidget {
 class _ManagementShellState extends State<ManagementShell>
     with WidgetsBindingObserver {
   int _index = 0;
+
+  /// Kassa tasdig'i oynasi ilova ochilganda bir marta o'zi chiqadi.
+  /// Yopilsa, bosh sahifadagi eslatma qoladi — keyingi pollarda qayta
+  /// bezovta qilmaydi.
+  bool _handoverPromptShown = false;
+  bool _handoverPromptScheduled = false;
 
   late final ManagementAccess _access = ManagementAccess.of(widget.user);
   late final PulseCubit _pulse;
@@ -79,6 +86,11 @@ class _ManagementShellState extends State<ManagementShell>
       ..startPolling();
     // Avatar appbar'da turadi — surat darhol kerak
     _profile = ProfileCubit(getIt())..load(widget.user.id);
+    // Ma'lumot birinchi kadrdan oldin kelib qolsa ham eslatma o'tkazib
+    // yuborilmasin; odatda holatni BlocListener ushlaydi.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _maybeShowHandoverPrompt(context, _team.state);
+    });
   }
 
   @override
@@ -136,11 +148,36 @@ class _ManagementShellState extends State<ManagementShell>
         _chat.load(silent: true);
     }
     _notifications.load(silent: true);
+    if (index == 0) {
+      _maybeShowHandoverPrompt(context, _team.state);
+    }
   }
 
   void _openTeam(TeamSegment segment) {
     _team.selectSegment(segment);
     _onTabSelected(2);
+  }
+
+  /// Admin/menejer ilovaga kirishi bilan topshirilgan kassalar bo'lsa,
+  /// qabul qilish oynasi bir marta avtomatik ochiladi. Keyin ham bosh
+  /// sahifadagi doimiy eslatma orqali qayta ochish mumkin.
+  void _maybeShowHandoverPrompt(BuildContext context, TeamState state) {
+    if (_handoverPromptShown || _handoverPromptScheduled) return;
+    if (_index != 0 || !_access.canForceClose) return;
+    if (!state.openShifts.any((s) => s.isPendingApproval)) return;
+    _handoverPromptScheduled = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _handoverPromptScheduled = false;
+      if (!mounted || _handoverPromptShown) return;
+      if (_index != 0 || !_access.canForceClose) return;
+      if (!_team.state.openShifts.any((s) => s.isPendingApproval)) return;
+      _handoverPromptShown = true;
+      showShiftApprovalSheet(
+        context,
+        team: _team,
+        onApproved: () => _pulse.load(silent: true),
+      );
+    });
   }
 
   Future<void> _openProfile(BuildContext context) {
@@ -272,18 +309,22 @@ class _ManagementShellState extends State<ManagementShell>
               ],
             ),
             // Ko'rinmas tablardagi animatsiya uxlaydi
-            body: TickerIndexedStack(
-              index: _index,
-              children: [
-                PulsePage(
-                  access: _access,
-                  onOpenRooms: () => _onTabSelected(1),
-                  onOpenTeam: _openTeam,
-                ),
-                RoomMapPage(access: _access),
-                TeamPage(access: _access),
-                const ChatPage(),
-              ],
+            body: BlocListener<TeamCubit, TeamState>(
+              listener: (context, state) =>
+                  _maybeShowHandoverPrompt(context, state),
+              child: TickerIndexedStack(
+                index: _index,
+                children: [
+                  PulsePage(
+                    access: _access,
+                    onOpenRooms: () => _onTabSelected(1),
+                    onOpenTeam: _openTeam,
+                  ),
+                  RoomMapPage(access: _access),
+                  TeamPage(access: _access),
+                  const ChatPage(),
+                ],
+              ),
             ),
             bottomNavigationBar: AppNavBar(
               selectedIndex: _index,

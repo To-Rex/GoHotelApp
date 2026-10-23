@@ -19,6 +19,7 @@ import '../widgets/income_sparkline.dart';
 import '../widgets/live_dot.dart';
 import '../widgets/occupancy_ring.dart';
 import '../widgets/segmented_tabs.dart';
+import '../widgets/shift_approval_sheet.dart';
 import '../widgets/stagger_in.dart';
 import '../../domain/finance_report.dart';
 import 'feedback_page.dart';
@@ -66,6 +67,29 @@ class PulsePage extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             padding: EdgeInsets.fromLTRB(20, barPadding.top + 8, 20, 130),
             children: [
+              BlocBuilder<TeamCubit, TeamState>(
+                builder: (context, team) {
+                  if (!access.canForceClose) {
+                    return const SizedBox.shrink();
+                  }
+                  final pending = team.openShifts
+                      .where((s) => s.isPendingApproval)
+                      .toList();
+                  if (pending.isEmpty) return const SizedBox.shrink();
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: PendingHandoverCard(
+                      sessions: pending,
+                      expectedCashOf: team.expectedCashOf,
+                      onOpen: () => showShiftApprovalSheet(
+                        context,
+                        team: context.read<TeamCubit>(),
+                        onApproved: () => cubit.load(silent: true),
+                      ),
+                    ),
+                  );
+                },
+              ),
               if (state.failedSections > 0) ...[
                 _WarningStrip(count: state.failedSections),
                 const SizedBox(height: 12),

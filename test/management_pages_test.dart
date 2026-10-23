@@ -23,6 +23,7 @@ import 'package:gohotels/features/management/presentation/pages/room_map_page.da
 import 'package:gohotels/features/management/presentation/pages/team_page.dart';
 import 'package:gohotels/features/management/presentation/widgets/broadcast_sheet.dart';
 import 'package:gohotels/features/management/presentation/widgets/force_close_sheet.dart';
+import 'package:gohotels/features/management/presentation/widgets/shift_approval_sheet.dart';
 import 'package:gohotels/features/management/presentation/widgets/task_create_sheet.dart';
 import 'package:gohotels/l10n/gen/app_localizations.dart';
 
@@ -290,6 +291,55 @@ class _CashRepo extends _FakeRepo {
   }
 }
 
+
+/// Tasdiq rejimida topshirilgan kassa: bosh sahifa eslatmasi va qabul
+/// qilish oynasini tekshirish uchun.
+class _ApprovalRepo extends _CashRepo {
+  final approved = <String>[];
+  final pending = <ShiftSession>[
+    ShiftSession(
+      id: 'p1',
+      userId: 'u1',
+      userName: 'Sardor Rustamov',
+      status: 'PENDING_HANDOVER',
+      openingCash: 1000000,
+      expectedCash: 1800000,
+      countedCash: 1750000,
+      forceClosed: false,
+      pendingApproval: 'close_cash',
+      startedAt: _now.subtract(const Duration(hours: 6)),
+    ),
+  ];
+
+  @override
+  Future<List<ShiftSession>> getShiftHistory({int limit = 50}) async =>
+      List.of(pending);
+
+  @override
+  Future<CashOverview> getCashOverview() async => const CashOverview(
+    mode: 'cash',
+    drawers: [
+      CashDrawer(
+        id: 'p1',
+        status: 'PENDING_HANDOVER',
+        openingCash: 1000000,
+        paymentsCash: 800000,
+        shopCash: 0,
+        expensesCash: 0,
+        expectedCash: 1800000,
+        userName: 'Sardor Rustamov',
+        countedCash: 1750000,
+      ),
+    ],
+    totalExpected: 1800000,
+  );
+
+  @override
+  Future<void> approveShift(String sessionId) async {
+    approved.add(sessionId);
+    pending.removeWhere((s) => s.id == sessionId);
+  }
+}
 
 /// Ixtiyoriy skrinshotlar: `GOHOTEL_SHOTS=<papka>` muhit o'zgaruvchisi va
 /// `--update-goldens` bilan ishga tushirilsa, har bosqich PNG bo'lib
@@ -661,4 +711,80 @@ void main() {
       });
     });
   }
+
+  testWidgets('Kassa eslatmasi summani ko\'rsatadi va oynani ochadi', (
+    tester,
+  ) async {
+    _phone(tester);
+    final l10n = lookupS(const Locale('uz'));
+    final session = _ApprovalRepo().pending.single;
+    var opened = false;
+
+    await tester.pumpWidget(
+      _host(
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: PendingHandoverCard(
+              sessions: [session],
+              expectedCashOf: (_) => 1800000,
+              onOpen: () => opened = true,
+            ),
+          ),
+        ),
+        const Locale('uz'),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text(l10n.shiftApprovePending), findsOneWidget);
+    expect(find.textContaining('Sardor Rustamov'), findsOneWidget);
+    expect(find.textContaining('1 750 000'), findsOneWidget);
+    await tester.tap(find.text(l10n.shiftApproveBtn));
+    expect(opened, isTrue);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Qabul qilish oynasi kassani tasdiqlaydi va yopiladi', (
+    tester,
+  ) async {
+    _phone(tester);
+    final l10n = lookupS(const Locale('uz'));
+    final repo = _ApprovalRepo();
+    final cubit = TeamCubit(repo);
+    addTearDown(cubit.close);
+    await cubit.loadSegment(TeamSegment.shifts);
+    var approvedCallback = 0;
+
+    await tester.pumpWidget(
+      _host(
+        Builder(
+          builder: (context) => Center(
+            child: TextButton(
+              onPressed: () => showShiftApprovalSheet(
+                context,
+                team: cubit,
+                onApproved: () => approvedCallback++,
+              ),
+              child: const Text('open'),
+            ),
+          ),
+        ),
+        const Locale('uz'),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    expect(find.text(l10n.handoverSheetTitle), findsOneWidget);
+    expect(find.text('Sardor Rustamov'), findsWidgets);
+    await tester.tap(find.text(l10n.confirm));
+    await tester.pumpAndSettle();
+
+    expect(repo.approved, ['p1']);
+    expect(approvedCallback, 1);
+    expect(find.text(l10n.handoverSheetTitle), findsNothing);
+    expect(find.text('open'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 }

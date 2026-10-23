@@ -698,6 +698,31 @@
   "shiftApproveTitle": "Kassani tasdiqlash",
   "shiftApproveConfirm": "Tasdiqlangach sessiya yopiladi va (xodim ishda davom etsa) yangi kassa 0 so'mdan ochiladi.",
   "shiftApproveDone": "Kassa tasdiqlandi",
+  "handoverBannerOne": "Kassa topshirildi: {name} · {amount}",
+  "@handoverBannerOne": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "handoverBannerMany": "{count} ta kassa topshirildi · {amount}",
+  "@handoverBannerMany": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "handoverSheetTitle": "Kassani qabul qilish",
+  "handoverSheetHint": "Avval naqd pulni sanab oling. Tasdiqlagach sessiya yopiladi.",
+  "handoverLastDone": "Barcha kassalar tasdiqlandi",
   "shiftForceCloseBody": "{name} smenasi yopiladi. Sanalgan summa kiritilmasa kutilgan summa bo'yicha yopiladi.",
   "@shiftForceCloseBody": {
     "placeholders": {
