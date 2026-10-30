@@ -20,6 +20,7 @@ import '../widgets/live_dot.dart';
 import '../widgets/occupancy_ring.dart';
 import '../widgets/segmented_tabs.dart';
 import '../widgets/shift_approval_sheet.dart';
+import '../widgets/shift_cash_widgets.dart';
 import '../widgets/stagger_in.dart';
 import '../../domain/finance_report.dart';
 import 'feedback_page.dart';
@@ -396,6 +397,7 @@ class _FinanceCard extends StatelessWidget {
     final cubit = context.read<PulseCubit>();
     final finance = state.pulse.finance;
     final days = state.pulse.incomeDays;
+    final cash = state.pulse.cash;
 
     // Karta bosilsa — alohida "Moliya" sahifasi (shu davr bilan ochiladi)
     void openFinance() => FinancePage.open(
@@ -431,6 +433,13 @@ class _FinanceCard extends StatelessWidget {
               Icon(CupertinoIcons.chevron_right, size: 15, color: c.brand),
             ],
           ),
+          // Kassada hozir — davrga bog'liq emas, shuning uchun davr
+          // tanlagichidan yuqorida. Faqat kassa smenalari yuritilsa (oddiy
+          // rejimda kassa yo'q) va ruxsat bo'lsa (aks holda so'ralmaydi)
+          if (cash != null && cash.isCashMode) ...[
+            const SizedBox(height: 12),
+            CashNowStrip(cash: cash),
+          ],
           const SizedBox(height: 12),
           SegmentedTabs(
             items: [

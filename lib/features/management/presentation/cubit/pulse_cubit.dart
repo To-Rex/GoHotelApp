@@ -157,6 +157,10 @@ class PulseCubit extends Cubit<PulseState> with SafeEmit<PulseState> {
         _repository.getIncomeDays(now),
         (p, v) => p.copyWith(incomeDays: v),
       ),
+      // Kassada hozir — server faqat admin yoki `shift.force_close` egasiga
+      // beradi; boshqalarda so'ralmaydi (aks holda 403 "yuklanmadi" bo'lardi)
+      if (access?.canForceClose ?? true)
+        part(_repository.getCashOverview(), (p, v) => p.copyWith(cash: v)),
       part(
         _repository.getOverdueRoomCount(),
         (p, v) => p.copyWith(overdueRooms: v),

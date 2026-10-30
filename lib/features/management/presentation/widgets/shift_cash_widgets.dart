@@ -5,10 +5,91 @@ import '../../../../core/extensions/context_x.dart';
 import '../../domain/finance_report.dart';
 import '../../domain/format.dart';
 import '../../domain/shift_handover.dart';
+import 'animated_counter.dart';
 import 'finance_widgets.dart';
 
 /// Gap ichidagi summa qatorga bo'linib ketmasin ("1 / 200 000").
 String _nb(String money) => money.replaceAll(' ', '\u00A0');
+
+/// Bosh sahifa \u2192 Moliya kartasi: kassada HOZIR qancha pul \u2014 bir qarashda,
+/// oddiy ko'rinishda. Batafsili (har kassa: kim, qachondan, qancha)
+/// "Moliya" sahifasida; manba ham, hisob ham bir xil
+/// (`/shifts/cash-overview`, smena topshirish bilan aynan bir hisob).
+class CashNowStrip extends StatelessWidget {
+  const CashNowStrip({super.key, required this.cash});
+
+  final CashOverview cash;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final c = context.colors;
+    return Container(
+      padding: const EdgeInsets.fromLTRB(12, 10, 14, 10),
+      decoration: BoxDecoration(
+        color: c.successSoft,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: c.success.withValues(alpha: 0.22)),
+      ),
+      child: Row(
+        children: [
+          CardIcon(
+            icon: CupertinoIcons.tray_full_fill,
+            color: c.success,
+            background: c.surface,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.cashNowTitle,
+                  style: context.textStyles.labelMedium!.copyWith(
+                    color: c.success,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Flexible(
+                      child: AnimatedCounter(
+                        value: cash.totalExpected,
+                        format: formatMoney,
+                        style: context.textStyles.titleLarge!.copyWith(
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 5),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 3),
+                      child: Text(
+                        l10n.currencySuffix,
+                        style: context.textStyles.bodySmall!.copyWith(color: c.textMuted),
+                      ),
+                    ),
+                  ],
+                ),
+                Text(
+                  cash.drawers.isEmpty
+                      ? l10n.cashNoOpen
+                      : l10n.cashDrawersCount(cash.activeCount, cash.pendingCount),
+                  style: context.textStyles.labelSmall!.copyWith(color: c.textMuted),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 /// Jamoa → Smenalar: kassada HOZIR qancha pul (ochiq smenalar kassasi) —
 /// vebdagi "Smenalar" sahifasi bilan bir xil manba (`/shifts/cash-overview`,

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 import '../../reception/bookings/domain/booking.dart';
+import 'finance_report.dart';
 import 'finance_summary.dart';
 import 'hk_task.dart';
 import 'room_tile.dart';
@@ -17,6 +18,7 @@ class HotelPulse extends Equatable {
     this.tasks,
     this.finance,
     this.incomeDays,
+    this.cash,
     this.overdueRooms = 0,
     this.newComplaints = 0,
     this.openFeedback = 0,
@@ -34,6 +36,11 @@ class HotelPulse extends Equatable {
   final List<HkTask>? tasks;
   final FinanceSummary? finance;
   final List<IncomeDay>? incomeDays;
+
+  /// Kassada HOZIR qancha pul (ochiq smenalar kassasi) — moliya
+  /// sahifasidagi "Kassada hozir" bilan bir manba (`/shifts/cash-overview`).
+  /// Ruxsat yo'q yoki hali yuklanmagan — `null`.
+  final CashOverview? cash;
 
   /// Chiqish vaqti o'tib ketgan xonalar.
   final int overdueRooms;
@@ -114,6 +121,7 @@ class HotelPulse extends Equatable {
     List<HkTask>? tasks,
     FinanceSummary? finance,
     List<IncomeDay>? incomeDays,
+    CashOverview? cash,
     int? overdueRooms,
     int? newComplaints,
     int? openFeedback,
@@ -130,6 +138,7 @@ class HotelPulse extends Equatable {
     tasks: tasks ?? this.tasks,
     finance: finance ?? this.finance,
     incomeDays: incomeDays ?? this.incomeDays,
+    cash: cash ?? this.cash,
     overdueRooms: overdueRooms ?? this.overdueRooms,
     newComplaints: newComplaints ?? this.newComplaints,
     openFeedback: openFeedback ?? this.openFeedback,
@@ -149,6 +158,7 @@ class HotelPulse extends Equatable {
     tasks,
     finance,
     incomeDays,
+    cash,
     overdueRooms,
     newComplaints,
     openFeedback,
