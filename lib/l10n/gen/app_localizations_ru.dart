@@ -1815,6 +1815,11 @@ class SRu extends S {
       'За поздний выезд и повреждения — добавляются к долгу по брони';
 
   @override
+  String financePenaltiesPaid(String amount) {
+    return 'в том числе оплачено $amount — входит в выручку';
+  }
+
+  @override
   String get staffRevenueTitle => 'Выручка по сотрудникам';
 
   @override

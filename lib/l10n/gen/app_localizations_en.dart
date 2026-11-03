@@ -1815,6 +1815,11 @@ class SEn extends S {
       'For late check-out and damage — added to the booking debt';
 
   @override
+  String financePenaltiesPaid(String amount) {
+    return 'including $amount paid — already in revenue';
+  }
+
+  @override
   String get staffRevenueTitle => 'Revenue by staff';
 
   @override

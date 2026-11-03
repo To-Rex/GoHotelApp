@@ -10,6 +10,7 @@ import 'package:gohotels/core/network/api_exception.dart';
 import 'package:gohotels/features/management/data/management_repository.dart';
 import 'package:gohotels/features/management/domain/finance_report.dart';
 import 'package:gohotels/features/management/domain/finance_summary.dart';
+import 'package:gohotels/features/management/domain/format.dart';
 import 'package:gohotels/features/management/domain/shift_session.dart';
 import 'package:gohotels/features/management/domain/staff_revenue.dart';
 import 'package:gohotels/features/management/presentation/cubit/finance_cubit.dart';
@@ -37,6 +38,7 @@ FinanceSummary _summary({double income = 4500000, double shop = 350000}) => Fina
   'shop_debt': 85000,
   'penalty_total': 200000,
   'penalty_count': 2,
+  'penalty_paid': 150000,
   'expense_categories': [
     {'name': 'Kommunal xizmatlar va internet to\'lovlari', 'total': 600000, 'count': 2},
     {'name': 'Tozalash vositalari', 'total': 380000, 'count': 5},
@@ -534,6 +536,45 @@ void main() {
         expect(tester.takeException(), isNull);
       });
     }
+
+    testWidgets('jarimalar: davrda to\'langani alohida qatorda', (tester) async {
+      tester.view.physicalSize = const Size(360 * 3, 740 * 3);
+      tester.view.devicePixelRatio = 3;
+      addTearDown(tester.view.reset);
+
+      final cubit = FinanceCubit(_Repo(), initial: FinanceRangeKind.week, clock: () => _now);
+      addTearDown(cubit.close);
+      await cubit.load();
+
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.light(),
+          locale: const Locale('uz'),
+          supportedLocales: S.supportedLocales,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          home: BlocProvider.value(value: cubit, child: const FinancePage()),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      final l10n = lookupS(const Locale('uz'));
+      await tester.scrollUntilVisible(
+        find.text(l10n.financePenalties),
+        200,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.pumpAndSettle();
+      // Yozilgan jarimalar (2 ta · 200 000) va davrda to'langani (150 000):
+      // to'langani tushum ichida — sof natijaga qo'shilmaydi, faqat ko'rsatiladi
+      expect(find.text(l10n.financePenaltiesValue(2, formatMoney(200000))), findsOneWidget);
+      expect(find.text(l10n.financePenaltiesPaid(formatMoney(150000))), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
   });
 }
 

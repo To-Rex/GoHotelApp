@@ -1811,6 +1811,11 @@ class SUz extends S {
       'Kech chiqish va buzilgan narsalar uchun yozilgan — bron qarziga qo\'shiladi';
 
   @override
+  String financePenaltiesPaid(String amount) {
+    return 'shu jumladan to\'langani $amount — tushum ichida';
+  }
+
+  @override
   String get staffRevenueTitle => 'Tushum — xodimlar bo\'yicha';
 
   @override

@@ -3338,6 +3338,12 @@ abstract class S {
   /// **'Kech chiqish va buzilgan narsalar uchun yozilgan — bron qarziga qo\'shiladi'**
   String get financePenaltiesHint;
 
+  /// No description provided for @financePenaltiesPaid.
+  ///
+  /// In uz, this message translates to:
+  /// **'shu jumladan to\'langani {amount} — tushum ichida'**
+  String financePenaltiesPaid(String amount);
+
   /// No description provided for @staffRevenueTitle.
   ///
   /// In uz, this message translates to:

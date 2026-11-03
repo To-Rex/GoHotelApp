@@ -1058,6 +1058,14 @@
     }
   },
   "financePenaltiesHint": "Kech chiqish va buzilgan narsalar uchun yozilgan — bron qarziga qo'shiladi",
+  "financePenaltiesPaid": "shu jumladan to'langani {amount} — tushum ichida",
+  "@financePenaltiesPaid": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "staffRevenueTitle": "Tushum — xodimlar bo'yicha",
   "staffRevenueHint": "Kim qancha pul qabul qilgan: bron to'lovlari va do'kon",
   "staffRevenueNone": "Bu davrda xodimlar pul qabul qilmagan",

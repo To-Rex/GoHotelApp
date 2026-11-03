@@ -76,9 +76,10 @@ class ShiftSession extends Equatable {
   /// Naqd bo'lmagan turlarda jami qabul qilingan summa.
   final double nonCashIncome;
 
-  /// Tasdiq rejimida topshirilgan sessiya kutayotgani:
-  /// "close_cash" (kassa topshirildi) | "end_shift" (smena tugallandi).
-  /// Faqat admin/menejer tasdiqlagach sessiya yopiladi.
+  /// Tasdiq rejimida kassa adminga topshirilib, tasdiq kutayotgani:
+  /// "close_cash". Smenani tugallash tasdiq so'ramaydi — pul keyingi
+  /// kassirga o'tadi (eski serverdan "end_shift" kelsa ham xuddi shunday
+  /// ko'rsatiladi). Faqat admin/menejer tasdiqlagach sessiya yopiladi.
   final String? pendingApproval;
 
   bool get isPendingApproval => pendingApproval != null;

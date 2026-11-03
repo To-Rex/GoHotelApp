@@ -23,6 +23,7 @@ class FinanceSummary extends Equatable {
     this.expenseCategories = const [],
     this.penaltyTotal = 0,
     this.penaltyCount = 0,
+    this.penaltyPaid = 0,
   });
 
   static const empty = FinanceSummary(
@@ -72,6 +73,11 @@ class FinanceSummary extends Equatable {
   final double penaltyTotal;
   final int penaltyCount;
 
+  /// Davrda jarima uchun OLINGAN pul — `income` ichida allaqachon bor,
+  /// faqat ajratib ko'rsatish uchun (veb bilan bir xil: "shu jumladan
+  /// jarimalar"). Eski server javobida bo'lmasa — nol.
+  final double penaltyPaid;
+
   /// Jami tushum: bron to'lovlari + do'kon savdosi.
   double get revenue => income + shopTotal;
 
@@ -107,6 +113,7 @@ class FinanceSummary extends Equatable {
     ],
     penaltyTotal: _num(json['penalty_total']),
     penaltyCount: _int(json['penalty_count']),
+    penaltyPaid: _num(json['penalty_paid']),
   );
 
   /// Usullar kanonik guruhlarga yig'iladi: eski kodlar (CREDIT_CARD,
@@ -153,6 +160,7 @@ class FinanceSummary extends Equatable {
     expenseCategories,
     penaltyTotal,
     penaltyCount,
+    penaltyPaid,
   ];
 }
 

@@ -576,6 +576,18 @@ class _KpiGrid extends StatelessWidget {
               ),
             ],
           ),
+          // Jarima uchun davrda OLINGAN pul — tushum ichida, qo'shilmaydi,
+          // faqat ko'rsatiladi (vebdagi "shu jumladan jarimalar" kabi)
+          if (summary.penaltyPaid > 0) ...[
+            const SizedBox(height: 4),
+            Padding(
+              padding: const EdgeInsets.only(left: 24),
+              child: Text(
+                l10n.financePenaltiesPaid(formatMoney(summary.penaltyPaid)),
+                style: context.textStyles.bodySmall!.copyWith(color: c.textMuted),
+              ),
+            ),
+          ],
         ],
       ),
     );

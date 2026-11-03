@@ -701,6 +701,7 @@
   "financePenalties": "Penalties",
   "financePenaltiesValue": "{count} · {amount}",
   "financePenaltiesHint": "For late check-out and damage — added to the booking debt",
+  "financePenaltiesPaid": "including {amount} paid — already in revenue",
   "staffRevenueTitle": "Revenue by staff",
   "staffRevenueHint": "Who took how much: booking payments and shop",
   "staffRevenueNone": "No money was taken by staff in this period",
