@@ -601,6 +601,9 @@ class SUz extends S {
   String get branchMain => 'Asosiy filial';
 
   @override
+  String get branchCurrent => 'Hozirgi';
+
+  @override
   String get scheduleLabel => 'Ish vaqti';
 
   @override

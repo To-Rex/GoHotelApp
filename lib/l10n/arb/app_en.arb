@@ -246,6 +246,7 @@
   "branchSwitchTitle": "Switch branch",
   "branchSwitchHint": "Each branch has its own rooms, guests, cash desk and reports. The selected branch's data will open.",
   "branchMain": "Main branch",
+  "branchCurrent": "Current",
   "scheduleLabel": "Working hours",
   "statsTitle": "Work statistics",
   "statToday": "Today",

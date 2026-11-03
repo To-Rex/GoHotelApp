@@ -157,36 +157,57 @@ class _BranchTile extends StatelessWidget {
     return Material(
       color: selected ? c.brandSoft : c.surface,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: selected ? c.brand : c.outline, width: 1.4),
+        borderRadius: BorderRadius.circular(18),
+        side: BorderSide(
+          color: selected ? c.brand : c.outline,
+          width: selected ? 1.5 : 1,
+        ),
       ),
+      clipBehavior: Clip.antiAlias,
       child: InkWell(
-        borderRadius: BorderRadius.circular(16),
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
           child: Row(
             children: [
-              Icon(
-                CupertinoIcons.arrow_branch,
-                color: selected ? c.brand : c.textMuted,
+              // Bino belgisi — yumshoq fonli kvadratda (tanlanganida brend)
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: selected ? c.brand : c.surfaceAlt,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  CupertinoIcons.building_2_fill,
+                  size: 20,
+                  color: selected ? Colors.white : c.textMuted,
+                ),
               ),
-              const SizedBox(width: 14),
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(branch.name, style: context.textStyles.titleSmall),
+                    Text(
+                      branch.name,
+                      style: context.textStyles.titleSmall,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     if (details.isNotEmpty)
                       Text(
                         details,
                         style: context.textStyles.labelSmall!.copyWith(
                           color: c.textMuted,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                   ],
                 ),
               ),
+              const SizedBox(width: 8),
               if (busy)
                 const SizedBox(
                   width: 20,
@@ -194,7 +215,34 @@ class _BranchTile extends StatelessWidget {
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
               else if (selected)
-                Icon(Icons.check_circle_rounded, color: c.brand),
+                // "Hozirgi" belgisi — qaysi filialda turganini aniq ko'rsatadi
+                Container(
+                  padding: const EdgeInsets.fromLTRB(8, 4, 10, 4),
+                  decoration: BoxDecoration(
+                    color: c.brand,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        CupertinoIcons.checkmark_alt,
+                        size: 13,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        l10n.branchCurrent,
+                        style: context.textStyles.labelSmall!.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              else
+                Icon(CupertinoIcons.chevron_right, size: 16, color: c.textMuted),
             ],
           ),
         ),

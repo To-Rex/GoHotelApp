@@ -1203,6 +1203,12 @@ abstract class S {
   /// **'Asosiy filial'**
   String get branchMain;
 
+  /// No description provided for @branchCurrent.
+  ///
+  /// In uz, this message translates to:
+  /// **'Hozirgi'**
+  String get branchCurrent;
+
   /// No description provided for @scheduleLabel.
   ///
   /// In uz, this message translates to:

@@ -602,6 +602,9 @@ class SEn extends S {
   String get branchMain => 'Main branch';
 
   @override
+  String get branchCurrent => 'Current';
+
+  @override
   String get scheduleLabel => 'Working hours';
 
   @override

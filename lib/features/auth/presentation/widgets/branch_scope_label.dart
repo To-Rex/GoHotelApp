@@ -6,17 +6,26 @@ import '../../../../core/extensions/context_x.dart';
 import '../cubit/auth_cubit.dart';
 import 'branch_switch_sheet.dart';
 
-/// Joriy filial qatori — sahifa sarlavhasi ostida (web'dagi navbar
+/// Joriy filial — sahifa sarlavhasi ostidagi chip (web'dagi navbar
 /// ko'rsatkichi kabi).
 ///
 /// Filiallar to'liq ajratilgan: har ekran joriy filial ma'lumotlarini
 /// ko'rsatadi, shuning uchun "qaysi filialda ishlayapman" doim ko'rinib
-/// turishi kerak. **Administrator** qatorni bosib filialni almashtiradi
-/// (xuddi web'dagi kabi); oddiy xodim filialga qat'iy bog'langan — u uchun
-/// faqat ma'lumot, bosilmaydi. Filial nomi bo'lmasa (eski javob) qator
-/// umuman chiqmaydi — avvalgi ko'rinish saqlanadi.
+/// turishi kerak. **Administrator** uchun bu bosiladigan tugma — brend
+/// rangida, bino belgisi va pastga strelka bilan, bosilsa filialni
+/// almashtirish oynasi ochiladi. Oddiy xodim filialga qat'iy bog'langan —
+/// unga xuddi shu shakldagi, lekin neytral rangdagi ko'rsatkich, strelkasiz
+/// va bosilmaydi. Filial nomi bo'lmasa (eski javob) chip umuman chiqmaydi.
+///
+/// Balandligi ~34 (6 bo'shliq + 28 chip): sarlavha ustuniga (salom, ism)
+/// qo'shilganda app bar [toolbarHeight] bo'lishi kerak — shell'lar bosh
+/// sahifada shuni beradi.
 class BranchScopeLabel extends StatelessWidget {
   const BranchScopeLabel({super.key});
+
+  /// Chip bilan birga sarlavha (salom + ism + chip) sig'adigan app bar
+  /// balandligi.
+  static const double toolbarHeight = 84;
 
   @override
   Widget build(BuildContext context) {
@@ -26,55 +35,57 @@ class BranchScopeLabel extends StatelessWidget {
     final l10n = context.l10n;
     final c = context.colors;
     final canSwitch = user!.canSwitchBranch;
+    final fg = canSwitch ? c.onBrandSoft : c.textMuted;
 
-    final row = Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(CupertinoIcons.location_fill, size: 11, color: c.textMuted),
-        const SizedBox(width: 4),
-        Flexible(
-          child: Text(
-            branch,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: context.textStyles.labelSmall!.copyWith(
-              color: c.textMuted,
-              fontWeight: FontWeight.w600,
+    final content = Padding(
+      padding: EdgeInsets.fromLTRB(10, 5, canSwitch ? 8 : 10, 5),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(CupertinoIcons.building_2_fill, size: 13, color: fg),
+          const SizedBox(width: 6),
+          Flexible(
+            child: Text(
+              branch,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: context.textStyles.labelMedium!.copyWith(
+                color: fg,
+                fontWeight: FontWeight.w600,
+                height: 1.25,
+              ),
             ),
           ),
-        ),
-        if (canSwitch) ...[
-          const SizedBox(width: 2),
-          Icon(CupertinoIcons.chevron_down, size: 10, color: c.textMuted),
+          if (canSwitch) ...[
+            const SizedBox(width: 4),
+            Icon(CupertinoIcons.chevron_down, size: 11, color: fg),
+          ],
         ],
-      ],
+      ),
     );
 
-    if (!canSwitch) {
-      // Xodim — faqat ma'lumot
-      return Padding(padding: const EdgeInsets.only(top: 2), child: row);
-    }
-
-    // Administrator — bosiladi: filialni almashtirish oynasi
-    return Padding(
-      padding: const EdgeInsets.only(top: 2),
-      child: Semantics(
-        button: true,
-        label: l10n.branchSwitchTitle,
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () => showBranchSwitchSheet(context),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-            decoration: BoxDecoration(
-              color: c.surfaceAlt,
-              border: Border.all(color: c.outline),
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: row,
-          ),
-        ),
+    final chip = ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 240),
+      child: Material(
+        color: canSwitch ? c.brandSoft : c.surfaceAlt,
+        shape: const StadiumBorder(),
+        clipBehavior: Clip.antiAlias,
+        child: canSwitch
+            // Administrator — bosiladi: filialni almashtirish oynasi
+            ? InkWell(
+                onTap: () => showBranchSwitchSheet(context),
+                child: content,
+              )
+            // Xodim — faqat ma'lumot
+            : content,
       ),
+    );
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 6),
+      child: canSwitch
+          ? Semantics(button: true, label: l10n.branchSwitchTitle, child: chip)
+          : chip,
     );
   }
 }

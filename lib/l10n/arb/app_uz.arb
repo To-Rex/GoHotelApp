@@ -246,6 +246,7 @@
   "branchSwitchTitle": "Filialni almashtirish",
   "branchSwitchHint": "Har filialning xonalari, mehmonlari, kassasi va hisobotlari alohida. Tanlangan filial ma'lumotlari ochiladi.",
   "branchMain": "Asosiy filial",
+  "branchCurrent": "Hozirgi",
   "scheduleLabel": "Ish vaqti",
   "statsTitle": "Ish statistikasi",
   "statToday": "Bugun",

@@ -600,6 +600,9 @@ class SRu extends S {
   String get branchMain => 'Основной филиал';
 
   @override
+  String get branchCurrent => 'Текущий';
+
+  @override
   String get scheduleLabel => 'Рабочее время';
 
   @override

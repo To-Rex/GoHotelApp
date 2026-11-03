@@ -281,6 +281,8 @@ class _ManagementShellState extends State<ManagementShell>
             extendBody: true,
             extendBodyBehindAppBar: true,
             appBar: GlassAppBar(
+              // Bosh sahifada sarlavha uch qatorli (salom, ism, filial chipi)
+              toolbarHeight: _index == 0 ? BranchScopeLabel.toolbarHeight : 68,
               title: Builder(builder: _title),
               actions: [
                 const NotificationBell(),
