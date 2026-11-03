@@ -12,7 +12,7 @@ import '../../../l10n/gen/app_localizations.dart';
 import '../../auth/domain/staff_user.dart';
 import '../../auth/presentation/cubit/auth_cubit.dart';
 import '../../auth/presentation/widgets/branch_scope_label.dart';
-import '../../auth/presentation/widgets/branch_switch_bar.dart';
+import '../../auth/presentation/widgets/branch_title.dart';
 import '../../chat/presentation/cubit/chat_cubit.dart';
 import '../../chat/presentation/pages/chat_page.dart';
 import '../../notifications/presentation/cubit/notifications_cubit.dart';
@@ -203,6 +203,14 @@ class _ManagementShellState extends State<ManagementShell>
     switch (_index) {
       case 0:
         final user = context.select((AuthCubit cubit) => cubit.state.user);
+        final name = user?.firstName.isNotEmpty == true
+            ? user!.firstName
+            : l10n.pulseTitle;
+        if (_branchAsTitle(user)) {
+          // Administrator: sarlavha — joriy filial (bosilsa almashtirish),
+          // salom va ism yuqori qatorda. Qo'shimcha joy egallamaydi.
+          return BranchTitle(greeting: '${_greeting(l10n)}, $name');
+        }
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -212,16 +220,12 @@ class _ManagementShellState extends State<ManagementShell>
               style: context.textStyles.bodyMedium!.copyWith(color: c.textMuted),
             ),
             Text(
-              user?.firstName.isNotEmpty == true
-                  ? user!.firstName
-                  : l10n.pulseTitle,
+              name,
               style: context.textStyles.headlineSmall,
               overflow: TextOverflow.ellipsis,
             ),
-            // Qaysi filial: administrator uchun app bar ostida filiallar
-            // qatori (BranchSwitchBar) bor, boshqalar uchun shu yerda
-            // ko'rsatkich chipi
-            if (!(user?.canSwitchBranch ?? false)) const BranchScopeLabel(),
+            // Filial almashtira olmaydigan hisob — joriy filial ko'rsatkichi
+            const BranchScopeLabel(),
           ],
         );
       case 1:
@@ -256,6 +260,10 @@ class _ManagementShellState extends State<ManagementShell>
     }
   }
 
+  /// Administrator va filial nomi bor — sarlavha filialning o'zi.
+  static bool _branchAsTitle(StaffUser? user) =>
+      user != null && user.canSwitchBranch && (user.branchName ?? '').isNotEmpty;
+
   String _greeting(S l10n) {
     final hour = DateTime.now().hour;
     if (hour < 12) return l10n.goodMorning;
@@ -283,15 +291,12 @@ class _ManagementShellState extends State<ManagementShell>
             extendBody: true,
             extendBodyBehindAppBar: true,
             appBar: GlassAppBar(
-              // Bosh sahifa: administrator — sarlavha ostida filiallar qatori;
-              // filial almashtira olmaydigan hisob — sarlavha uch qatorli
-              // (salom, ism, filial chipi), app bar balandroq
-              toolbarHeight: _index == 0 && !widget.user.canSwitchBranch
+              // Bosh sahifa: filial almashtira olmaydigan hisobda sarlavha uch
+              // qatorli (salom, ism, filial chipi) — app bar balandroq;
+              // administratorda filial sarlavhaning o'zi — oddiy balandlik
+              toolbarHeight: _index == 0 && !_branchAsTitle(widget.user)
                   ? BranchScopeLabel.toolbarHeight
                   : 68,
-              bottom: _index == 0 && widget.user.canSwitchBranch
-                  ? const BranchSwitchBar()
-                  : null,
               title: Builder(builder: _title),
               actions: [
                 const NotificationBell(),
