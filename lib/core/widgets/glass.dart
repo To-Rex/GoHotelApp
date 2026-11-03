@@ -196,6 +196,7 @@ class GlassAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     this.leading,
     this.toolbarHeight = 68,
+    this.bottom,
   });
 
   final Widget title;
@@ -203,8 +204,13 @@ class GlassAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
   final double toolbarHeight;
 
+  /// Sarlavha ostidagi qator (masalan, filiallar qatori) — shisha fon uning
+  /// ostigacha davom etadi, kontent ikkalasi ostida "erib" o'tadi.
+  final PreferredSizeWidget? bottom;
+
   @override
-  Size get preferredSize => Size.fromHeight(toolbarHeight);
+  Size get preferredSize =>
+      Size.fromHeight(toolbarHeight + (bottom?.preferredSize.height ?? 0));
 
   @override
   Widget build(BuildContext context) {
@@ -214,6 +220,7 @@ class GlassAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: title,
       actions: actions,
       leading: leading,
+      bottom: bottom,
       backgroundColor: Colors.transparent,
       elevation: 0,
       scrolledUnderElevation: 0,
