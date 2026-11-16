@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
@@ -8,6 +9,7 @@ import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 import '../../../../core/extensions/context_x.dart';
 import '../../../../core/services/camera_service.dart';
 import '../../../../l10n/gen/app_localizations.dart';
+import 'face_frame.dart';
 
 /// MyID uslubidagi AVTOMATIK yuz suratga olish.
 ///
@@ -83,8 +85,8 @@ class _FaceCapturePageState extends State<FaceCapturePage>
         front,
         ResolutionPreset.high,
         enableAudio: false,
-        // ML Kit Android'da NV21 formatini talab qiladi.
-        imageFormatGroup: ImageFormatGroup.nv21,
+        // ML Kit Android'da NV21, iOS'da BGRA formatini talab qiladi.
+        imageFormatGroup: FaceFrame.streamFormat(defaultTargetPlatform),
       );
       await controller.initialize();
       if (!mounted) {
@@ -129,11 +131,19 @@ class _FaceCapturePageState extends State<FaceCapturePage>
     _lastProcessed = now;
     _processing = true;
     try {
-      final input = _toInputImage(image);
+      final controller = _controller;
+      if (controller == null) return;
+      final rotation = FaceFrame.rotationDegrees(
+        platform: defaultTargetPlatform,
+        sensorOrientation: controller.description.sensorOrientation,
+        width: image.width,
+        height: image.height,
+      );
+      final input = _toInputImage(image, rotation);
       if (input == null) return;
       final faces = await _detector.processImage(input);
       if (!mounted || _capturing) return;
-      _evaluate(faces, image);
+      _evaluate(faces, image, rotation);
     } catch (_) {
       // Bitta kadr tahlili yiqilsa — keyingisi bilan davom etamiz.
     } finally {
@@ -141,12 +151,8 @@ class _FaceCapturePageState extends State<FaceCapturePage>
     }
   }
 
-  InputImage? _toInputImage(CameraImage image) {
-    final controller = _controller;
-    if (controller == null) return null;
-    final rotation = InputImageRotationValue.fromRawValue(
-      controller.description.sensorOrientation,
-    );
+  InputImage? _toInputImage(CameraImage image, int rotationDegrees) {
+    final rotation = InputImageRotationValue.fromRawValue(rotationDegrees);
     if (rotation == null || image.planes.isEmpty) return null;
     final plane = image.planes.first;
     return InputImage.fromBytes(
@@ -154,23 +160,18 @@ class _FaceCapturePageState extends State<FaceCapturePage>
       metadata: InputImageMetadata(
         size: Size(image.width.toDouble(), image.height.toDouble()),
         rotation: rotation,
-        format: InputImageFormat.nv21,
+        format: FaceFrame.inputFormat(defaultTargetPlatform),
         bytesPerRow: plane.bytesPerRow,
       ),
     );
   }
 
   /// Kadr bo'yicha shartlarni tekshiradi va hint/progress'ni yangilaydi.
-  void _evaluate(List<Face> faces, CameraImage image) {
-    final controller = _controller;
-    if (controller == null) return;
-
+  void _evaluate(List<Face> faces, CameraImage image, int rotation) {
     // ML Kit natijalari "tik" (rotatsiya qo'llangan) koordinatalarda.
-    final rotated =
-        controller.description.sensorOrientation == 90 ||
-        controller.description.sensorOrientation == 270;
-    final upW = (rotated ? image.height : image.width).toDouble();
-    final upH = (rotated ? image.width : image.height).toDouble();
+    final upright = FaceFrame.uprightSize(image.width, image.height, rotation);
+    final upW = upright.width;
+    final upH = upright.height;
 
     _Hint next;
     if (faces.length != 1) {

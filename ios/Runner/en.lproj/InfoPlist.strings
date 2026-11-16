@@ -1,0 +1,6 @@
+/* System permission prompt texts (English) */
+"CFBundleDisplayName" = "GoHotel Staff";
+"NSCameraUsageDescription" = "The camera is used for face verification, photo reports and scanning guest documents.";
+"NSPhotoLibraryUsageDescription" = "Photo access lets you pick pictures for photo reports and chat.";
+"NSFaceIDUsageDescription" = "Face ID is used to open the app quickly.";
+"NSMicrophoneUsageDescription" = "The app never records audio: the camera is only used silently to take pictures.";

@@ -68,7 +68,16 @@ class TasksPage extends StatelessWidget {
                 ),
               );
               if (state.loading) {
-                return fill(const ListSkeleton(count: 4));
+                // Skelet o'zi ro'yxat (ListView): uning balandligi o'lchab
+                // bo'lmaydi, shuning uchun qolgan joyni "scroll tanasi"
+                // sifatida egallaydi. hasScrollBody: false bilan debug
+                // rejimida layout xatosi (qizil ekran) chiqardi.
+                return SliverFillRemaining(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: barPadding.bottom),
+                    child: const ListSkeleton(count: 4),
+                  ),
+                );
               }
               if (state.error != null && state.tasks.isEmpty) {
                 return fill(

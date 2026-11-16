@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart'
+    show TargetPlatform, defaultTargetPlatform;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -6,6 +8,7 @@ import '../core/extensions/context_x.dart';
 import '../core/network/api_client.dart';
 import '../core/services/push_service.dart';
 import '../core/widgets/confirm_sheet.dart';
+import '../core/widgets/keyboard_dismiss_on_tap.dart';
 import '../features/auth/data/face_repository.dart';
 import '../features/auth/presentation/cubit/auth_cubit.dart';
 import '../features/auth/presentation/pages/face_verify_page.dart';
@@ -66,6 +69,10 @@ class GoHotelsApp extends StatelessWidget {
                     builder: (_) => const AuthGate(),
                   )
                 : null,
+            builder: (context, child) =>
+                defaultTargetPlatform == TargetPlatform.iOS
+                ? KeyboardDismissOnTap(child: child!)
+                : child!,
           );
         },
       ),

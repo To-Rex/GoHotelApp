@@ -3,7 +3,8 @@ import 'dart:typed_data';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart' show debugPrint;
+import 'package:flutter/foundation.dart'
+    show TargetPlatform, debugPrint, defaultTargetPlatform;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../../features/auth/data/auth_repository.dart';
@@ -71,6 +72,14 @@ Future<void> _ensureLocalReady() async {
 /// Kelgan xabarni ekranga chiqaradi: yangi vazifa — budilnik kanalida
 /// (yopilmaguncha jiringlaydi), qolgani — oddiy kanalda.
 Future<void> _display(RemoteMessage message) async {
+  // iOS'da sarlavha va matnli (APNs alert) xabarni tizimning o'zi
+  // ko'rsatadi: ilova yopiq, fonda yoki ochiq bo'lsa ham (ochiq holat
+  // `setForegroundNotificationPresentationOptions` orqali). Bu yerda yana
+  // chizilsa, xabar ikki marta chiqadi.
+  if (defaultTargetPlatform == TargetPlatform.iOS &&
+      message.notification != null) {
+    return;
+  }
   final notification = message.notification;
   final title = notification?.title ?? message.data['title'] as String?;
   final body = notification?.body ?? message.data['body'] as String?;
@@ -164,7 +173,7 @@ class PushService {
       );
       // Ochiq ilovada Android push'ni o'zi chizmaydi — o'zimiz chizamiz
       _messageSub ??= FirebaseMessaging.onMessage.listen(_display);
-      final token = await messaging.getToken();
+      final token = await _fetchToken(messaging);
       // Token konsolda ko'rinadi — Firebase konsolidan sinov push
       // yuborishda aynan shu qiymat kerak bo'ladi (adb logcat / flutter run)
       debugPrint('FCM token: ${token ?? "(olinmadi)"}');
@@ -178,6 +187,27 @@ class PushService {
       // Firebase yo'q — push jim o'chadi, ilova ishlayveradi
     } finally {
       _connecting = false;
+    }
+  }
+
+  /// FCM tokenini oladi. Olinmasa null qaytaradi.
+  ///
+  /// iOS'da FCM tokeni Apple'ning APNs tokenidan keyin paydo bo'ladi, u
+  /// esa ruxsatdan so'ng bir necha soniyada keladi. Erta so'ralsa
+  /// `getToken` xato tashlaydi. Shu sababli APNs tokeni qisqa kutiladi.
+  /// Baribir kelmasa, token keyinroq `onTokenRefresh` orqali serverga
+  /// yuboriladi: obuna xato bo'lsa ham o'rnatiladi.
+  Future<String?> _fetchToken(FirebaseMessaging messaging) async {
+    try {
+      if (defaultTargetPlatform == TargetPlatform.iOS) {
+        for (var i = 0; i < 20; i++) {
+          if (await messaging.getAPNSToken() != null) break;
+          await Future<void>.delayed(const Duration(milliseconds: 500));
+        }
+      }
+      return await messaging.getToken();
+    } catch (_) {
+      return null;
     }
   }
 

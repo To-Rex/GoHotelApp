@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Push xabarlar (APNs). App Store / TestFlight uchun eksportda Xcode
+	     buni o'zi "production"ga almashtiradi. -->
+	<key>aps-environment</key>
+	<string>development</string>
+	<!-- Yangi vazifa xabari "Diqqatni jamlash" (Focus) rejimida ham
+	     ko'rinishi uchun: interruption-level = time-sensitive. -->
+	<key>com.apple.developer.usernotifications.time-sensitive</key>
+	<true/>
+</dict>
+</plist>

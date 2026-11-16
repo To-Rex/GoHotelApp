@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart'
+    show TargetPlatform, defaultTargetPlatform;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
@@ -40,6 +42,14 @@ Future<void> configureDependencies() async {
   ]);
 
   final prefs = AppPrefs(results.first as SharedPreferences);
+  if (prefs.isFreshInstall) {
+    // iOS Keychain ilova o'chirilganda ham tozalanmaydi. Qayta o'rnatilgan
+    // ilova eski sessiya bilan ochilmasin: Androiddagidek login sahifasidan
+    // boshlansin. Androidda tegilmaydi: shu versiyaga yangilangan ilovada
+    // ham belgi hali yo'q, sessiya esa saqlanib qolishi kerak.
+    if (defaultTargetPlatform == TargetPlatform.iOS) await tokenStore.clear();
+    await prefs.markInstalled();
+  }
   getIt.registerSingleton<AppPrefs>(prefs);
   getIt.registerSingleton<TokenStore>(tokenStore);
 

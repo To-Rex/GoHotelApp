@@ -1,0 +1,6 @@
+/* Tizim ruxsat oynalaridagi matnlar (o'zbekcha) */
+"CFBundleDisplayName" = "GoHotel Staff";
+"NSCameraUsageDescription" = "Yuzni tasdiqlash, foto hisobot yuborish va mehmon hujjatini skanerlash uchun kamera kerak.";
+"NSPhotoLibraryUsageDescription" = "Foto hisobot va chat uchun rasm tanlashga ruxsat kerak.";
+"NSFaceIDUsageDescription" = "Ilovaga tez kirish uchun Face ID ishlatiladi.";
+"NSMicrophoneUsageDescription" = "Ilova ovoz yozmaydi: kamera faqat suratga olish uchun ovozsiz ishlatiladi.";

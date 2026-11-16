@@ -15,6 +15,17 @@ class AppPrefs {
   static const _kBiometric = 'biometric_enabled';
   static const _kBiometricAsked = 'biometric_asked';
   static const _kLastUsername = 'last_username';
+  static const _kInstalled = 'installed';
+
+  // --- O'rnatish belgisi ----------------------------------------------------
+
+  /// Ilova o'rnatilgandan keyin birinchi marta ochilyaptimi.
+  ///
+  /// Bu sozlamalar ilova o'chirilganda yo'qoladi, iOS Keychain'dagi
+  /// tokenlar esa qoladi. Belgi yo'q bo'lsa, ilova yangi o'rnatilgan.
+  bool get isFreshInstall => !_prefs.containsKey(_kInstalled);
+
+  Future<void> markInstalled() => _prefs.setBool(_kInstalled, true);
 
   // --- Til ------------------------------------------------------------------
 

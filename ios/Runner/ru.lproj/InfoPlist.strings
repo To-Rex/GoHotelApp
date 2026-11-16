@@ -1,0 +1,6 @@
+/* Тексты системных окон разрешений (русский) */
+"CFBundleDisplayName" = "GoHotel Staff";
+"NSCameraUsageDescription" = "Камера нужна для подтверждения лица, фотоотчётов и сканирования документов гостей.";
+"NSPhotoLibraryUsageDescription" = "Доступ к фото нужен, чтобы выбирать снимки для фотоотчётов и чата.";
+"NSFaceIDUsageDescription" = "Face ID используется для быстрого входа в приложение.";
+"NSMicrophoneUsageDescription" = "Приложение не записывает звук: камера используется только для снимков, без звука.";

@@ -9,11 +9,25 @@
 	<key>CFBundleDisplayName</key>
 	<string>GoHotel Staff</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Yuzni tasdiqlash va foto hisobot yuborish uchun kamera kerak.</string>
+	<string>Yuzni tasdiqlash, foto hisobot yuborish va mehmon hujjatini skanerlash uchun kamera kerak.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Foto hisobot va chat uchun rasm tanlashga ruxsat kerak.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Ilovaga tez kirish uchun Face ID ishlatiladi.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Ilova ovoz yozmaydi: kamera faqat suratga olish uchun ovozsiz ishlatiladi.</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>uz</string>
+		<string>ru</string>
+		<string>en</string>
+	</array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -62,8 +76,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
